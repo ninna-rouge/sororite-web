@@ -77,12 +77,16 @@ if (!data.example) {
         <div class="prose">
           <Content />
         </div>
-        <div class="button-row">
-          <a class="button" href={data.hotmartCheckoutUrl} rel="nofollow noopener noreferrer">
+        <div class="cta-stack">
+          <a
+            class="btn btn-primary"
+            href={data.hotmartCheckoutUrl}
+            rel="nofollow noopener noreferrer"
+          >
             Ir al pago en Hotmart
             <span class="visually-hidden"> (sitio externo)</span>
           </a>
-          <a class="button secondary" href={whatsappHref}>
+          <a class="btn btn-line" href={whatsappHref}>
             Preguntar por WhatsApp
           </a>
         </div>

@@ -1,0 +1,31 @@
+---
+export const prerender = true;
+
+import { whatsappHref } from '../data/site';
+import Button from '../components/Button.astro';
+import Todo from '../components/Todo.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description =
+  'El acceso a los cursos de Sororité llega por correo de Hotmart cuando se confirma el pago.';
+---
+
+<BaseLayout title="Ingresar" description={description} robots="noindex,follow">
+  <header class="page-hero shell">
+    <p class="eyebrow">Acceso</p>
+    <h1>Ingresar</h1>
+    <p class="lede">
+      El acceso a los cursos llega por correo de Hotmart cuando se confirma el pago. Revisa también
+      la carpeta de spam o promociones.
+    </p>
+    <Todo>URL del aula o del inicio de sesión de Hotmart. Esta página no inicia sesión.</Todo>
+    <div class="cta-stack">
+      <Button href="/cursos" variant="line">
+        Ver cursos
+      </Button>
+      <Button href={whatsappHref} variant="text">
+        Escribir por WhatsApp
+      </Button>
+    </div>
+  </header>
+</BaseLayout>

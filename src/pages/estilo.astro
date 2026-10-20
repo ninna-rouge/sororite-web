@@ -1,0 +1,138 @@
+---
+export const prerender = true;
+
+import Button from '../components/Button.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Separator from '../components/Separator.astro';
+import Todo from '../components/Todo.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const swatches = [
+  { name: 'Blush', token: '--blush', hex: '#F4BEBC', use: 'Fondo de página', chip: 'swatch-blush' },
+  {
+    name: 'Crema',
+    token: '--cream',
+    hex: '#FFF8F2',
+    use: 'Tarjetas y pastillas',
+    chip: 'swatch-cream',
+  },
+  {
+    name: 'Tinta',
+    token: '--ink',
+    hex: '#303236',
+    use: 'Texto y botón Ingresar',
+    chip: 'swatch-ink',
+  },
+  {
+    name: 'Tinta suave',
+    token: '--ink-soft',
+    hex: '#3E4044',
+    use: 'Bajadas',
+    chip: 'swatch-ink-soft',
+  },
+  {
+    name: 'Rosa',
+    token: '--rose',
+    hex: '#E06A78',
+    use: 'CTA grande, texto blanco',
+    chip: 'swatch-rose',
+  },
+  {
+    name: 'Rosa profundo',
+    token: '--rose-deep',
+    hex: '#B5606C',
+    use: 'Ícono de reproducción',
+    chip: 'swatch-rose-deep',
+  },
+  {
+    name: 'Rosa tinta',
+    token: '--rose-ink',
+    hex: '#7E434B',
+    use: 'Microtexto sobre crema',
+    chip: 'swatch-rose-ink',
+  },
+  {
+    name: 'Hoja',
+    token: '--leaf',
+    hex: '#536E58',
+    use: 'Firma en script, sobre crema',
+    chip: 'swatch-leaf',
+  },
+];
+---
+
+<BaseLayout
+  title="Dirección de estilo"
+  description="Página interna con los tokens y componentes del sitio de Sororité."
+  robots="noindex,follow"
+>
+  <header class="page-hero shell">
+    <p class="eyebrow">Interna · noindex</p>
+    <h1>Dirección de estilo</h1>
+    <p class="lede">
+      Tokens y componentes del hero v8. La explicación vive en docs/direccion-de-estilo.md.
+    </p>
+  </header>
+  <section class="section" aria-labelledby="color-titulo">
+    <div class="shell">
+      <h2 id="color-titulo">Color</h2>
+      <ul class="swatch-grid">
+        {swatches.map((swatch) => (
+          <li class="swatch">
+            <i class={swatch.chip} aria-hidden="true"></i>
+            <span>
+              <strong>{swatch.name}</strong>
+              <br />
+              <code>{swatch.hex}</code>
+              <br />
+              {swatch.token}. {swatch.use}.
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+  <section class="section band-cream" aria-labelledby="tipo-titulo">
+    <div class="shell">
+      <h2 id="tipo-titulo">Tipografía</h2>
+      <p class="eyebrow">Nunito 800 · tracking amplio</p>
+      <h3 class="type-light">Titular en Nunito light</h3>
+      <p>
+        <span class="script-green type-script-xl">naturales</span>
+      </p>
+      <p>Always Classy solo en palabras sin tilde. «naturales» y la firma «Ven, te enseño.».</p>
+      <p>
+        <strong class="type-brand">3.500</strong>
+      </p>
+      <p>Contrail One para cifras y precios cortos. El texto corrido es Nunito.</p>
+    </div>
+  </section>
+  <section class="section" aria-labelledby="componentes-titulo">
+    <div class="shell">
+      <SectionHeading
+        eyebrow="Componentes"
+        lede="Los mismos botones, tarjetas y notas en todo el sitio."
+      >
+        <h2 id="componentes-titulo">Componentes</h2>
+      </SectionHeading>
+      <div class="cta-stack">
+        <Button href="/cursos">Quiero los 6 cursos por $35.000</Button>
+        <Button href="/ingresar" variant="ink">
+          Ingresar
+        </Button>
+        <Button href="/contacto" variant="line">
+          Escribir
+        </Button>
+        <Button href="/#elegir" variant="text">
+          Ayúdame a elegir mi curso →
+        </Button>
+      </div>
+      <Separator />
+      <div class="card stack-top" data-reveal>
+        <h3>Tarjeta</h3>
+        <p>Fondo crema, radio amplio y sombra corta. El revelado al scroll usa esta misma pieza.</p>
+      </div>
+      <Todo>Así se marca un dato que todavía no existe. No se inventa.</Todo>
+    </div>
+  </section>
+</BaseLayout>

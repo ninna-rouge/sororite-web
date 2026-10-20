@@ -1,17 +1,26 @@
 ---
-import { isCurrent, nav, site } from '../data/site';
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/logo-oficial.png';
+import { headerNav, ingresar, isCurrent, mobileNav } from '../data/site';
 
 const pathname = Astro.url.pathname;
 ---
 
 <header class="site-header">
-  <div class="shell header-bar">
+  <div class="header-bar">
     <a class="brand" href="/">
-      <img src={site.logo} width="586" height="416" alt="Sororité, inicio" />
+      <Image
+        src={logo}
+        alt="Sororité, inicio"
+        width={128}
+        height={91}
+        densities={[1, 2]}
+        loading="eager"
+      />
     </a>
     <nav class="site-nav" aria-label="Principal">
       <ul class="nav-desktop">
-        {nav.map((item) => (
+        {headerNav.map((item) => (
           <li>
             <a href={item.href} aria-current={isCurrent(pathname, item.href) ? 'page' : undefined}>
               {item.label}
@@ -19,10 +28,17 @@ const pathname = Astro.url.pathname;
           </li>
         ))}
       </ul>
+      <a
+        class="btn btn-ink nav-login"
+        href={ingresar.href}
+        aria-current={isCurrent(pathname, ingresar.href) ? 'page' : undefined}
+      >
+        {ingresar.label}
+      </a>
       <details class="nav-mobile">
         <summary role="button">Menú</summary>
         <ul>
-          {nav.map((item) => (
+          {mobileNav.map((item) => (
             <li>
               <a
                 href={item.href}

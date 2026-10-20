@@ -1,61 +1,15 @@
 ---
 export const prerender = true;
 
-import CourseCard from '../components/CourseCard.astro';
 import Hero from '../components/Hero.astro';
-import { home } from '../data/copy';
-import { site, whatsappHref } from '../data/site';
+import Landing from '../components/Landing.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
 
-const cursos = (await getCollection('cursos')).sort((a, b) =>
-  a.data.title.localeCompare(b.data.title, 'es'),
-);
+const description =
+  'Aprende a formular cosmética natural, jabones y velas desde cero, a tu ritmo y desde tu casa. Terminas con productos propios, el criterio para fabricarlos con seguridad y un camino claro para emprender.';
 ---
 
-<BaseLayout title={`${site.name} | Cursos de cosmética natural`} description={site.description}>
+<BaseLayout title="Crea tus propios cosméticos naturales" description={description}>
   <Hero />
-  <section class="section shell" aria-labelledby="cursos-titulo">
-    <div class="section-head">
-      <h2 id="cursos-titulo">{home.coursesTitle}</h2>
-      <p>{home.coursesLede}</p>
-    </div>
-    <div class="card-grid courses">
-      {cursos.map((curso) => (
-        <CourseCard curso={curso} heading="h3" />
-      ))}
-    </div>
-  </section>
-  <section class="section band" aria-labelledby="academia-titulo">
-    <div class="shell">
-      <h2 id="academia-titulo">{home.aboutTitle}</h2>
-      <p class="lede">{home.aboutLede}</p>
-      <a class="button" href="/quienes-somos">
-        {home.aboutCta}
-      </a>
-    </div>
-  </section>
-  <section class="section shell" aria-labelledby="camino-titulo">
-    <h2 id="camino-titulo">{home.stepsTitle}</h2>
-    <ol class="steps">
-      {home.steps.map((step) => (
-        <li>
-          <h3>{step.title}</h3>
-          <p>{step.text}</p>
-        </li>
-      ))}
-    </ol>
-  </section>
-  <section class="section shell" aria-labelledby="cierre-titulo">
-    <h2 id="cierre-titulo">{home.closingTitle}</h2>
-    <p class="lede">{home.closingLede}</p>
-    <div class="button-row">
-      <a class="button" href={whatsappHref}>
-        WhatsApp
-      </a>
-      <a class="button secondary" href={`mailto:${site.email}`}>
-        {site.email}
-      </a>
-    </div>
-  </section>
+  <Landing />
 </BaseLayout>

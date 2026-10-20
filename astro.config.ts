@@ -23,7 +23,9 @@ export default defineConfig({
       filter: (page) =>
         !page.includes('/cursos/ejemplo-') &&
         !page.endsWith('/politica-de-privacidad') &&
-        !page.endsWith('/terminos'),
+        !page.endsWith('/terminos') &&
+        !page.endsWith('/estilo') &&
+        !page.endsWith('/ingresar'),
     }),
   ],
 });

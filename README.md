@@ -27,9 +27,19 @@ El sitio queda en `http://127.0.0.1:4321`.
 | `npm run test:e2e`  | Playwright y axe. Hace build y levanta el preview           |
 | `npm run lhci`      | Lighthouse CI local. Antes hay que tener `dist/` construido |
 
+## Sistema de diseño
+
+La dirección visual sale del hero v8 aprobado. Los tokens (color, tipo, espaciado, radios y sombras) están en `src/styles/global.css`. La guía está en `docs/direccion-de-estilo.md` y se puede ver, sin indexar, en `/estilo`.
+
+Botones, títulos de sección, tarjetas, separadores y notas TODO son componentes en `src/components/`. La intro del logo, el revelado al scroll y las transiciones de Astro se apagan con `prefers-reduced-motion`.
+
 ## Editar el contenido
 
-Los textos de portada, Quiénes somos, galería y contacto están en `src/data/copy.ts`, `src/data/site.ts` y `src/data/gallery.ts`. El teléfono, el correo y las redes se cambian en `src/data/site.ts`.
+La portada usa el copy de `src/components/Landing.astro`, `src/components/Hero.astro` y el catálogo de `src/data/catalog.ts`. Quiénes somos está en `src/pages/quienes-somos.astro`. El teléfono, el correo, el RUT de la empresa y las redes se cambian en `src/data/site.ts`.
+
+Lo que falta (precios individuales, URLs de Hotmart, fotos de alumnas, video, calendario) está marcado con `TODO`. No se inventan precios ni datos.
+
+Las fotos del hero y el retrato de Camila viven en `src/assets/` y se publican con `astro:assets`. El logo oficial también está en `public/brand/` para el favicon y el esquema.
 
 Cada curso es un Markdown en `src/content/cursos/`. El esquema exige:
 
@@ -45,7 +55,7 @@ Cada curso es un Markdown en `src/content/cursos/`. El esquema exige:
 
 Las dos fichas actuales son datos de ejemplo. No uses sus enlaces de pago: apuntan a `example.com`. Una ficha con `example: true` se publica con `noindex` para no indexar un curso falso. Al pasar a `example: false`, la ficha queda indexable y el JSON-LD incluye la oferta.
 
-Las imágenes van en `public/` y se referencian con una ruta que empiece por `/`.
+Las imágenes de marca van en `src/assets/` y se optimizan en el build. Un archivo suelto en `public/` solo hace falta si la URL tiene que ser estable, como el favicon o la imagen de Open Graph.
 
 ## Analítica
 
@@ -76,6 +86,7 @@ La integración continua corre esos pasos en cada pull request. Un segundo job c
 
 ## Documentos
 
+- `docs/direccion-de-estilo.md`
 - `docs/requisitos-y-roadmap.md`
 - `docs/arquitectura.md`
 - `CONTRIBUTING.md`

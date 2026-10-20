@@ -24,8 +24,8 @@ Los cursos viven en una colección de contenido con esquema: título, slug, moda
 
 ## Marca y accesibilidad
 
-- Titulares en Contrail One y texto en Nunito, alojadas en el propio sitio
-- Color y tono tomados del logo y del sitio vigente, hasta incorporar el mockup aprobado
+- Titulares en Nunito light, cifras en Contrail One y acentos en Always Classy, alojadas en el propio sitio
+- Color y tono del hero v8 aprobado: blush, crema, tinta y rosa. El detalle está en `docs/direccion-de-estilo.md`
 - WCAG 2.2 nivel AA: contraste, foco visible, nombres accesibles, HTML semántico, navegación con teclado y diseño responsive
 
 ## SEO

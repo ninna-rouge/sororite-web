@@ -1,36 +1,118 @@
 ---
-import { home } from '../data/copy';
-import { site, whatsappHref } from '../data/site';
+import { getImage } from 'astro:assets';
+import camila from '../assets/hero/camila.jpg';
+import fondo from '../assets/hero/fondo.jpg';
+import podios from '../assets/hero/podios.jpg';
+import Button from './Button.astro';
+import Todo from './Todo.astro';
 
-/**
- * Composición provisoria del hero.
- * El mockup aprobado (hero.html, hero-desktop.png, hero-movil.png) no estaba
- * en el entorno. Los colores salen del logo y del sitio vigente.
- */
+const fondoWebp = await getImage({
+  src: fondo,
+  width: 1440,
+  height: 900,
+  format: 'webp',
+  quality: 62,
+});
+const fondoAvif = await getImage({
+  src: fondo,
+  width: 1440,
+  height: 900,
+  format: 'avif',
+  quality: 48,
+});
+const podiosWebp = await getImage({
+  src: podios,
+  width: 960,
+  height: 540,
+  format: 'webp',
+  quality: 64,
+});
+const camilaWebp = await getImage({
+  src: camila,
+  width: 192,
+  format: 'webp',
+  quality: 72,
+});
+
+const stats = [
+  { value: '3.500', label: 'estudiantes durante 2026' },
+  { value: '6', label: 'cursos online' },
+  { value: 'Enseña', label: 'una enfermera universitaria' },
+  { value: 'Laboratorio', label: 'con resolución sanitaria del ISP' },
+];
 ---
 
-<section class="hero shell" aria-labelledby="hero-title">
-  <div>
-    <p class="eyebrow">{home.eyebrow}</p>
-    <h1 id="hero-title">{home.title}</h1>
-    <p class="lede">{home.lede}</p>
-    <ul class="point-list">
-      {home.points.map((point) => (
-        <li>{point}</li>
-      ))}
-    </ul>
-    <div class="button-row">
-      <a class="button" href="/cursos">
-        {home.primaryCta}
-      </a>
-      <a class="button secondary" href={whatsappHref}>
-        {home.secondaryCta}
-      </a>
+<section class="hero-home" aria-labelledby="hero-titulo">
+  <div class="hero-frame">
+    <picture class="hero-still">
+      <source media="(max-width: 1079px)" srcset={podiosWebp.src} type="image/webp" />
+      <source media="(min-width: 1080px)" srcset={fondoAvif.src} type="image/avif" />
+      <img
+        src={fondoWebp.src}
+        width="1440"
+        height="900"
+        alt="Velas tipo postre, cupcake, sérums y jabones Sororité entre flores rosas"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </picture>
+    <img class="hero-doodle" src="/brand/rama.svg" alt="" width="207" height="146" />
+    <div class="hero-copy">
+      <p class="eyebrow">Cursos online · Cosmética natural con ciencia</p>
+      <h1 id="hero-titulo">
+        Crea tus propios cosméticos <em>naturales</em> con ciencia y conviértelos en tu
+        emprendimiento.
+      </h1>
+      <p class="lead">
+        Aprende a formular cosmética natural, jabones y velas desde cero, a tu ritmo y desde tu
+        casa. Terminas con productos propios, el criterio para fabricarlos con seguridad y un camino
+        claro para emprender.
+      </p>
+      <div class="stats">
+        {stats.map((stat) => (
+          <div class="stat">
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </div>
+        ))}
+      </div>
+      <div class="cta-stack">
+        <Button href="/#oferta" utm="hero_pack">
+          Quiero los 6 cursos por $35.000
+        </Button>
+        <Button href="/#elegir" utm="hero_elegir" variant="text">
+          Ayúdame a elegir mi curso →
+        </Button>
+      </div>
+      <p class="micro">
+        Pago seguro con Hotmart · Acceso por correo apenas se confirme el pago · Garantía de 7 días
+      </p>
+      <div class="video-pill">
+        <div class="avatar-wrap">
+          <img
+            class="avatar"
+            src={camilaWebp.src}
+            width={camilaWebp.attributes.width}
+            height={camilaWebp.attributes.height}
+            alt="Camila Sánchez"
+          />
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div>
+          <div class="kick">Video · 1 min</div>
+          <p class="script-green">
+            <span aria-hidden="true">
+              Ven, te ense<span class="enye">n</span>o.
+            </span>
+            <span class="visually-hidden">Ven, te enseño.</span>
+          </p>
+        </div>
+      </div>
+      <p class="micro">«Ven, te enseño. Soy Camila y te cuento cómo vas a aprender.»</p>
+      <Todo>
+        Video de bienvenida de Camila, 60–90 s. Faltan el archivo y la miniatura. El ícono de
+        reproducción no abre un video.
+      </Todo>
     </div>
-  </div>
-  <div class="hero-art">
-    <div class="blob blob-sage" aria-hidden="true"></div>
-    <div class="blob blob-blush" aria-hidden="true"></div>
-    <img src={site.logo} width="586" height="416" alt="" fetchpriority="high" />
   </div>
 </section>

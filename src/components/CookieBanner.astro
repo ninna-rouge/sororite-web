@@ -5,17 +5,24 @@
  */
 ---
 
-<div id="cookie-banner" class="cookie-banner" role="region" aria-labelledby="cookie-title" hidden>
+<div
+  id="cookie-banner"
+  class="cookie-banner"
+  role="region"
+  aria-labelledby="cookie-title"
+  hidden
+  transition:persist="cookie-banner"
+>
   <h2 id="cookie-title">Cookies</h2>
   <p>
     Este sitio solo carga analítica de Google y Meta si lo autorizas. Puedes rechazarlas y seguir
     navegando. <a href="/politica-de-privacidad">Política de privacidad</a>.
   </p>
   <div class="cookie-actions">
-    <button type="button" class="button" data-consent="accepted">
+    <button type="button" class="btn btn-primary" data-consent="accepted">
       Aceptar
     </button>
-    <button type="button" class="button secondary" data-consent="rejected">
+    <button type="button" class="btn btn-line" data-consent="rejected">
       Rechazar
     </button>
   </div>

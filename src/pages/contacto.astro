@@ -3,6 +3,7 @@ export const prerender = true;
 
 import { contact } from '../data/copy';
 import { site, whatsappHref } from '../data/site';
+import Todo from '../components/Todo.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const description = `Escríbele a Sororité por WhatsApp al ${site.phoneDisplay} o al correo ${site.email}.`;
@@ -10,35 +11,37 @@ const description = `Escríbele a Sororité por WhatsApp al ${site.phoneDisplay}
 
 <BaseLayout title={contact.title} description={description}>
   <header class="page-hero shell">
+    <p class="eyebrow">Contacto</p>
     <h1>{contact.title}</h1>
     <p class="lede">{contact.lede}</p>
   </header>
-  <section class="section shell split" aria-label="Canales de contacto">
-    <ul class="contact-list">
-      <li>
-        <a href={whatsappHref}>
-          {contact.whatsappLabel}: {site.phoneDisplay}
-        </a>
-      </li>
-      <li>
-        <a href={`mailto:${site.email}`}>
-          {contact.emailLabel}: {site.email}
-        </a>
-      </li>
-      <li>{site.legalName}</li>
-      <li>RUT {site.companyTaxId}</li>
-      <li>Giro: {site.businessActivity}</li>
-      <li>Representante: {site.representative}</li>
-      <li>{site.location}</li>
-    </ul>
-    <div class="card">
-      <div class="card-body">
-        <h2>Antes de escribir</h2>
+  <section class="section" aria-label="Canales de contacto">
+    <div class="shell split">
+      <ul class="contact-list">
+        <li>
+          <a href={whatsappHref}>
+            {contact.whatsappLabel}: {site.phoneDisplay}
+          </a>
+        </li>
+        <li>
+          <a href={`mailto:${site.email}`}>
+            {contact.emailLabel}: {site.email}
+          </a>
+        </li>
+        <li>{site.legalName}</li>
+        <li>RUT {site.companyTaxId}</li>
+        <li>Giro: {site.businessActivity}</li>
+        <li>Representante: {site.representative}</li>
+        <li>{site.location}</li>
+      </ul>
+      <article class="card" id="talleres">
+        <h2>Talleres presenciales</h2>
         <p>
-          Cuéntanos si buscas un curso en línea o presencial y en qué etapa está tu proyecto. El
-          mensaje se abre en WhatsApp o en tu correo: este sitio no lo guarda.
+          Hay talleres en Providencia y Puente Alto, Santiago. El mensaje se abre en WhatsApp o en
+          tu correo: este sitio no lo guarda.
         </p>
-      </div>
+        <Todo>Enlace al calendario de fechas de los talleres.</Todo>
+      </article>
     </div>
   </section>
 </BaseLayout>

@@ -16,13 +16,13 @@ La ficha `/cursos/[slug]` sale de `getStaticPaths`. El slug lo declara el frontm
 
 `example: true` hace tres cosas: muestra un aviso visible, pone `noindex` y omite la oferta del JSON-LD. El objeto `Course` igual se emite, para tener el marcado listo. Con `example: false` la ficha se indexa y, si corresponde, incluye `Offer`.
 
-Los textos que no son un curso están en `src/data/`. Así se reemplaza el copy sin buscar frases dentro de los componentes.
+Los textos que no son un curso están en `src/data/` y, en la portada, en los componentes de la landing. El catálogo real de seis cursos está en `src/data/catalog.ts`. No entra a la colección de contenido porque el esquema exige una URL `https` de Hotmart y esas URLs todavía no existen. Las dos fichas Markdown siguen siendo el fixture del esquema.
 
 ## SEO y redirecciones
 
 `src/layouts/BaseLayout.astro` arma título, descripción, canónica, Open Graph y un grafo schema.org. La organización va en todas las páginas. La ficha de curso agrega `Course`.
 
-`@astrojs/sitemap` genera el sitemap. Quedan fuera las fichas cuyo slug empieza por `ejemplo-` y los borradores legales, porque esas páginas van con `noindex`. Un curso real no debe usar ese prefijo. `public/robots.txt` declara el sitemap.
+`@astrojs/sitemap` genera el sitemap. Quedan fuera las fichas cuyo slug empieza por `ejemplo-`, los borradores legales, `/estilo` y `/ingresar`, porque esas páginas van con `noindex`. Un curso real no debe usar ese prefijo. `public/robots.txt` declara el sitemap.
 
 `vercel.json` responde 301 a las rutas del WordPress que estaba en producción el 20 de octubre de 2026 (páginas, productos, cursos de Edwiser, categorías y dos noticias). El inventario pedido (`inventario-wp.md`) no estaba entre los archivos del entorno: el mapa salió del sitemap público de sororite.cl.
 
@@ -59,6 +59,36 @@ Supabase puede guardar usuarias y compras. La colección de cursos sigue siendo 
 
 Esas piezas no están esbozadas en código para no dejar endpoints vacíos que parezcan activos.
 
-## Qué quedó pendiente del diseño
+## Sistema de diseño
 
-El hero aprobado (`hero.html`, `hero-desktop.png`, `hero-movil.png`) no estaba disponible. `src/components/Hero.astro` es una composición con el logo, Contrail One, Nunito y la paleta crema, salvia, blush y bosque del logo y del sitio actual. Cuando llegue el mockup, se reemplaza ese componente sin mover el resto de las páginas.
+La referencia es el hero v8 (`hero.html` del equipo de diseño). `src/styles/global.css` declara los tokens y `docs/direccion-de-estilo.md` explica cómo usarlos. La página `/estilo` los muestra y va con `noindex`; el sitemap también la excluye, igual que `/ingresar`.
+
+Tokens principales:
+
+| Token        | Valor     | Uso                                                                                                      |
+| ------------ | --------- | -------------------------------------------------------------------------------------------------------- |
+| `--blush`    | `#F4BEBC` | Fondo                                                                                                    |
+| `--cream`    | `#FFF8F2` | Tarjetas, pastilla del video, selección                                                                  |
+| `--ink`      | `#303236` | Texto, botón Ingresar, pie                                                                               |
+| `--ink-soft` | `#3E4044` | Bajadas                                                                                                  |
+| `--rose`     | `#E06A78` | CTA principal, solo con texto blanco grande (19px, peso 800): contraste 3.23:1, válido como texto grande |
+| `--rose-ink` | `#7E434B` | Microtexto. Sobre crema da 7.15:1 y sobre blush 4.63:1                                                   |
+| `--leaf`     | `#536E58` | Script sobre crema (5.34:1). No va sobre blush en texto chico                                            |
+
+El escenario mide `90rem` (1440px) y el contenido `76rem`, con un margen `--gutter` de `clamp(1.375rem, 7.8vw, 7rem)`. En 1440px ese margen es 112px, el mismo del mockup.
+
+Tipografía, self-hosted y con `font-display: swap`: Nunito (300, 400, 600, 700, 800) para texto y titulares, Contrail One para cifras, Always Classy en `src/fonts/AlwaysClassy.woff2` para una o dos palabras sin tilde. La fuente script no trae eñe ni acentos.
+
+Las fotos (`src/assets/hero/`) pasan por `getImage` de `astro:assets` (WebP y AVIF, medidas explícitas). El hero de escritorio usa el bodegón completo; el móvil recorta los podios. No se anima la foto: es el candidato a LCP.
+
+## Movimiento
+
+Tres gestos, el mismo en todas las páginas:
+
+1. Intro del logo, 0.8s, solo CSS, solo en la primera carga. No tapa la fotografía.
+2. Revelado al entrar en pantalla: `IntersectionObserver` en `src/scripts/motion.ts` añade `.is-in` a `[data-reveal]`. El gesto es un desplazamiento de 16px, sin fundido, para que el texto no pierda contraste a mitad de la animación. Sin JavaScript el contenido sigue visible (`scripting: none`).
+3. Transición entre páginas con `<ClientRouter />` de Astro, fundido de 180–280ms definido en la hoja global. No se nombra una transición por elemento: eso inyectaría un `<style>` y chocaría con la CSP. El aviso de cookies usa `transition:persist`.
+
+`prefers-reduced-motion: reduce` anula animaciones y transiciones. La clase `intro-done` evita que el logo se vuelva a animar en cada navegación del cliente.
+
+Componentes compartidos: `Button`, `SectionHeading`, `Separator`, `Todo`, `Reveal` y `CatalogGrid`.

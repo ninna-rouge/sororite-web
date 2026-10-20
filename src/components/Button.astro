@@ -1,0 +1,31 @@
+---
+import { withUtm } from '../lib/links';
+
+interface Props {
+  href?: string;
+  utm?: string;
+  variant?: 'primary' | 'ink' | 'text' | 'line';
+  type?: 'button' | 'submit';
+  class?: string;
+}
+
+const { href, utm, variant = 'primary', type = 'button', class: className } = Astro.props;
+const destination = href && utm ? withUtm(href, utm) : href;
+const classes = ['btn', `btn-${variant}`, className];
+const external = Boolean(destination?.startsWith('http'));
+---
+
+{destination ? (
+  <a
+    class:list={classes}
+    href={destination}
+    rel={external ? 'noopener noreferrer' : undefined}
+    target={external ? '_blank' : undefined}
+  >
+    <slot />
+  </a>
+) : (
+  <button class:list={classes} type={type}>
+    <slot />
+  </button>
+)}

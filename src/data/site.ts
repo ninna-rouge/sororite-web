@@ -18,21 +18,33 @@ export const site = {
   location: 'Región Metropolitana, Chile',
   instagram: 'https://www.instagram.com/sororite.cl/',
   facebook: 'https://www.facebook.com/sororiteinsumos',
-  logo: '/brand/logo-color.png',
-  logoLight: '/brand/logo-blanco.png',
+  logo: '/brand/logo-oficial.png',
+  shareImage: '/og/hero.jpg',
 } as const;
 
 export const whatsappHref = `https://wa.me/${site.phoneE164}?text=${encodeURIComponent(site.whatsappMessage)}`;
 
-export const nav = [
-  { href: '/', label: 'Inicio' },
-  { href: '/quienes-somos', label: 'Quiénes somos' },
+export const headerNav = [
   { href: '/cursos', label: 'Cursos' },
-  { href: '/galeria', label: 'Galería' },
+  { href: '/contacto#talleres', label: 'Talleres' },
+  { href: '/quienes-somos', label: 'Quiénes somos' },
   { href: '/contacto', label: 'Contacto' },
 ] as const;
 
+export const ingresar = { href: '/ingresar', label: 'Ingresar' } as const;
+
+export const mobileNav = [...headerNav, { href: '/galeria', label: 'Galería' }, ingresar] as const;
+
+export const footerNav = [
+  { href: '/cursos', label: 'Cursos' },
+  { href: '/quienes-somos', label: 'Quiénes somos' },
+  { href: '/galeria', label: 'Galería' },
+  { href: '/contacto', label: 'Contacto' },
+  ingresar,
+] as const;
+
 export function isCurrent(pathname: string, href: string): boolean {
+  if (href.includes('#')) return false;
   if (href === '/') return pathname === '/';
   return pathname === href || pathname.startsWith(`${href}/`);
 }

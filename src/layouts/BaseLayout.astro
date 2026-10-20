@@ -1,12 +1,15 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import { site } from '../data/site';
 import CookieBanner from '../components/CookieBanner.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import '@fontsource/contrail-one/latin-400.css';
+import '@fontsource/nunito/latin-300.css';
 import '@fontsource/nunito/latin-400.css';
 import '@fontsource/nunito/latin-600.css';
 import '@fontsource/nunito/latin-700.css';
+import '@fontsource/nunito/latin-800.css';
 import '../styles/global.css';
 
 interface Props {
@@ -17,7 +20,13 @@ interface Props {
   jsonLd?: Record<string, unknown>[];
 }
 
-const { title, description, image = site.logo, robots = 'index,follow', jsonLd = [] } = Astro.props;
+const {
+  title,
+  description,
+  image = site.shareImage,
+  robots = 'index,follow',
+  jsonLd = [],
+} = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const imageUrl = new URL(image, Astro.site).href;
@@ -66,7 +75,8 @@ const pageTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />
-    <meta name="theme-color" content="#fff5ed" />
+    <meta name="theme-color" content="#f4bebc" />
+    <ClientRouter />
     <link rel="canonical" href={canonical.href} />
     <link rel="icon" href={site.logo} type="image/png" />
     <meta property="og:locale" content="es_CL" />
@@ -93,5 +103,8 @@ const pageTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
     </main>
     <Footer />
     <CookieBanner />
+    <script>
+      import '../scripts/motion.ts';
+    </script>
   </body>
 </html>

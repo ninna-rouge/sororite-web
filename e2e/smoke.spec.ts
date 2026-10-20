@@ -18,7 +18,9 @@ test.beforeEach(async ({ page }) => {
 test('la portada expone el hero, no carga analítica y pasa axe', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Ver cursos' })).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: 'Quiero los 6 cursos por $35.000' }).first(),
+  ).toBeVisible();
   await expect(page.getByRole('region', { name: 'Cookies' })).toBeVisible();
   await expect(
     page.locator('script[src*="googletagmanager"], script[src*="facebook.net"]'),
@@ -60,6 +62,8 @@ test('las páginas principales pasan axe', async ({ page }) => {
     '/contacto',
     '/politica-de-privacidad',
     '/terminos',
+    '/ingresar',
+    '/estilo',
   ];
   for (const path of paths) {
     await page.goto(path);
