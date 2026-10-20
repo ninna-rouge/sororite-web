@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sororite.cl/sitemap-index.xml

@@ -1,0 +1,44 @@
+---
+export const prerender = true;
+
+import { about } from '../data/copy';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description =
+  'Sororité es una academia chilena de cosmética natural. Acompaña a mujeres a convertir un oficio en un emprendimiento propio.';
+---
+
+<BaseLayout title={about.title} description={description}>
+  <header class="page-hero shell">
+    <h1>{about.title}</h1>
+    <p class="lede">{about.intro}</p>
+  </header>
+  <section class="section shell prose" aria-labelledby="que-es">
+    <h2 id="que-es">Qué es Sororité</h2>
+    {about.story.map((paragraph) => (
+      <p>{paragraph}</p>
+    ))}
+  </section>
+  <section class="section band" aria-labelledby="valores">
+    <div class="shell">
+      <div class="section-head">
+        <h2 id="valores">{about.valuesTitle}</h2>
+        <p>{about.valuesLede}</p>
+      </div>
+      <div class="card-grid values">
+        {about.values.map((value) => (
+          <article class="card">
+            <div class="card-body">
+              <h3>{value.title}</h3>
+              <p>{value.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section shell prose" aria-labelledby="historia">
+    <h2 id="historia">{about.historyTitle}</h2>
+    <p>{about.history}</p>
+  </section>
+</BaseLayout>

@@ -1,0 +1,21 @@
+# Dependencias y build
+node_modules/
+dist/
+.astro/
+
+# Entorno: nunca commitear secretos ni IDs reales si viven solo en el entorno local
+.env
+.env.*
+!.env.example
+
+# Tests e informes
+coverage/
+test-results/
+playwright-report/
+blob-report/
+.lighthouseci/
+
+# Sistema
+.DS_Store
+*.log
+.vercel

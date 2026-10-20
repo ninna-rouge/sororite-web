@@ -1,0 +1,40 @@
+---
+export const prerender = true;
+
+import { contact } from '../data/copy';
+import { site, whatsappHref } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description = `Escríbele a Sororité por WhatsApp al ${site.phoneDisplay} o al correo ${site.email}.`;
+---
+
+<BaseLayout title={contact.title} description={description}>
+  <header class="page-hero shell">
+    <h1>{contact.title}</h1>
+    <p class="lede">{contact.lede}</p>
+  </header>
+  <section class="section shell split" aria-label="Canales de contacto">
+    <ul class="contact-list">
+      <li>
+        <a href={whatsappHref}>
+          {contact.whatsappLabel}: {site.phoneDisplay}
+        </a>
+      </li>
+      <li>
+        <a href={`mailto:${site.email}`}>
+          {contact.emailLabel}: {site.email}
+        </a>
+      </li>
+      <li>{site.location}</li>
+    </ul>
+    <div class="card">
+      <div class="card-body">
+        <h2>Antes de escribir</h2>
+        <p>
+          Cuéntanos si buscas un curso en línea o presencial y en qué etapa está tu proyecto. El
+          mensaje se abre en WhatsApp o en tu correo: este sitio no lo guarda.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

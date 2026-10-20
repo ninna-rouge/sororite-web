@@ -1,0 +1,53 @@
+---
+export const prerender = true;
+
+import { legalBanner } from '../data/copy';
+import { site } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description =
+  'Borrador de los términos y condiciones de Sororité. Requiere revisión legal antes de publicarse.';
+---
+
+<BaseLayout title="Términos y condiciones" description={description} robots="noindex,follow">
+  <article class="section shell prose">
+    <h1>Términos y condiciones</h1>
+    <p class="legal-flag">{legalBanner}</p>
+    <h2>Uso del sitio</h2>
+    <p>
+      {site.domain.replace('https://', '')} informa sobre la academia {site.name} y sus cursos. Los
+      textos de cursos marcados como ejemplo no constituyen una oferta.
+    </p>
+    <h2>Cursos y pagos</h2>
+    <p>
+      En esta versión el cobro, cuando corresponda a un curso real, se hace en Hotmart. Las
+      condiciones de compra, reembolso y acceso al aula son las de esa plataforma y las que se
+      acuerden en la ficha definitiva del curso. Este sitio no procesa pagos ni guarda datos de
+      tarjeta.
+    </p>
+    <h2>Propiedad intelectual</h2>
+    <p>
+      Los textos, la marca y el material de los cursos pertenecen a sus titulares. No se autoriza
+      copiar el material de estudio ni usar la marca sin permiso.
+    </p>
+    <h2>Conducta</h2>
+    <p>
+      No uses el sitio para suplantar a la academia, interferir con su operación o enviar mensajes
+      abusivos por los canales de contacto.
+    </p>
+    <h2>Responsabilidad</h2>
+    <p>
+      El alcance de la responsabilidad por la información publicada debe definirlo asesoría legal.
+      Este borrador no limita ni amplía derechos de las personas consumidoras en Chile.
+    </p>
+    <h2>Ley aplicable</h2>
+    <p>
+      Se prevé que la relación informada en este sitio se rija por la ley chilena. El fuero y la
+      redacción final quedan pendientes de revisión.
+    </p>
+    <h2>Contacto</h2>
+    <p>
+      <a href={`mailto:${site.email}`}>{site.email}</a>· {site.phoneDisplay}
+    </p>
+  </article>
+</BaseLayout>

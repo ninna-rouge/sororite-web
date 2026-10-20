@@ -1,0 +1,53 @@
+---
+import { nav, site } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="shell footer-grid">
+    <div>
+      <img class="footer-logo" src={site.logoLight} width="512" height="512" alt="" />
+      <p>{site.description}</p>
+    </div>
+    <nav aria-label="Pie de página">
+      <ul>
+        {nav.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <div>
+      <ul>
+        <li>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </li>
+        <li>
+          <a href="/contacto">{site.phoneDisplay}</a>
+        </li>
+        <li>
+          <a href={site.instagram}>Instagram</a>
+        </li>
+        <li>
+          <a href={site.facebook}>Facebook</a>
+        </li>
+        <li>
+          <a href="/politica-de-privacidad">Política de privacidad</a>
+        </li>
+        <li>
+          <a href="/terminos">Términos y condiciones</a>
+        </li>
+        <li>
+          <button type="button" class="cookie-preferences" data-cookie-preferences>
+            Preferencias de cookies
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="shell legal-note">
+    <p>
+      © {new Date().getFullYear()} {site.name}. {site.location}.
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,34 @@
+---
+export const prerender = true;
+
+import { getCollection } from 'astro:content';
+import CourseCard from '../../components/CourseCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const cursos = (await getCollection('cursos')).sort((a, b) =>
+  a.data.title.localeCompare(b.data.title, 'es'),
+);
+const description =
+  'Cursos de cosmética natural de Sororité, en línea y presenciales. El catálogo visible es de ejemplo hasta definir las fichas reales.';
+---
+
+<BaseLayout title="Cursos" description={description}>
+  <header class="page-hero shell">
+    <h1>Cursos</h1>
+    <p class="lede">
+      Elige una modalidad y revisa la ficha. Los dos cursos publicados son datos de ejemplo para
+      dejar lista la colección.
+    </p>
+  </header>
+  <section class="section shell" aria-label="Listado de cursos">
+    {cursos.length === 0 ? (
+      <p>Todavía no hay cursos publicados.</p>
+    ) : (
+      <div class="card-grid courses">
+        {cursos.map((curso) => (
+          <CourseCard curso={curso} />
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>

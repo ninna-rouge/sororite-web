@@ -1,0 +1,30 @@
+---
+export const prerender = true;
+
+import { gallery } from '../data/copy';
+import { galleryItems } from '../data/gallery';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description =
+  'Galería de Sororité. Las imágenes actuales son marcadores hasta publicar las fotografías del laboratorio y los talleres.';
+---
+
+<BaseLayout title={gallery.title} description={description}>
+  <header class="page-hero shell">
+    <h1>{gallery.title}</h1>
+    <p class="lede">{gallery.lede}</p>
+  </header>
+  <section class="section shell" aria-label="Fotografías de ejemplo">
+    <div class="card-grid gallery">
+      {galleryItems.map((item) => (
+        <figure class="card gallery-card">
+          <img src={item.src} width="640" height="480" alt="" />
+          <figcaption>
+            <h2>{item.title}</h2>
+            <p>{item.caption}</p>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

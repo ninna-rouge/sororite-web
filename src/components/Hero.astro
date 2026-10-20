@@ -1,0 +1,36 @@
+---
+import { home } from '../data/copy';
+import { site, whatsappHref } from '../data/site';
+
+/**
+ * Composición provisoria del hero.
+ * El mockup aprobado (hero.html, hero-desktop.png, hero-movil.png) no estaba
+ * en el entorno. Los colores salen del logo y del sitio vigente.
+ */
+---
+
+<section class="hero shell" aria-labelledby="hero-title">
+  <div>
+    <p class="eyebrow">{home.eyebrow}</p>
+    <h1 id="hero-title">{home.title}</h1>
+    <p class="lede">{home.lede}</p>
+    <ul class="point-list">
+      {home.points.map((point) => (
+        <li>{point}</li>
+      ))}
+    </ul>
+    <div class="button-row">
+      <a class="button" href="/cursos">
+        {home.primaryCta}
+      </a>
+      <a class="button secondary" href={whatsappHref}>
+        {home.secondaryCta}
+      </a>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="blob blob-sage" aria-hidden="true"></div>
+    <div class="blob blob-blush" aria-hidden="true"></div>
+    <img src={site.logo} width="586" height="416" alt="" fetchpriority="high" />
+  </div>
+</section>

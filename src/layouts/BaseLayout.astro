@@ -1,0 +1,85 @@
+---
+import { site } from '../data/site';
+import CookieBanner from '../components/CookieBanner.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import '@fontsource/contrail-one/latin-400.css';
+import '@fontsource/nunito/latin-400.css';
+import '@fontsource/nunito/latin-600.css';
+import '@fontsource/nunito/latin-700.css';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  robots?: string;
+  jsonLd?: Record<string, unknown>[];
+}
+
+const { title, description, image = site.logo, robots = 'index,follow', jsonLd = [] } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const imageUrl = new URL(image, Astro.site).href;
+const graph = [
+  {
+    '@type': 'Organization',
+    '@id': `${site.domain}/#organization`,
+    name: site.name,
+    url: site.domain,
+    logo: new URL(site.logo, Astro.site).href,
+    email: site.email,
+    telephone: `+${site.phoneE164}`,
+    address: {
+      '@type': 'PostalAddress',
+      addressRegion: 'Región Metropolitana',
+      addressCountry: 'CL',
+    },
+    sameAs: [site.instagram, site.facebook],
+  },
+  ...jsonLd,
+];
+const structuredData = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': graph,
+}).replaceAll('<', '\\u003c');
+const pageTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+---
+
+<!doctype html>
+<html lang="es-CL">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <meta name="theme-color" content="#fff5ed" />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="icon" href={site.logo} type="image/png" />
+    <meta property="og:locale" content="es_CL" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <slot name="head" />
+    <script type="application/ld+json" set:html={structuredData} />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">
+      Saltar al contenido
+    </a>
+    <Header />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Footer />
+    <CookieBanner />
+  </body>
+</html>
