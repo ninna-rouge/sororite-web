@@ -1,0 +1,27 @@
+---
+export const prerender = true;
+
+import Todo from '../components/Todo.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description =
+  'Galería de productos hechos por alumnas de Sororité. Las fotografías autorizadas todavía no están publicadas.';
+---
+
+<BaseLayout title="Galería" description={description}>
+  <header class="page-hero shell">
+    <p class="eyebrow">Creado por nuestras alumnas</p>
+    <h1>Galería</h1>
+    <p class="lede">Productos reales hechos por alumnas de Sororité.</p>
+    <Todo>
+      6–9 fotos de productos hechos por alumnas, con autorización de uso y nombre o @ si lo aceptan.
+      No se publican fotografías de relleno ni imágenes de stock.
+    </Todo>
+  </header>
+  <section class="section shell" aria-label="Fotografías pendientes">
+    <p>
+      Cuando existan las fotos y la autorización, esta página las muestra con el nombre de quien las
+      hizo. Hasta entonces el espacio queda vacío a propósito.
+    </p>
+  </section>
+</BaseLayout>

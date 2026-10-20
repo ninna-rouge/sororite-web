@@ -1,0 +1,15 @@
+---
+export const prerender = true;
+
+import Hero from '../components/Hero.astro';
+import Landing from '../components/Landing.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description =
+  'Aprende a formular cosmética natural, jabones y velas desde cero, a tu ritmo y desde tu casa. Terminas con productos propios, el criterio para fabricarlos con seguridad y un camino claro para emprender.';
+---
+
+<BaseLayout title="Crea tus propios cosméticos naturales" description={description}>
+  <Hero />
+  <Landing />
+</BaseLayout>

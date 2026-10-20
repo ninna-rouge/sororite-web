@@ -1,0 +1,486 @@
+---
+import { packOffer } from '../data/catalog';
+import { whatsappHref } from '../data/site';
+import { getImage } from 'astro:assets';
+import camila from '../assets/hero/camila.jpg';
+import Button from './Button.astro';
+import CatalogGrid from './CatalogGrid.astro';
+import Reveal from './Reveal.astro';
+import SectionHeading from './SectionHeading.astro';
+import Todo from './Todo.astro';
+
+const portrait = await getImage({
+  src: camila,
+  width: 640,
+  format: 'webp',
+  quality: 70,
+});
+
+const paths = [
+  {
+    title: 'Quiero empezar a vender pronto',
+    course: 'Velas y Aromatizadores, con el complemento Mini curso Velas Tipo Postre.',
+    text: 'Productos aromáticos para el hogar (velas, home spray, difusores, wax melt) con técnica y fragancias seguras. Un camino práctico para tus primeras ventas, en ferias, redes o como regalo. TODO: validar la redacción sobre si requiere o no resolución sanitaria.',
+    links: [{ href: '/#velas', label: 'Ver Velas y Aromatizadores', utm: 'camino_velas' }],
+  },
+  {
+    title: 'Quiero aprender cosmética natural',
+    course: 'Cosmética Natural Online, o Todo Jabones si prefieres partir por jabones.',
+    text: 'Formulación desde cero: cremas, sérums, tónicos, desodorantes, maquillaje y jabones, con pH, estabilidad y conservantes explicados con ciencia.',
+    links: [
+      { href: '/#cosmetica', label: 'Ver Cosmética Natural', utm: 'camino_cosmetica' },
+      { href: '/#jabones', label: 'Ver Todo Jabones', utm: 'camino_jabones' },
+    ],
+  },
+  {
+    title: 'Ya fabrico y quiero formalizarme',
+    course: 'Resolución Sanitaria, con el complemento Técnicas de Venta para Emprendedores.',
+    text: 'Fichas técnicas, etiquetado, nomenclatura y lo que necesitas saber para tramitar la resolución sanitaria de tus cosméticos en Chile. Después, aprende a vender con estrategia.',
+    links: [{ href: '/#resolucion', label: 'Ver Resolución Sanitaria', utm: 'camino_resolucion' }],
+  },
+];
+
+const objections = [
+  {
+    quote: 'Hacer cosméticos requiere ser química o tener laboratorio',
+    text: 'Cualquier persona puede aprender a formular con la guía correcta. La ciencia detrás de una crema o un jabón se puede entender y aplicar sin formación previa.',
+    close: 'En Sororité te lo explicamos para que lo entiendas desde la primera clase.',
+  },
+  {
+    quote: 'Los tutoriales de YouTube bastan para emprender',
+    text: 'Formular sin base científica puede terminar en productos inestables o contaminados. La diferencia entre una receta y una fórmula es el conocimiento técnico.',
+    close: 'Nuestros cursos te dan el criterio para formular, no solo la receta.',
+  },
+  {
+    quote: 'Los productos naturales hechos en casa no se pueden vender legalmente',
+    text: 'En Chile sí se puede: existe la categoría de cosméticos de bajo riesgo. Te enseñamos paso a paso qué pide la normativa vigente para obtener la resolución sanitaria.',
+    close:
+      'Somos los únicos en Chile con un curso de Resolución Sanitaria para cosmética artesanal, dictado por una enfermera universitaria con laboratorio propio autorizado por el ISP.',
+  },
+];
+
+const trust = [
+  {
+    title: '3.500 estudiantes durante 2026',
+    text: 'Mujeres que aprendieron con Sororité en cursos online y talleres presenciales en Providencia y Puente Alto.',
+  },
+  {
+    title: 'Laboratorio con resolución sanitaria',
+    text: 'Contamos con un laboratorio de bajo riesgo cosmético con resolución sanitaria del ISP (N° 2931/22), donde también practican nuestras estudiantes.',
+  },
+  {
+    title: 'Una enfermera universitaria te enseña',
+    text: 'Camila Sánchez enseña cosmética natural desde 2018, explicando el porqué de cada paso: pH, conservación y estabilidad, en lenguaje simple.',
+  },
+  {
+    title: 'Ingredientes libres de tóxicos',
+    text: 'Te enseñamos a elegir materias primas libres de tóxicos y disruptores hormonales, con información técnica clara.',
+  },
+];
+
+const chips = [
+  'Enfermera universitaria',
+  'Enseña desde 2018',
+  '3.500 estudiantes en 2026',
+  'Laboratorio con resolución sanitaria ISP',
+  'Talleres en Providencia y Puente Alto',
+  'Únicos en Chile con formación en Resolución Sanitaria',
+];
+---
+
+<section class="section band-cream" id="respaldo" aria-labelledby="respaldo-titulo">
+  <div class="shell">
+    <SectionHeading eyebrow="Respaldo">
+      <h2 id="respaldo-titulo">
+        Aprendes con ciencia, oficio y una formadora con experiencia real
+      </h2>
+    </SectionHeading>
+    <div class="card-grid cols-2 stagger">
+      {trust.map((item) => (
+        <Reveal class="card">
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </Reveal>
+      ))}
+    </div>
+    <div class="section-head stack-loose">
+      <h3>Creado por nuestras alumnas</h3>
+      <p>Productos reales hechos por alumnas de Sororité.</p>
+      <Todo>
+        6–9 fotos de productos hechos por alumnas, con autorización de uso y nombre o @ si lo
+        aceptan. No se publican imágenes de relleno.
+      </Todo>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="frenos" aria-labelledby="frenos-titulo">
+  <div class="shell">
+    <SectionHeading
+      eyebrow="Lo que te está frenando"
+      lede="El primer paso para formular con confianza es cuestionar lo que damos por hecho sobre los cosméticos y sobre nuestra propia capacidad."
+    >
+      <h2 id="frenos-titulo">Estas ideas son las que nos impiden empezar.</h2>
+    </SectionHeading>
+    <div class="card-grid stagger">
+      {objections.map((item) => (
+        <Reveal class="card">
+          <h3>«{item.quote}».</h3>
+          <p>{item.text}</p>
+          <p>{item.close}</p>
+        </Reveal>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section band-cream" id="elegir" aria-labelledby="elegir-titulo">
+  <div class="shell">
+    <SectionHeading
+      eyebrow="Elige tu camino"
+      lede="Depende de lo que quieras lograr hoy. Elige tu camino y suma los demás cursos cuando quieras."
+    >
+      <h2 id="elegir-titulo">¿Por dónde empiezo?</h2>
+    </SectionHeading>
+    <div class="card-grid cols-3 stagger">
+      {paths.map((path) => (
+        <Reveal class="card">
+          <h3>«{path.title}»</h3>
+          <p>
+            <strong>{path.course}</strong>
+          </p>
+          <p>{path.text}</p>
+          <div class="cta-stack">
+            {path.links.map((link) => (
+              <Button href={link.href} utm={link.utm} variant="text">
+                {link.label}
+              </Button>
+            ))}
+          </div>
+        </Reveal>
+      ))}
+    </div>
+    <p class="lede stack-top">
+      ¿Te interesan varios? El pack incluye los 6 cursos.
+      <Button href="/#oferta" utm="camino_pack" variant="text">
+        Ver el pack
+      </Button>
+    </p>
+  </div>
+</section>
+
+<section class="section" id="oferta" aria-labelledby="oferta-titulo" data-reveal>
+  <div class="shell">
+    <SectionHeading eyebrow={packOffer.eyebrow} lede={packOffer.lede}>
+      <h2 id="oferta-titulo">{packOffer.title}</h2>
+    </SectionHeading>
+    <div class="split">
+      <div>
+        <ul class="plain-list">
+          {packOffer.includes.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+        <p class="price">
+          <s>
+            <span class="visually-hidden">Precio por separado: </span>
+            {packOffer.compareAt}
+          </s>
+          <span class="price-now">
+            <span class="visually-hidden">Precio del pack: </span>
+            {packOffer.price}
+          </span>
+        </p>
+        <p>{packOffer.priceNote}</p>
+        <Todo>
+          Fecha de término de la oferta, si se quiere comunicar. Confirmar si se habilitan cuotas en
+          Hotmart y cómo se comunican.
+        </Todo>
+        <Todo id="todo-hotmart">
+          URLs de Hotmart del pack y de cada curso. Los botones de compra todavía no abren un pago.
+        </Todo>
+        <Button href="/#todo-hotmart" utm="oferta_pack">
+          {packOffer.cta}
+        </Button>
+        <p class="micro">{packOffer.micro}</p>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Bono 1: Lista de proveedores investigados y validados.</h3>
+          <p>
+            Te entregamos una lista de proveedores de materias primas libres de tóxicos y
+            disruptores hormonales, con precios mayoristas y minoristas y despacho a todo Chile. Así
+            formulas con tranquilidad desde tu primer pedido.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Bono 2: Consultas por WhatsApp con Camila.</h3>
+          <p>
+            Resuelve tus dudas de formulación, ingredientes y emprendimiento directamente con la
+            fundadora.
+          </p>
+          <Todo>
+            Definir alcance y duración. La web actual dice «por 1 año» solo en Cosmética Natural.
+          </Todo>
+        </article>
+      </div>
+    </div>
+    <h3>Qué recibes en cada curso</h3>
+    <ul class="plain-list">
+      {packOffer.receives.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="section band-cream" id="cursos-lista" aria-labelledby="cursos-titulo">
+  <div class="shell">
+    <SectionHeading lede="Cada curso se compra por separado en Hotmart y te llega al correo apenas se confirma el pago.">
+      <h2 id="cursos-titulo">Elige el curso que más te mueva hoy.</h2>
+    </SectionHeading>
+    <CatalogGrid />
+    <div id="muestra" class="section-head stack-mid">
+      <h3>Mira cómo es una clase por dentro.</h3>
+      <Todo>Video o fragmento de clase de 2–3 min.</Todo>
+      <Button href="/#muestra" utm="muestra_clase" variant="text">
+        Ver clase de muestra
+      </Button>
+    </div>
+    <p>
+      ¿Quieres más de uno? El pack de 6 cursos cuesta $35.000 por tiempo limitado.
+      <Button href="/#oferta" utm="cards_pack" variant="text">
+        Ver el pack
+      </Button>
+    </p>
+  </div>
+</section>
+
+<section class="section" id="testimonios" aria-labelledby="testimonios-titulo">
+  <div class="shell">
+    <SectionHeading
+      eyebrow="Lo que crean nuestras alumnas"
+      lede="Experiencias de quienes ya aprendieron con nosotras."
+    >
+      <h2 id="testimonios-titulo">Palabras reales de alumnas de Sororité.</h2>
+    </SectionHeading>
+    <Todo>
+      3–6 testimonios de alumnas de los cursos online, con producto creado o paso logrado (por
+      ejemplo, primera venta o resolución sanitaria obtenida), foto del producto y autorización. No
+      usar cifras de ventas sin respaldo.
+    </Todo>
+    <div class="card-grid cols-3 stagger">
+      <Reveal tag="article" class="card">
+        <blockquote class="quote">
+          <p>
+            «Hoy viví una experiencia increíble. Creamos productos maravillosos con nuestras propias
+            manos. Hoy no gané un premio, gané el día completo.»
+          </p>
+          <footer>@poninapolito · Instagram · Taller presencial</footer>
+        </blockquote>
+      </Reveal>
+      <Reveal tag="article" class="card">
+        <blockquote class="quote">
+          <p>
+            «Feliz de haber participado, aprendí muchas cosas que me hacían falta. La profe un amor,
+            se pasa bien, compartes y conoces. 100% recomendado.»
+          </p>
+          <footer>@hummingurbangirl · Instagram · Taller presencial</footer>
+        </blockquote>
+      </Reveal>
+      <Reveal tag="article" class="card">
+        <blockquote class="quote">
+          <p>«Amo los productos, especialmente el desodorante y el shampoo.»</p>
+          <footer>
+            María · alumna Sororité · WhatsApp. TODO: confirmar si es de curso online o de taller.
+          </footer>
+        </blockquote>
+      </Reveal>
+    </div>
+  </div>
+</section>
+
+<section class="section band-cream" id="camila" aria-labelledby="camila-titulo" data-reveal>
+  <div class="shell split">
+    <img
+      class="portrait"
+      src={portrait.src}
+      width={portrait.attributes.width}
+      height={portrait.attributes.height}
+      alt="Camila Sánchez, fundadora de Sororité"
+      loading="lazy"
+    />
+    <div>
+      <SectionHeading eyebrow="Quién te enseña">
+        <h2 id="camila-titulo">Camila Sánchez, fundadora de Sororité.</h2>
+      </SectionHeading>
+      <p class="lede">Enfermera universitaria · Formuladora · Enseña desde 2018</p>
+      <p>
+        Soy enfermera universitaria, emprendedora y mamá. Enseño cosmética natural desde 2018, con
+        un objetivo claro: que las mujeres accedan a conocimiento real, sin mitos ni recetas
+        sueltas, con ciencia explicada de forma simple. Durante 2026 ya son 3.500 las estudiantes
+        que aprendieron con Sororité, online y en nuestros talleres de Providencia y Puente Alto.
+        Formulo en un laboratorio de bajo riesgo cosmético con resolución sanitaria del ISP, y ahí
+        también practican mis alumnas. Somos los únicos en Chile con formación en Resolución
+        Sanitaria para cosmética artesanal.
+      </p>
+      <blockquote class="quote">
+        <p>
+          «Invertir en ti no es egoísmo: es el primer paso para transformar tu vida y la de tu
+          familia.»
+        </p>
+        <footer>Camila Sánchez</footer>
+      </blockquote>
+      <ul class="chips">
+        {chips.map((chip) => (
+          <li>{chip}</li>
+        ))}
+      </ul>
+      <Button href="/quienes-somos" variant="text">
+        Conoce nuestra historia
+      </Button>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="garantia" aria-labelledby="garantia-titulo" data-reveal>
+  <div class="shell">
+    <div class="split">
+      <div>
+        <h2 id="garantia-titulo">Pruébalo con tranquilidad: tienes 7 días de garantía.</h2>
+        <p>
+          Compras a través de Hotmart. Si en los primeros 7 días sientes que el curso no es para ti,
+          puedes pedir el reembolso directamente en Hotmart, según sus condiciones.
+        </p>
+      </div>
+      <div class="faq" id="faq">
+        <h2>Preguntas frecuentes</h2>
+        <details>
+          <summary>¿Cómo compro y cómo accedo al curso?</summary>
+          <p>
+            Haces clic en el botón del curso o del pack y pagas en Hotmart. Cuando se confirma el
+            pago, Hotmart te envía un correo con tu acceso. Revisa también la carpeta de spam o
+            promociones.
+          </p>
+        </details>
+        <details>
+          <summary>¿Qué medios de pago puedo usar?</summary>
+          <p>
+            Los que Hotmart tenga disponibles para Chile al momento de pagar. TODO: listar medios y
+            cuotas habilitados.
+          </p>
+        </details>
+        <details>
+          <summary>¿Qué pasa si no me llega el correo de acceso?</summary>
+          <p>
+            Revisa spam o promociones y confirma que escribiste bien tu correo. Si sigue sin llegar,
+            escríbenos por <a href={whatsappHref}>WhatsApp</a> y te ayudamos.
+          </p>
+        </details>
+        <details>
+          <summary>¿Cómo funciona la garantía?</summary>
+          <p>Tienes 7 días desde la compra para solicitar el reembolso a través de Hotmart.</p>
+        </details>
+        <details>
+          <summary>¿Los cursos tienen fecha de vencimiento?</summary>
+          <p>
+            No. El acceso es permanente: puedes ver el material cuando quieras, las veces que
+            necesites y desde cualquier dispositivo. TODO: confirmar configuración en Hotmart.
+          </p>
+        </details>
+        <details>
+          <summary>¿Necesito experiencia previa?</summary>
+          <p>
+            No. Todos los cursos están pensados para aprender desde cero, con la base científica
+            explicada de forma simple.
+          </p>
+        </details>
+        <details>
+          <summary>¿El pack de $35.000 incluye todos los cursos?</summary>
+          <p>
+            Sí. Incluye los 6 cursos completos: Velas y Aromatizadores, Cosmética Natural, Todo
+            Jabones, Velas Tipo Postre, Resolución Sanitaria y Técnicas de Venta.
+          </p>
+        </details>
+        <details>
+          <summary>¿Puedo tomar los cursos si estoy fuera de Chile?</summary>
+          <p>
+            Sí. Los cursos son 100% online. Los proveedores de la lista despachan dentro de Chile;
+            si estás en otro país, las fórmulas y el conocimiento te sirven igual.
+          </p>
+        </details>
+        <details>
+          <summary>¿Recibo boleta o certificado?</summary>
+          <p>
+            TODO: cómo se emite el comprobante con Hotmart y qué cursos entregan diploma. La web
+            actual menciona diploma solo en Resolución Sanitaria.
+          </p>
+        </details>
+        <details>
+          <summary>¿Hay talleres presenciales?</summary>
+          <p>
+            Sí, en Providencia y Puente Alto, Santiago.
+            <a href="/contacto#talleres">Escríbenos para los talleres</a>. TODO: enlace a calendario
+            de fechas.
+          </p>
+        </details>
+        <details>
+          <summary>¿Tengo dudas antes de comprar?</summary>
+          <p>
+            Escríbenos por <a href={whatsappHref}>WhatsApp</a> y te respondemos antes de que
+            decidas.
+          </p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section band-cream" id="cierre" aria-labelledby="cierre-titulo" data-reveal>
+  <div class="shell split">
+    <div>
+      <h2 id="cierre-titulo">Eres tu mejor inversión.</h2>
+      <p class="lede">
+        Empieza hoy, a tu ritmo y desde casa, con fórmulas probadas y ciencia explicada simple.
+      </p>
+      <div class="cta-stack">
+        <Button href="/#oferta" utm="final_pack">
+          Quiero los 6 cursos por $35.000
+        </Button>
+        <Button href="/#cursos-lista" utm="final_cursos" variant="text">
+          Ver cursos por separado
+        </Button>
+      </div>
+    </div>
+    <div id="lead">
+      <h2>¿Aún no te decides? Empieza gratis.</h2>
+      <p>
+        Déjanos tu correo y te enviamos TODO: nombre y contenido del recurso gratuito (la minuta del
+        28-09 propone un libro digital) para que des tu primer paso en cosmética natural.
+      </p>
+      <div class="lead-grid">
+        <div>
+          <label for="lead-nombre">Nombre</label>
+          <input id="lead-nombre" type="text" autocomplete="name" />
+        </div>
+        <div>
+          <label for="lead-correo">Correo</label>
+          <input id="lead-correo" type="email" autocomplete="email" inputmode="email" />
+        </div>
+      </div>
+      <div class="cta-stack stack-tight">
+        <Button href="/#lead" utm="lead_magnet">
+          Quiero recibirlo
+        </Button>
+      </div>
+      <p class="micro">
+        Usaremos tu correo solo para enviarte contenido de Sororité. Puedes darte de baja cuando
+        quieras. <a href="/politica-de-privacidad">Política de privacidad</a>.
+      </p>
+      <Todo>
+        Herramienta de email. El formulario no envía datos: no hay servicio conectado. El recurso
+        gratuito todavía no tiene nombre ni archivo.
+      </Todo>
+    </div>
+  </div>
+</section>

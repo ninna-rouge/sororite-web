@@ -1,0 +1,70 @@
+---
+export const prerender = true;
+
+import { legalBanner } from '../data/copy';
+import { site, whatsappHref } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description =
+  'Borrador de la política de privacidad de Sororité. Requiere revisión legal antes de publicarse, incluida la Ley 21.719.';
+---
+
+<BaseLayout title="Política de privacidad" description={description} robots="noindex,follow">
+  <article class="section shell prose">
+    <h1>Política de privacidad</h1>
+    <p class="legal-flag">{legalBanner}</p>
+    <h2>Responsable</h2>
+    <p>
+      El responsable del tratamiento es {site.legalName}, RUT {site.companyTaxId}, giro{' '}
+      {site.businessActivity}. La representa {site.representative}. El correo para ejercer derechos
+      y consultas de privacidad es <a href={`mailto:${site.email}`}>{site.email}</a> y el teléfono
+      es <a href={whatsappHref}>{site.phoneDisplay}</a>.
+    </p>
+    <p>
+      Este borrador no publica el RUT de ninguna persona natural. El domicilio y el detalle que
+      todavía exija la Ley 21.719 siguen pendientes de revisión legal.
+    </p>
+    <h2>Qué datos puede tratar esta versión</h2>
+    <p>En la versión actual el sitio es estático y no tiene cuentas ni formulario propio.</p>
+    <ul>
+      <li>Si escribes por WhatsApp o por correo, la conversación ocurre en esos servicios.</li>
+      <li>Si aceptas las cookies, pueden cargarse Google Analytics 4 y el píxel de Meta.</li>
+      <li>
+        El hosting puede registrar datos técnicos de la visita, como la dirección IP y el navegador.
+      </li>
+      <li>El pago de un curso, cuando exista, ocurre en Hotmart y no en este dominio.</li>
+    </ul>
+    <h2>Finalidades</h2>
+    <p>
+      Responder consultas, medir la audiencia solo con consentimiento y mostrar el catálogo de
+      cursos. No hay venta de bases de datos prevista en este borrador.
+    </p>
+    <h2>Base de tratamiento</h2>
+    <p>
+      La base aplicable según la Ley 21.719 debe confirmarla asesoría legal. La analítica queda
+      sujeta al consentimiento que se pide en el aviso de cookies. Rechazarla no bloquea el sitio.
+    </p>
+    <h2>Encargados y transferencias</h2>
+    <p>
+      Pueden intervenir el proveedor de hosting, Hotmart (si se usa su checkout) y, solo tras el
+      consentimiento, Google y Meta. Hay que identificar a cada encargado y el país donde tratan
+      datos antes de publicar esta política.
+    </p>
+    <h2>Cookies</h2>
+    <p>
+      Las cookies de analítica no se instalan hasta que la persona pulsa «Aceptar». «Rechazar» deja
+      la decisión guardada en el propio navegador, en la clave local `sororite-consent`. Se puede
+      cambiar desde «Preferencias de cookies» en el pie.
+    </p>
+    <h2>Derechos</h2>
+    <p>
+      La Ley 21.719 reconoce derechos de acceso, rectificación, supresión, oposición y portabilidad,
+      entre otros que la norma precise. La forma de ejercerlos y los plazos deben redactarlos con
+      revisión legal. Mientras tanto, la vía de contacto es {site.email}.
+    </p>
+    <h2>Conservación</h2>
+    <p>Los plazos de conservación quedan por definir. Este borrador no inventa un período.</p>
+    <h2>Cambios</h2>
+    <p>Cuando el texto se revise, hay que actualizar la fecha y quitar este aviso de borrador.</p>
+  </article>
+</BaseLayout>

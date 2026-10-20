@@ -1,0 +1,14 @@
+---
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+---
+
+<p class="todo" id={id} role="note">
+  <span class="todo-flag">TODO</span>
+  <span>
+    <slot />
+  </span>
+</p>

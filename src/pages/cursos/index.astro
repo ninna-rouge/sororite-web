@@ -1,0 +1,51 @@
+---
+export const prerender = true;
+
+import { getCollection } from 'astro:content';
+import CatalogGrid from '../../components/CatalogGrid.astro';
+import CourseCard from '../../components/CourseCard.astro';
+import Todo from '../../components/Todo.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const ejemplos = (await getCollection('cursos')).sort((a, b) =>
+  a.data.title.localeCompare(b.data.title, 'es'),
+);
+const description =
+  'Seis cursos online de cosmética natural, jabones, velas, ventas y resolución sanitaria. El pack de los 6 cuesta $35.000 por tiempo limitado.';
+---
+
+<BaseLayout title="Cursos" description={description}>
+  <header class="page-hero shell">
+    <p class="eyebrow">Cursos online</p>
+    <h1>Elige el curso que más te mueva hoy.</h1>
+    <p class="lede">
+      Cada curso se compra por separado en Hotmart y te llega al correo apenas se confirma el pago.
+      El pack de 6 cursos cuesta $35.000 por tiempo limitado.
+    </p>
+    <Todo id="todo-hotmart">
+      Precio individual y URL de Hotmart de cada curso. Ningún botón de esta página abre un pago.
+    </Todo>
+  </header>
+  <section class="section" aria-label="Cursos online">
+    <div class="shell">
+      <CatalogGrid checkoutHref="#todo-hotmart" />
+    </div>
+  </section>
+  <section class="section band-cream" aria-labelledby="ejemplos-titulo">
+    <div class="shell">
+      <h2 id="ejemplos-titulo">Fichas de ejemplo del esquema</h2>
+      <details class="syllabus">
+        <summary>Ver las fichas de prueba, no son la oferta</summary>
+        <p>
+          Sirven para dejar armada la colección de contenido. El precio y el enlace de pago son
+          datos de prueba.
+        </p>
+        <div class="card-grid courses">
+          {ejemplos.map((curso) => (
+            <CourseCard curso={curso} />
+          ))}
+        </div>
+      </details>
+    </div>
+  </section>
+</BaseLayout>

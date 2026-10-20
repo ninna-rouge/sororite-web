@@ -1,0 +1,63 @@
+---
+import { footerNav, site, whatsappHref } from '../data/site';
+import Todo from './Todo.astro';
+---
+
+<footer class="site-footer">
+  <div class="shell footer-grid">
+    <div>
+      <img class="footer-logo" src={site.logo} width="586" height="416" alt="" />
+      <p>Sororité · Academia de Cosmética Natural y Emprendimiento · Santiago de Chile</p>
+      <Todo>
+        Rango de años. No usar 2015–2026: según el CV, Sororité.cl es de 2016 y 2015 corresponde a
+        Lahuen Productos Terapéuticos.
+      </Todo>
+    </div>
+    <nav aria-label="Pie de página">
+      <ul>
+        {footerNav.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <div>
+      <ul>
+        <li>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </li>
+        <li>
+          <a href={whatsappHref}>{site.phoneDisplay}</a>
+        </li>
+        <li>
+          <a href={site.instagram} rel="noopener noreferrer">
+            Instagram
+          </a>
+        </li>
+        <li>
+          <a href={site.facebook} rel="noopener noreferrer">
+            Facebook
+          </a>
+        </li>
+        <li>
+          <a href="/politica-de-privacidad">Política de privacidad</a>
+        </li>
+        <li>
+          <a href="/terminos">Términos y condiciones</a>
+        </li>
+        <li>
+          <button type="button" class="cookie-preferences" data-cookie-preferences>
+            Preferencias de cookies
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="shell legal-note">
+    <p>
+      © {new Date().getFullYear()} {site.legalName}. RUT {site.companyTaxId}. Giro:{' '}
+      {site.businessActivity}. Representante: {site.representative}.
+    </p>
+  </div>
+</footer>

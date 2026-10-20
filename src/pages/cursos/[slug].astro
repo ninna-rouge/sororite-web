@@ -1,0 +1,106 @@
+---
+export const prerender = true;
+
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { modalityLabel } from '../../lib/courses';
+import { site, whatsappHref } from '../../data/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+interface Props {
+  curso: CollectionEntry<'cursos'>;
+}
+
+export async function getStaticPaths() {
+  const cursos = await getCollection('cursos');
+  return cursos.map((curso) => ({
+    params: { slug: curso.data.slug },
+    props: { curso },
+  }));
+}
+
+const { curso } = Astro.props;
+const data = curso.data;
+const { Content } = await render(curso);
+const courseLd: Record<string, unknown> = {
+  '@type': 'Course',
+  name: data.title,
+  description: data.summary,
+  image: new URL(data.image, Astro.site).href,
+  inLanguage: 'es-CL',
+  courseMode: data.modality === 'online' ? 'online' : 'onsite',
+  provider: { '@id': `${site.domain}/#organization` },
+};
+if (!data.example) {
+  courseLd.offers = {
+    '@type': 'Offer',
+    url: data.hotmartCheckoutUrl,
+    priceCurrency: 'CLP',
+    availability: 'https://schema.org/InStock',
+  };
+}
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.summary}
+  image={data.image}
+  robots={data.example ? 'noindex,follow' : 'index,follow'}
+  jsonLd={[courseLd]}
+>
+  <article class="section shell">
+    <nav class="crumbs" aria-label="Miga de pan">
+      <ol>
+        <li>
+          <a href="/">Inicio</a>
+        </li>
+        <li>
+          <a href="/cursos">Cursos</a>
+        </li>
+        <li aria-current="page">{data.title}</li>
+      </ol>
+    </nav>
+    {data.example && (
+      <p class="example-flag">
+        Dato de ejemplo. Esta ficha, el precio y el enlace de Hotmart no corresponden a una venta
+        real.
+      </p>
+    )}
+    <div class="split">
+      <div>
+        <h1>{data.title}</h1>
+        <ul class="meta">
+          <li>{modalityLabel(data.modality)}</li>
+          <li>{data.priceDisplay}</li>
+        </ul>
+        <p class="lede">{data.summary}</p>
+        <div class="prose">
+          <Content />
+        </div>
+        <div class="cta-stack">
+          <a
+            class="btn btn-primary"
+            href={data.hotmartCheckoutUrl}
+            rel="nofollow noopener noreferrer"
+          >
+            Ir al pago en Hotmart
+            <span class="visually-hidden"> (sitio externo)</span>
+          </a>
+          <a class="btn btn-line" href={whatsappHref}>
+            Preguntar por WhatsApp
+          </a>
+        </div>
+      </div>
+      <img src={data.image} width="640" height="480" alt="" />
+    </div>
+    <section class="faq" aria-labelledby="faq-titulo">
+      <h2 id="faq-titulo">Preguntas frecuentes</h2>
+      {data.faq.map((item) => (
+        <details>
+          <summary>{item.question}</summary>
+          <p>{item.answer}</p>
+        </details>
+      ))}
+    </section>
+  </article>
+</BaseLayout>

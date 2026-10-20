@@ -1,0 +1,13 @@
+---
+interface Props {
+  class?: string;
+  tag?: 'div' | 'article' | 'li';
+  id?: string;
+}
+
+const { class: className, tag: Tag = 'div', id } = Astro.props;
+---
+
+<Tag class={className} data-reveal id={id}>
+  <slot />
+</Tag>

@@ -1,0 +1,82 @@
+---
+/**
+ * El aviso va en HTML y la lógica en un módulo empaquetado.
+ * Así la CSP no necesita unsafe-inline: Astro no inyecta el runtime de una isla.
+ */
+---
+
+<div
+  id="cookie-banner"
+  class="cookie-banner"
+  role="region"
+  aria-labelledby="cookie-title"
+  hidden
+  transition:persist="cookie-banner"
+>
+  <h2 id="cookie-title">Cookies</h2>
+  <p>
+    Este sitio solo carga analítica de Google y Meta si lo autorizas. Puedes rechazarlas y seguir
+    navegando. <a href="/politica-de-privacidad">Política de privacidad</a>.
+  </p>
+  <div class="cookie-actions">
+    <button type="button" class="btn btn-primary" data-consent="accepted">
+      Aceptar
+    </button>
+    <button type="button" class="btn btn-line" data-consent="rejected">
+      Rechazar
+    </button>
+  </div>
+</div>
+
+<script>
+  import { CONSENT_KEY, loadAnalytics } from '../lib/analytics';
+
+  const banner = document.querySelector<HTMLElement>('#cookie-banner');
+
+  function readChoice(): string | null {
+    try {
+      return localStorage.getItem(CONSENT_KEY);
+    } catch {
+      return null;
+    }
+  }
+
+  function showBanner() {
+    banner?.removeAttribute('hidden');
+  }
+
+  function hideBanner() {
+    banner?.setAttribute('hidden', '');
+  }
+
+  function choose(choice: 'accepted' | 'rejected') {
+    const previous = readChoice();
+    try {
+      localStorage.setItem(CONSENT_KEY, choice);
+    } catch {
+      hideBanner();
+      return;
+    }
+    if (choice === 'accepted') loadAnalytics();
+    hideBanner();
+    if (previous && previous !== choice) window.location.reload();
+  }
+
+  const saved = readChoice();
+  if (saved === 'accepted') loadAnalytics();
+  else if (saved !== 'rejected') showBanner();
+
+  banner?.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+    const choice = target.closest<HTMLElement>('[data-consent]')?.dataset.consent;
+    if (choice === 'accepted' || choice === 'rejected') choose(choice);
+  });
+
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    if (!target.closest('[data-cookie-preferences]')) return;
+    showBanner();
+  });
+</script>

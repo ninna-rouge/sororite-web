@@ -1,0 +1,24 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Página no encontrada"
+  description="La dirección no existe en Sororité. Vuelve al inicio o revisa los cursos."
+  robots="noindex,follow"
+>
+  <section class="not-found shell">
+    <h1>No encontramos esta página</h1>
+    <p class="lede">El enlace puede estar antiguo o escrito con un error.</p>
+    <div class="cta-stack">
+      <a class="btn btn-primary" href="/">
+        Ir al inicio
+      </a>
+      <a class="btn btn-line" href="/cursos">
+        Ver cursos
+      </a>
+    </div>
+  </section>
+</BaseLayout>

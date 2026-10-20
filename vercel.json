@@ -1,0 +1,94 @@
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'none'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; style-src 'self'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com https://www.facebook.com; font-src 'self'; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://www.facebook.com https://connect.facebook.net; frame-src https://www.googletagmanager.com https://www.facebook.com; upgrade-insecure-requests"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    { "source": "/quienes-somos/", "destination": "/quienes-somos", "statusCode": 301 },
+    { "source": "/galeria/", "destination": "/galeria", "statusCode": 301 },
+    { "source": "/cursos/", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/contacto/", "destination": "/contacto", "statusCode": 301 },
+    {
+      "source": "/politica-de-privacidad/",
+      "destination": "/politica-de-privacidad",
+      "statusCode": 301
+    },
+    { "source": "/terminos/", "destination": "/terminos", "statusCode": 301 },
+    {
+      "source": "/politicas-de-privacidad",
+      "destination": "/politica-de-privacidad",
+      "statusCode": 301
+    },
+    {
+      "source": "/politicas-de-privacidad/",
+      "destination": "/politica-de-privacidad",
+      "statusCode": 301
+    },
+    { "source": "/terminos-y-condiciones", "destination": "/terminos", "statusCode": 301 },
+    { "source": "/terminos-y-condiciones/", "destination": "/terminos", "statusCode": 301 },
+    { "source": "/noticias", "destination": "/", "statusCode": 301 },
+    { "source": "/noticias/", "destination": "/", "statusCode": 301 },
+    { "source": "/tienda", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/tienda/", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/carrito", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/carrito/", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/finalizar-compra", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/finalizar-compra/", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/mi-cuenta", "destination": "/contacto", "statusCode": 301 },
+    { "source": "/mi-cuenta/", "destination": "/contacto", "statusCode": 301 },
+    { "source": "/inicio", "destination": "/", "statusCode": 301 },
+    { "source": "/inicio/", "destination": "/", "statusCode": 301 },
+    { "source": "/eb-courses", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/eb-courses/", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/eb-my-courses", "destination": "/contacto", "statusCode": 301 },
+    { "source": "/eb-my-courses/", "destination": "/contacto", "statusCode": 301 },
+    { "source": "/user-account", "destination": "/contacto", "statusCode": 301 },
+    { "source": "/user-account/", "destination": "/contacto", "statusCode": 301 },
+    { "source": "/enroll-students", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/enroll-students/", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/thank-you-for-purchase", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/thank-you-for-purchase/", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/tvn-emprendedores-locales", "destination": "/", "statusCode": 301 },
+    { "source": "/tvn-emprendedores-locales/", "destination": "/", "statusCode": 301 },
+    { "source": "/reconocimiento-mujeres-que-emprenden", "destination": "/", "statusCode": 301 },
+    { "source": "/reconocimiento-mujeres-que-emprenden/", "destination": "/", "statusCode": 301 },
+    { "source": "/producto/:slug", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/producto/:slug/", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/courses", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/courses/", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/courses/:path*", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/categoria-producto", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/categoria-producto/", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/categoria-producto/:path*", "destination": "/cursos", "statusCode": 301 },
+    { "source": "/category/:path*", "destination": "/", "statusCode": 301 },
+    { "source": "/feed", "destination": "/", "statusCode": 301 },
+    { "source": "/feed/", "destination": "/", "statusCode": 301 }
+  ]
+}

@@ -1,0 +1,47 @@
+---
+export const prerender = true;
+
+import { contact } from '../data/copy';
+import { site, whatsappHref } from '../data/site';
+import Todo from '../components/Todo.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description = `Escríbele a Sororité por WhatsApp al ${site.phoneDisplay} o al correo ${site.email}.`;
+---
+
+<BaseLayout title={contact.title} description={description}>
+  <header class="page-hero shell">
+    <p class="eyebrow">Contacto</p>
+    <h1>{contact.title}</h1>
+    <p class="lede">{contact.lede}</p>
+  </header>
+  <section class="section" aria-label="Canales de contacto">
+    <div class="shell split">
+      <ul class="contact-list">
+        <li>
+          <a href={whatsappHref}>
+            {contact.whatsappLabel}: {site.phoneDisplay}
+          </a>
+        </li>
+        <li>
+          <a href={`mailto:${site.email}`}>
+            {contact.emailLabel}: {site.email}
+          </a>
+        </li>
+        <li>{site.legalName}</li>
+        <li>RUT {site.companyTaxId}</li>
+        <li>Giro: {site.businessActivity}</li>
+        <li>Representante: {site.representative}</li>
+        <li>{site.location}</li>
+      </ul>
+      <article class="card" id="talleres">
+        <h2>Talleres presenciales</h2>
+        <p>
+          Hay talleres en Providencia y Puente Alto, Santiago. El mensaje se abre en WhatsApp o en
+          tu correo: este sitio no lo guarda.
+        </p>
+        <Todo>Enlace al calendario de fechas de los talleres.</Todo>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

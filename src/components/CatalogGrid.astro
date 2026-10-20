@@ -1,0 +1,35 @@
+---
+import { courses } from '../data/catalog';
+import Button from './Button.astro';
+import Reveal from './Reveal.astro';
+
+interface Props {
+  checkoutHref?: string;
+}
+
+const { checkoutHref = '/#todo-hotmart' } = Astro.props;
+---
+
+<div class="card-grid courses stagger">
+  {courses.map((course) => (
+    <Reveal tag="article" class="card" id={course.id}>
+      <h3>{course.name}</h3>
+      <p>{course.lede}</p>
+      <p class="audience">Para quién: {course.audience}</p>
+      <details class="syllabus">
+        <summary>Ver temario</summary>
+        <ul>
+          {course.includes.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </details>
+      <p class="price">
+        <span class="price-now">{course.priceDisplay}</span>
+      </p>
+      <Button href={checkoutHref} utm={course.utm}>
+        {course.cta}
+      </Button>
+    </Reveal>
+  ))}
+</div>
