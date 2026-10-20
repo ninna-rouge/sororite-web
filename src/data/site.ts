@@ -4,12 +4,16 @@
  */
 export const site = {
   name: 'Sororité',
+  legalName: 'SORORITE INSUMOS EIRL',
+  companyTaxId: '76.921.142-K',
+  businessActivity: 'otros tipos de enseñanza',
+  representative: 'Camila Sánchez Fernández',
   domain: 'https://sororite.cl',
   description:
     'Academia chilena de cosmética natural. Cursos en línea y presenciales para aprender a formular y emprender.',
-  email: 'contacto@sororite.cl',
-  phoneDisplay: '+56 9 5751 7139',
-  phoneE164: '56957517139',
+  email: 'Camifsanchezf@gmail.com',
+  phoneDisplay: '+56 9 5751 7130',
+  phoneE164: '56957517130',
   whatsappMessage: 'Hola, quiero información sobre los cursos de Sororité.',
   location: 'Región Metropolitana, Chile',
   instagram: 'https://www.instagram.com/sororite.cl/',

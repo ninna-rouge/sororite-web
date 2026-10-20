@@ -2,7 +2,7 @@
 export const prerender = true;
 
 import { legalBanner } from '../data/copy';
-import { site } from '../data/site';
+import { site, whatsappHref } from '../data/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const description =
@@ -15,10 +15,14 @@ const description =
     <p class="legal-flag">{legalBanner}</p>
     <h2>Responsable</h2>
     <p>
-      El sitio {site.domain.replace('https://', '')} lo opera {site.name}. La razón social, el RUT y
-      el domicilio todavía no están escritos en este borrador: hay que completarlos con el dato
-      legal vigente. El correo de contacto para privacidad es{' '}
-      <a href={`mailto:${site.email}`}>{site.email}</a>.
+      El responsable del tratamiento es {site.legalName}, RUT {site.companyTaxId}, giro{' '}
+      {site.businessActivity}. La representa {site.representative}. El correo para ejercer derechos
+      y consultas de privacidad es <a href={`mailto:${site.email}`}>{site.email}</a> y el teléfono
+      es <a href={whatsappHref}>{site.phoneDisplay}</a>.
+    </p>
+    <p>
+      Este borrador no publica el RUT de ninguna persona natural. El domicilio y el detalle que
+      todavía exija la Ley 21.719 siguen pendientes de revisión legal.
     </p>
     <h2>Qué datos puede tratar esta versión</h2>
     <p>En la versión actual el sitio es estático y no tiene cuentas ni formulario propio.</p>

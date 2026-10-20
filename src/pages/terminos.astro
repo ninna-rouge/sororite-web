@@ -2,7 +2,7 @@
 export const prerender = true;
 
 import { legalBanner } from '../data/copy';
-import { site } from '../data/site';
+import { site, whatsappHref } from '../data/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const description =
@@ -13,10 +13,12 @@ const description =
   <article class="section shell prose">
     <h1>Términos y condiciones</h1>
     <p class="legal-flag">{legalBanner}</p>
-    <h2>Uso del sitio</h2>
+    <h2>Quién opera el sitio</h2>
     <p>
-      {site.domain.replace('https://', '')} informa sobre la academia {site.name} y sus cursos. Los
-      textos de cursos marcados como ejemplo no constituyen una oferta.
+      {site.domain.replace('https://', '')} lo opera {site.legalName}, RUT {site.companyTaxId}, giro{' '}
+      {site.businessActivity}, representada por {site.representative}. Informa sobre la academia{' '}
+      {site.name} y sus cursos. Los textos de cursos marcados como ejemplo no constituyen una
+      oferta.
     </p>
     <h2>Cursos y pagos</h2>
     <p>
@@ -47,7 +49,9 @@ const description =
     </p>
     <h2>Contacto</h2>
     <p>
-      <a href={`mailto:${site.email}`}>{site.email}</a>· {site.phoneDisplay}
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+      {' · '}
+      <a href={whatsappHref}>{site.phoneDisplay}</a>
     </p>
   </article>
 </BaseLayout>

@@ -1,5 +1,5 @@
 ---
-import { nav, site } from '../data/site';
+import { nav, site, whatsappHref } from '../data/site';
 ---
 
 <footer class="site-footer">
@@ -23,7 +23,7 @@ import { nav, site } from '../data/site';
           <a href={`mailto:${site.email}`}>{site.email}</a>
         </li>
         <li>
-          <a href="/contacto">{site.phoneDisplay}</a>
+          <a href={whatsappHref}>{site.phoneDisplay}</a>
         </li>
         <li>
           <a href={site.instagram}>Instagram</a>
@@ -47,7 +47,8 @@ import { nav, site } from '../data/site';
   </div>
   <div class="shell legal-note">
     <p>
-      © {new Date().getFullYear()} {site.name}. {site.location}.
+      © {new Date().getFullYear()} {site.legalName}. RUT {site.companyTaxId}. Giro:{' '}
+      {site.businessActivity}. Representante: {site.representative}.
     </p>
   </div>
 </footer>

@@ -26,10 +26,22 @@ const graph = [
     '@type': 'Organization',
     '@id': `${site.domain}/#organization`,
     name: site.name,
+    legalName: site.legalName,
+    taxID: site.companyTaxId,
     url: site.domain,
     logo: new URL(site.logo, Astro.site).href,
     email: site.email,
     telephone: `+${site.phoneE164}`,
+    additionalProperty: {
+      '@type': 'PropertyValue',
+      name: 'Giro',
+      value: site.businessActivity,
+    },
+    employee: {
+      '@type': 'Person',
+      name: site.representative,
+      jobTitle: 'Representante',
+    },
     address: {
       '@type': 'PostalAddress',
       addressRegion: 'Región Metropolitana',
