@@ -47,7 +47,7 @@
   height: 2rem;
   border-radius: 50%;
   background: #d6ecea;
-  color: #237b7e;
+  color: var(--tone-calipso);
 }
 
 .qs-valores {

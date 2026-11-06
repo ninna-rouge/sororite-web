@@ -29,16 +29,16 @@ const stats = [
       <p class="eyebrow">Cursos online · Cosmética natural con ciencia</p>
       <div class="hero-copy">
         <h1 id="hero-titulo">
-          <span class="hl">Crea tus propios cosméticos</span> <em class="hl">naturales</em> <span class="hl">con ciencia y conviértelos en tu
-          emprendimiento.</span>
+          <span class="hl">Crea tus propios cosméticos</span> <em class="hl">naturales</em>{' '}
+          <span class="hl">con ciencia y conviértelos en tu emprendimiento.</span>
         </h1>
       </div>
       <aside class="hero-side">
         <img class="hero-mark" src="/brand/logo-oficial.png" alt="" width="586" height="416" />
         <span class="hero-mark-line" aria-hidden="true"></span>
         <div class="stats">
-          {stats.map((stat, i) => (
-            <div class="stat" style={`--i: ${i}`}>
+          {stats.map((stat) => (
+            <div class="stat">
               <strong>{stat.value}</strong>
               <span>{stat.label}</span>
             </div>

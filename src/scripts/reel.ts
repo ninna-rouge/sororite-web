@@ -1,3 +1,5 @@
+export {};
+
 /**
  * Carrusel de proceso y producto. El desplazamiento es nativo (scroll-snap);
  * el script sincroniza la leyenda, los segmentos y el avance automático.

@@ -105,9 +105,15 @@
   object-fit: cover;
 }
 
-.foco-arriba img { object-position: 50% 22%; }
-.foco-centro img { object-position: 50% 50%; }
-.foco-abajo img { object-position: 50% 78%; }
+.foco-arriba img {
+  object-position: 50% 22%;
+}
+.foco-centro img {
+  object-position: 50% 50%;
+}
+.foco-abajo img {
+  object-position: 50% 78%;
+}
 
 .ph-ramo {
   position: absolute;
@@ -138,10 +144,18 @@
     animation: ph-sube 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
-  html.js .ph-copy > :nth-child(2) { animation-delay: 0.06s; }
-  html.js .ph-copy > :nth-child(3) { animation-delay: 0.12s; }
-  html.js .ph-copy > :nth-child(4) { animation-delay: 0.2s; }
-  html.js .ph-copy > :nth-child(5) { animation-delay: 0.28s; }
+  html.js .ph-copy > :nth-child(2) {
+    animation-delay: 0.06s;
+  }
+  html.js .ph-copy > :nth-child(3) {
+    animation-delay: 0.12s;
+  }
+  html.js .ph-copy > :nth-child(4) {
+    animation-delay: 0.2s;
+  }
+  html.js .ph-copy > :nth-child(5) {
+    animation-delay: 0.28s;
+  }
 
   html.js .ph-ramo {
     animation: ph-ramo 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
@@ -155,15 +169,13 @@
 
 @keyframes ph-sube {
   from {
-    opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(12px);
   }
 }
 
 @keyframes ph-ramo {
   from {
-    opacity: 0;
-    transform: rotate(-22deg) scale(0.86);
+    transform: rotate(-16deg);
   }
 }
 
