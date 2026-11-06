@@ -19,11 +19,25 @@ interface Props {
   band?: 'band-cream' | '';
 }
 
-const { id, eyebrow, image, imageAlt = '', shape = 'retrato', flip = false, stamp, band = '' } = Astro.props;
+const {
+  id,
+  eyebrow,
+  image,
+  imageAlt = '',
+  shape = 'retrato',
+  flip = false,
+  stamp,
+  band = '',
+} = Astro.props;
 
 const foto = image
   ? await getImage({ src: image, widths: [480, 760, 1040], format: 'webp', quality: 74 })
   : null;
+
+/** Always Classy no tiene eñe: la tilde se dibuja y el texto real queda para el lector. */
+const stampVisual = stamp
+  ?.replaceAll('ñ', '<span class="stamp-enie">n</span>')
+  .replaceAll('Ñ', '<span class="stamp-enie">N</span>');
 ---
 
 <section class={`section ms ${band}`} id={id} aria-labelledby={`${id}-titulo`}>
@@ -43,7 +57,12 @@ const foto = image
       ) : (
         <slot name="media" />
       )}
-      {stamp && <figcaption class="ms-stamp">{stamp}</figcaption>}
+      {stamp && stampVisual && (
+        <figcaption class="ms-stamp">
+          <span aria-hidden="true" set:html={stampVisual} />
+          <span class="visually-hidden">{stamp}</span>
+        </figcaption>
+      )}
     </figure>
     <div class="ms-copy">
       <SectionHeading eyebrow={eyebrow}>

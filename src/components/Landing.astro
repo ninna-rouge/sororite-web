@@ -115,7 +115,9 @@ const chips = [
       eyebrow="Lo que te está frenando"
       lede="El primer paso para formular con confianza es cuestionar lo que damos por hecho sobre los cosméticos y sobre nuestra propia capacidad."
     >
-      <h2 id="frenos-titulo">Estas ideas son las que nos impiden <em class="hl-hoja">empezar</em>.</h2>
+      <h2 id="frenos-titulo">
+        Estas ideas son las que nos impiden <em class="hl-hoja">empezar</em>.
+      </h2>
     </SectionHeading>
     <div class="mitos" data-mitos>
       {objections.map((item, i) => (
@@ -125,7 +127,14 @@ const chips = [
               <figure class="mito-media">
                 <picture>
                   <source srcset={`/brand/mitos/${mitoImgs[i]}.avif`} type="image/avif" />
-                  <img src={`/brand/mitos/${mitoImgs[i]}.webp`} alt="" width="900" height="675" loading="lazy" decoding="async" />
+                  <img
+                    src={`/brand/mitos/${mitoImgs[i]}.webp`}
+                    alt=""
+                    width="900"
+                    height="675"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </picture>
               </figure>
               <div class="mito-frente">
@@ -139,9 +148,25 @@ const chips = [
               <p class="mito-cierre">{item.close}</p>
             </div>
           </div>
-          <button type="button" class="mito-toggle" aria-expanded="false" aria-controls={`mito-verdad-${i + 1}`}>
-            <span class="mito-toggle-txt" data-abrir="Ver la verdad" data-cerrar="Volver al mito">Ver la verdad</span>
-            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 10h10M10 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          <button
+            type="button"
+            class="mito-toggle"
+            aria-expanded="false"
+            aria-controls={`mito-verdad-${i + 1}`}
+          >
+            <span class="mito-toggle-txt" data-abrir="Ver la verdad" data-cerrar="Volver al mito">
+              Ver la verdad
+            </span>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <path
+                d="M5 10h10M10 5l5 5-5 5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </button>
         </Reveal>
       ))}
@@ -152,7 +177,9 @@ const chips = [
         raiz.classList.add('mitos-js');
         raiz.querySelectorAll<HTMLButtonElement>('.mito-toggle').forEach((btn) => {
           const card = btn.closest('.mito') as HTMLElement;
-          const panel = document.getElementById(btn.getAttribute('aria-controls') || '') as HTMLElement;
+          const panel = document.getElementById(
+            btn.getAttribute('aria-controls') || '',
+          ) as HTMLElement;
           const txt = btn.querySelector('.mito-toggle-txt') as HTMLElement;
           const set = (open: boolean) => {
             btn.setAttribute('aria-expanded', String(open));
@@ -163,7 +190,12 @@ const chips = [
           };
           set(false);
           btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
-          card.addEventListener('keydown', (e) => { if (e.key === 'Escape' && card.classList.contains('is-open')) { set(false); btn.focus(); } });
+          card.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && card.classList.contains('is-open')) {
+              set(false);
+              btn.focus();
+            }
+          });
         });
       }
     </script>
@@ -176,7 +208,9 @@ const chips = [
       eyebrow="Elige tu camino"
       lede="Depende de lo que quieras lograr hoy. Elige tu camino y suma los demás cursos cuando quieras."
     >
-      <h2 id="elegir-titulo">¿Por dónde <em class="hl-durazno">empiezo</em>?</h2>
+      <h2 id="elegir-titulo">
+        ¿Por dónde <em class="hl-durazno">empiezo</em>?
+      </h2>
     </SectionHeading>
     <div class="card-grid cols-3 stagger">
       {paths.map((path) => (
@@ -215,10 +249,25 @@ const chips = [
         <ul class="pk-lista pack-includes">
           {packOffer.includes.map((item, i) => (
             <li>
-              <button type="button" class={`pk-item${i === 0 ? ' is-on' : ''}`} aria-pressed={i === 0 ? 'true' : 'false'} aria-controls="pk-vista" data-i={i}>
+              <button
+                type="button"
+                class={`pk-item${i === 0 ? ' is-on' : ''}`}
+                aria-pressed={i === 0 ? 'true' : 'false'}
+                aria-controls="pk-vista"
+                data-i={i}
+              >
                 <span class="pack-num">{String(i + 1).padStart(2, '0')}</span>
                 <span class="pk-nombre">{item}</span>
-                <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 10h10M10 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                  <path
+                    d="M5 10h10M10 5l5 5-5 5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
               </button>
             </li>
           ))}
@@ -228,7 +277,14 @@ const chips = [
             {packImgs.map((img, i) => (
               <picture class={`pk-foto${i === 0 ? ' is-on' : ''}`} data-i={i}>
                 <source srcset={`/brand/pack/pack-${img}.avif`} type="image/avif" />
-                <img src={`/brand/pack/pack-${img}.webp`} alt="" width="1000" height="750" loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+                <img
+                  src={`/brand/pack/pack-${img}.webp`}
+                  alt=""
+                  width="1000"
+                  height="750"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
               </picture>
             ))}
           </div>
@@ -239,7 +295,13 @@ const chips = [
               <span class="pk-pie-lede">{courses[0].lede}</span>
             </span>
           </figcaption>
-          <script type="application/json" class="pk-data" set:html={JSON.stringify(packOffer.includes.map((n, i) => ({ n, l: courses[i]?.lede ?? '' })))} />
+          <script
+            type="application/json"
+            class="pk-data"
+            set:html={JSON.stringify(
+              packOffer.includes.map((n, i) => ({ n, l: courses[i]?.lede ?? '' })),
+            )}
+          />
         </figure>
       </div>
       <div class="pk-valor pack-offer">
@@ -257,7 +319,19 @@ const chips = [
         <Button href={whatsappHref} utm="oferta_pack">
           {packOffer.cta}
         </Button>
-        <p class="micro pk-trust"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 10.5V8a5 5 0 0 1 10 0v2.5M6 10.5h12a1 1 0 0 1 1 1V19a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19v-7.5a1 1 0 0 1 1-1zM12 14.5v2.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg><span>{packOffer.micro}</span></p>
+        <p class="micro pk-trust">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path
+              d="M7 10.5V8a5 5 0 0 1 10 0v2.5M6 10.5h12a1 1 0 0 1 1 1V19a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19v-7.5a1 1 0 0 1 1-1zM12 14.5v2.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span>{packOffer.micro}</span>
+        </p>
       </div>
       <div class="pack-bonos">
         <article class="pack-bono tone-coral">
@@ -289,7 +363,18 @@ const chips = [
     <ul class="pack-gets">
       {packOffer.receives.map((item, i) => (
         <li class={`pk-get pk-get-${i + 1}`}>
-          <span class="pk-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d={packIcons[i] ?? packIcons[0]} fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+          <span class="pk-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path
+                d={packIcons[i] ?? packIcons[0]}
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
           <span>{item}</span>
         </li>
       ))}
@@ -302,7 +387,10 @@ const chips = [
   if (pk) {
     const items = [...pk.querySelectorAll<HTMLButtonElement>('.pk-item')];
     const fotos = [...pk.querySelectorAll<HTMLElement>('.pk-foto')];
-    const data = JSON.parse(pk.querySelector('.pk-data')?.textContent || '[]') as { n: string; l: string }[];
+    const data = JSON.parse(pk.querySelector('.pk-data')?.textContent || '[]') as {
+      n: string;
+      l: string;
+    }[];
     const num = pk.querySelector('.pk-pie-num') as HTMLElement;
     const nombre = pk.querySelector('.pk-pie-nombre') as HTMLElement;
     const lede = pk.querySelector('.pk-pie-lede') as HTMLElement;
@@ -311,9 +399,14 @@ const chips = [
     const activar = (i: number) => {
       if (i === actual) return;
       actual = i;
-      items.forEach((b, k) => { b.classList.toggle('is-on', k === i); b.setAttribute('aria-pressed', String(k === i)); });
+      items.forEach((b, k) => {
+        b.classList.toggle('is-on', k === i);
+        b.setAttribute('aria-pressed', String(k === i));
+      });
       fotos.forEach((f, k) => f.classList.toggle('is-on', k === i));
-      pie.classList.remove('is-cambio'); void pie.offsetWidth; pie.classList.add('is-cambio');
+      pie.classList.remove('is-cambio');
+      void pie.offsetWidth;
+      pie.classList.add('is-cambio');
       num.textContent = String(i + 1).padStart(2, '0');
       nombre.textContent = data[i]?.n ?? '';
       lede.textContent = data[i]?.l ?? '';
@@ -321,9 +414,15 @@ const chips = [
     items.forEach((b, i) => {
       b.addEventListener('click', () => activar(i));
       b.addEventListener('focus', () => activar(i));
-      if (matchMedia('(hover: hover)').matches) b.addEventListener('pointerenter', () => activar(i));
+      if (matchMedia('(hover: hover)').matches)
+        b.addEventListener('pointerenter', () => activar(i));
       b.addEventListener('keydown', (e) => {
-        const d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+        const d =
+          e.key === 'ArrowDown' || e.key === 'ArrowRight'
+            ? 1
+            : e.key === 'ArrowUp' || e.key === 'ArrowLeft'
+              ? -1
+              : 0;
         if (!d) return;
         e.preventDefault();
         items[(i + d + items.length) % items.length].focus();
@@ -334,8 +433,10 @@ const chips = [
 
 <section class="section band-cream" id="cursos-lista" aria-labelledby="cursos-titulo">
   <div class="shell">
-    <SectionHeading lede="Cada curso se compra por separado en Hotmart y te llega al correo apenas se confirma el pago.">
-      <h2 id="cursos-titulo">Elige el curso que <em class="hl-coral">más te mueva</em> hoy.</h2>
+    <SectionHeading lede="Cada curso se consulta por separado. El acceso llega al correo cuando el pago queda confirmado.">
+      <h2 id="cursos-titulo">
+        Elige el curso que <em class="hl-coral">más te mueva</em> hoy.
+      </h2>
     </SectionHeading>
     <CatalogGrid />
     <p>
@@ -355,7 +456,9 @@ const chips = [
       eyebrow="Lo que crean nuestras alumnas"
       lede="Experiencias de quienes ya aprendieron con nosotras."
     >
-      <h2 id="testimonios-titulo">Palabras <em class="hl-hoja">reales</em> de alumnas de Sororité.</h2>
+      <h2 id="testimonios-titulo">
+        Palabras <em class="hl-hoja">reales</em> de alumnas de Sororité.
+      </h2>
     </SectionHeading>
     <div class="voices">
       <figure class="voices-photo">
@@ -391,9 +494,7 @@ const chips = [
         <Reveal tag="article" class="card">
           <blockquote class="quote">
             <p>«Amo los productos, especialmente el desodorante y el shampoo.»</p>
-            <footer>
-              María · alumna Sororité · WhatsApp
-            </footer>
+            <footer>María · alumna Sororité · WhatsApp</footer>
           </blockquote>
         </Reveal>
       </div>
@@ -413,7 +514,9 @@ const chips = [
     />
     <div class="bio">
       <SectionHeading eyebrow="Quién te enseña">
-        <h2 id="camila-titulo">Camila Sánchez, <em class="hl-durazno">fundadora</em> de Sororité.</h2>
+        <h2 id="camila-titulo">
+          Camila Sánchez, <em class="hl-durazno">fundadora</em> de Sororité.
+        </h2>
       </SectionHeading>
       <p class="lede">Enfermera universitaria · Formuladora · Enseña desde 2018</p>
       <p>
@@ -448,7 +551,9 @@ const chips = [
   <div class="shell">
     <div class="split garantia-split">
       <div class="garantia-note">
-        <h2 id="garantia-titulo">Pruébalo con tranquilidad: tienes <em class="hl-coral hl-brush">7 días de garantía</em>.</h2>
+        <h2 id="garantia-titulo">
+          Pruébalo con tranquilidad: tienes <em class="hl-coral hl-brush">7 días de garantía</em>.
+        </h2>
         <p>
           Compras a través de Hotmart. Si en los primeros 7 días sientes que el curso no es para ti,
           puedes pedir el reembolso directamente en Hotmart, según sus condiciones.
@@ -459,16 +564,14 @@ const chips = [
         <details>
           <summary>¿Cómo compro y cómo accedo al curso?</summary>
           <p>
-            El botón del curso o del pack abre WhatsApp. Te enviamos el enlace de Hotmart para pagar.
-            Cuando se confirma el pago, Hotmart te envía un correo con tu acceso. Revisa también la
-            carpeta de spam o promociones.
+            El botón del curso o del pack abre WhatsApp. Te enviamos el enlace de Hotmart para
+            pagar. Cuando se confirma el pago, Hotmart te envía un correo con tu acceso. Revisa
+            también la carpeta de spam o promociones.
           </p>
         </details>
         <details>
           <summary>¿Qué medios de pago puedo usar?</summary>
-          <p>
-            Los que Hotmart tenga disponibles para Chile al momento de pagar.
-          </p>
+          <p>Los que Hotmart tenga disponibles para Chile al momento de pagar.</p>
         </details>
         <details>
           <summary>¿Qué pasa si no me llega el correo de acceso?</summary>

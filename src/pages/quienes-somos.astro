@@ -27,22 +27,57 @@ import '../styles/paginas/quienes.css';
 const description =
   'Somos una escuela de cosmética natural que une ciencia, naturaleza y emprendimiento, creada por mujeres para mujeres.';
 
-const sororidad = await getImage({ src: equipoMural, widths: [480, 760], format: 'webp', quality: 72 });
+const sororidad = await getImage({
+  src: equipoMural,
+  widths: [480, 760],
+  format: 'webp',
+  quality: 72,
+});
 
 const stats = [
   { value: '3.500', label: 'estudiantes en 2026', icon: 'people', tone: 'coral' },
   { value: 'Desde 2018', label: 'formando en cosmética natural', icon: 'growth', tone: 'hoja' },
-  { value: 'ISP N° 2931/22', label: 'laboratorio con resolución sanitaria', icon: 'flask', tone: 'calipso' },
+  {
+    value: 'ISP N° 2931/22',
+    label: 'laboratorio con resolución sanitaria',
+    icon: 'flask',
+    tone: 'calipso',
+  },
   { value: 'Capital Abeja', label: 'Sercotec 2023', icon: 'badge', tone: 'durazno' },
 ] as const;
 
 const hitos = [
   { year: '2015', title: 'Lahuen', text: 'Nace Lahuen Productos Terapéuticos.', tone: 'hoja' },
-  { year: '2016', title: 'Sororité.cl', text: 'Venta de materias primas y primeros pasos de la academia.', tone: 'coral' },
-  { year: '2018', title: 'Capacitaciones', text: 'Cursos presenciales y online de cosmética natural y terapéutica.', tone: 'durazno' },
-  { year: '2021', title: 'Formalización', text: 'Fichas técnicas, maquila y resolución sanitaria.', tone: 'calipso' },
-  { year: '2023', title: 'Velas y aromaterapia', text: 'Emprendimientos con velas y aromatizadores.', tone: 'hoja' },
-  { year: '2026', title: '3.500 estudiantes', text: 'Online y en talleres de Providencia y Puente Alto.', tone: 'coral' },
+  {
+    year: '2016',
+    title: 'Sororité.cl',
+    text: 'Venta de materias primas y primeros pasos de la academia.',
+    tone: 'coral',
+  },
+  {
+    year: '2018',
+    title: 'Capacitaciones',
+    text: 'Cursos presenciales y online de cosmética natural y terapéutica.',
+    tone: 'durazno',
+  },
+  {
+    year: '2021',
+    title: 'Formalización',
+    text: 'Fichas técnicas, maquila y resolución sanitaria.',
+    tone: 'calipso',
+  },
+  {
+    year: '2023',
+    title: 'Velas y aromaterapia',
+    text: 'Emprendimientos con velas y aromatizadores.',
+    tone: 'hoja',
+  },
+  {
+    year: '2026',
+    title: '3.500 estudiantes',
+    text: 'Online y en talleres de Providencia y Puente Alto.',
+    tone: 'coral',
+  },
 ] as const;
 
 const trayectoria = [
@@ -157,7 +192,12 @@ const valores = [
   },
 ] as const;
 
-const medios = ['Radio Universidad de Chile', 'Las Últimas Noticias', 'TVN', 'Sercotec · Capital Abeja 2023'];
+const medios = [
+  'Radio Universidad de Chile',
+  'Las Últimas Noticias',
+  'TVN',
+  'Sercotec · Capital Abeja 2023',
+];
 ---
 
 <BaseLayout title="Quiénes somos" description={description}>
@@ -167,7 +207,10 @@ const medios = ['Radio Universidad de Chile', 'Las Últimas Noticias', 'TVN', 'S
     image={cuatroMujeres}
     imageAlt="Cuatro mujeres ríen juntas en el taller de Sororité, una sostiene el logo de la marca."
   >
-    <h1 id="ph-titulo">Una historia de <em class="hl-coral hl-brush">autonomía</em>, ciencia y empoderamiento femenino.</h1>
+    <h1 id="ph-titulo">
+      Una historia de <em class="hl-coral hl-brush">autonomía</em>, ciencia y empoderamiento
+      femenino.
+    </h1>
     <Fragment slot="lede">
       <p>
         Somos una escuela de cosmética natural que une ciencia, naturaleza y emprendimiento, creada
@@ -176,7 +219,9 @@ const medios = ['Radio Universidad de Chile', 'Las Últimas Noticias', 'TVN', 'S
     </Fragment>
     <Fragment slot="actions">
       <Button href="/cursos">Ver cursos</Button>
-      <Button href="#historia" variant="text">Conoce nuestra historia</Button>
+      <Button href="#historia" variant="text">
+        Conoce nuestra historia
+      </Button>
     </Fragment>
   </PageHero>
 
@@ -189,18 +234,22 @@ const medios = ['Radio Universidad de Chile', 'Las Últimas Noticias', 'TVN', 'S
     imageAlt="Camila Sánchez Fernández, fundadora de Sororité."
     stamp="Ven, te enseño."
   >
-    <h2 slot="title" id="historia-titulo">Emprender no es un sueño para <em class="hl-hoja">unas pocas</em>.</h2>
+    <h2 slot="title" id="historia-titulo">
+      Emprender no es un sueño para <em class="hl-hoja">unas pocas</em>.
+    </h2>
     <p>
       Camila Sánchez es enfermera universitaria, emprendedora y madre de una niña. A partir de su
-      experiencia creó Sororité, para que las mujeres recuperen su autonomía económica y
-      transformen lo que saben en un emprendimiento real.
+      experiencia creó Sororité, para que las mujeres recuperen su autonomía económica y transformen
+      lo que saben en un emprendimiento real.
     </p>
     <p>
       Conoce los desafíos de ser madre y emprendedora. Por eso quiere que otras mujeres, sobre todo
       las madres solteras, tengan herramientas para generar ingresos y construir más independencia.
     </p>
     <div class="ms-actions">
-      <Button href="#trayectoria" variant="line">Ver su trayectoria</Button>
+      <Button href="#trayectoria" variant="line">
+        Ver su trayectoria
+      </Button>
     </div>
   </MediaSplit>
 
@@ -210,7 +259,9 @@ const medios = ['Radio Universidad de Chile', 'Las Últimas Noticias', 'TVN', 'S
         eyebrow="La fundadora"
         lede="Enfermera universitaria, docente en cosmética natural y emprendimiento, fundadora de Sororité.cl."
       >
-        <h2 id="trayectoria-titulo">Camila Sánchez <em class="hl-durazno">Fernández</em>.</h2>
+        <h2 id="trayectoria-titulo">
+          Camila Sánchez <em class="hl-durazno">Fernández</em>.
+        </h2>
       </SectionHeading>
       <FeatureGrid items={[...trayectoria]} cols={4} />
       <div class="qs-camino">
@@ -223,7 +274,9 @@ const medios = ['Radio Universidad de Chile', 'Las Últimas Noticias', 'TVN', 'S
   <section class="section" id="proposito" aria-labelledby="proposito-titulo">
     <div class="shell">
       <SectionHeading eyebrow="Propósito">
-        <h2 id="proposito-titulo">Por qué existe <em class="hl-coral">Sororité</em>.</h2>
+        <h2 id="proposito-titulo">
+          Por qué existe <em class="hl-coral">Sororité</em>.
+        </h2>
       </SectionHeading>
       <FeatureGrid items={[...proposito]} cols={3} />
     </div>
@@ -238,7 +291,9 @@ const medios = ['Radio Universidad de Chile', 'Las Últimas Noticias', 'TVN', 'S
     flip
     band="band-cream"
   >
-    <h2 slot="title" id="filosofia-titulo">Volver a mirarte a <em class="hl-durazno">ti misma</em>.</h2>
+    <h2 slot="title" id="filosofia-titulo">
+      Volver a mirarte a <em class="hl-durazno">ti misma</em>.
+    </h2>
     <p>
       «Eres tu mejor inversión» es el corazón de Sororité. Muchas veces el primer paso es reconocer
       las propias capacidades y atreverse a trazar un camino propio.
@@ -256,14 +311,19 @@ const medios = ['Radio Universidad de Chile', 'Las Últimas Noticias', 'TVN', 'S
   <QuoteBand
     quote="Invertir en ti no es egoísmo: es el primer paso para transformar tu vida y la de tu familia."
     author="Camila Sánchez"
-    role="Fundadora de Sororité"
+    cargo="Fundadora"
     avatar={camila}
   />
 
   <section class="section band-cream" id="metodo" aria-labelledby="metodo-titulo">
     <div class="shell">
-      <SectionHeading eyebrow="Metodología" lede="Con oficio y cercanía. Gira cada tarjeta para ver cómo lo hacemos.">
-        <h2 id="metodo-titulo">Así <em class="hl-hoja">enseñamos</em>.</h2>
+      <SectionHeading
+        eyebrow="Metodología"
+        lede="Con oficio y cercanía. Gira cada tarjeta para ver cómo lo hacemos."
+      >
+        <h2 id="metodo-titulo">
+          Así <em class="hl-hoja">enseñamos</em>.
+        </h2>
       </SectionHeading>
       <FlipCards name="metodo" items={metodo} openLabel="Ver cómo" closeLabel="Volver" />
     </div>
@@ -271,27 +331,43 @@ const medios = ['Radio Universidad de Chile', 'Las Últimas Noticias', 'TVN', 'S
 
   <MediaSplit id="laboratorio" eyebrow="Formación responsable" shape="paisaje" flip>
     <ImageSlot slot="media" label="Laboratorio con resolución sanitaria (4:3)" ratio="4-3" />
-    <h2 slot="title" id="laboratorio-titulo">Un laboratorio <em class="hl-calipso">propio</em>.</h2>
+    <h2 slot="title" id="laboratorio-titulo">
+      Un laboratorio <em class="hl-calipso">propio</em>.
+    </h2>
     <p>
-      Camila cuenta con un laboratorio de bajo riesgo cosmético con resolución sanitaria del ISP
-      (N° 2931/22), donde también practican sus estudiantes.
+      Camila cuenta con un laboratorio de bajo riesgo cosmético con resolución sanitaria del ISP (N°
+      2931/22), donde también practican sus estudiantes.
     </p>
     <p>
       Elegimos las materias primas con conciencia, usamos bien cada ingrediente y cuidamos la
       calidad y la seguridad de cada formulación.
     </p>
     <ul class="qs-formatos" aria-label="Formatos">
-      <li><span set:html={icon('leaf', 16)} />Cursos online</li>
-      <li><span set:html={icon('pin', 16)} />Talleres en Providencia y Puente Alto</li>
-      <li><span set:html={icon('growth', 16)} />Acompañamiento a tu proyecto</li>
-      <li><span set:html={icon('people', 16)} />Experiencias en comunidad</li>
+      <li>
+        <span set:html={icon('leaf', 16)} />
+        Cursos online
+      </li>
+      <li>
+        <span set:html={icon('pin', 16)} />
+        Talleres en Providencia y Puente Alto
+      </li>
+      <li>
+        <span set:html={icon('growth', 16)} />
+        Acompañamiento a tu proyecto
+      </li>
+      <li>
+        <span set:html={icon('people', 16)} />
+        Experiencias en comunidad
+      </li>
     </ul>
   </MediaSplit>
 
   <section class="section band-cream" id="valores" aria-labelledby="valores-titulo">
     <div class="shell">
       <SectionHeading eyebrow="Valores">
-        <h2 id="valores-titulo">Lo que <em class="hl-calipso">no transamos</em>.</h2>
+        <h2 id="valores-titulo">
+          Lo que <em class="hl-calipso">no transamos</em>.
+        </h2>
       </SectionHeading>
       <div class="qs-valores">
         <figure class="qs-valores-foto">
@@ -318,7 +394,9 @@ const medios = ['Radio Universidad de Chile', 'Las Últimas Noticias', 'TVN', 'S
       Han hablado de nuestro trabajo
     </p>
     <ul class="qs-medios-lista">
-      {medios.map((m) => <li>{m}</li>)}
+      {medios.map((m) => (
+        <li>{m}</li>
+      ))}
     </ul>
   </section>
 

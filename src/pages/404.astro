@@ -1,6 +1,7 @@
 ---
 export const prerender = true;
 
+import Button from '../components/Button.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
@@ -13,12 +14,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <h1>No encontramos esta página</h1>
     <p class="lede">El enlace puede estar antiguo o escrito con un error.</p>
     <div class="cta-stack">
-      <a class="btn btn-primary" href="/">
-        Ir al inicio
-      </a>
-      <a class="btn btn-line" href="/cursos">
+      <Button href="/">Ir al inicio</Button>
+      <Button href="/cursos" variant="line">
         Ver cursos
-      </a>
+      </Button>
     </div>
   </section>
 </BaseLayout>

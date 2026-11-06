@@ -28,12 +28,13 @@ export const headerNav = [
   { href: '/cursos', label: 'Cursos' },
   { href: '/contacto#talleres', label: 'Talleres' },
   { href: '/quienes-somos', label: 'Quiénes somos' },
+  { href: '/galeria', label: 'Galería' },
   { href: '/contacto', label: 'Contacto' },
 ] as const;
 
 export const ingresar = { href: '/ingresar', label: 'Ingresar' } as const;
 
-export const mobileNav = [...headerNav, { href: '/galeria', label: 'Galería' }, ingresar] as const;
+export const mobileNav = [...headerNav, ingresar] as const;
 
 export const footerNav = [
   { href: '/cursos', label: 'Cursos' },

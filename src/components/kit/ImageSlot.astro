@@ -12,8 +12,15 @@ const { label, ratio = '4-3' } = Astro.props;
 const dev = import.meta.env.DEV;
 ---
 
-<div class={`islot islot-${ratio}`} role="img" aria-label="Imagen pendiente">
-  <img class="islot-marca" src="/brand/botanica/marca-hojas.svg" alt="" width="120" height="120" aria-hidden="true" />
+<div class={`islot islot-${ratio}`} aria-hidden="true">
+  <img
+    class="islot-marca"
+    src="/brand/botanica/marca-hojas.svg"
+    alt=""
+    width="120"
+    height="120"
+    aria-hidden="true"
+  />
   {dev && (
     <span class="islot-label">
       <span set:html={icon('image', 16)} />

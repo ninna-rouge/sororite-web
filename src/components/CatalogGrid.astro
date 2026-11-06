@@ -1,5 +1,6 @@
 ---
 import { courses } from '../data/catalog';
+import { icon, type IconName } from '../data/icons';
 import { whatsappHref } from '../data/site';
 import Button from './Button.astro';
 import Reveal from './Reveal.astro';
@@ -87,28 +88,7 @@ const meta: Record<string, CourseMeta> = {
   },
 };
 
-const glyphs: Record<string, string> = {
-  play: '<path d="M9 7.2v9.6l8-4.8-8-4.8z"/>',
-  book: '<path d="M5 5.5h5.5A2.5 2.5 0 0 1 13 8v11.2A2.5 2.5 0 0 0 10.5 16.7H5V5.5z"/><path d="M19 5.5h-5.5A2.5 2.5 0 0 0 11 8v11.2A2.5 2.5 0 0 1 13.5 16.7H19V5.5z"/>',
-  drop: '<path d="M12 3.4s5.6 6 5.6 9.6a5.6 5.6 0 0 1-11.2 0C6.4 9.4 12 3.4 12 3.4z"/>',
-  leaf: '<path d="M5 19s1.2-6.6 6.6-10.4S19 5 19 5s-.6 5.4-4.4 9.2S5 19 5 19z"/><path d="M9 15c1.8-1.8 3.6-4.4 5.4-7"/>',
-  pin: '<path d="M12 21s5.5-4.8 5.5-9.2a5.5 5.5 0 0 0-11 0C6.5 16.2 12 21 12 21z"/><circle cx="12" cy="11.6" r="1.5"/>',
-  chat: '<path d="M6.2 16.2 4.2 20l4-1.1A7.6 7.6 0 1 0 6.2 16.2z"/>',
-  doc: '<path d="M7 3.6h6.4l3.6 3.6V20.4H7V3.6z"/><path d="M13.4 3.6v3.6h3.6M9.4 12.4h5.2M9.4 15.8h5.2"/>',
-  award: '<circle cx="12" cy="9" r="4.2"/><path d="M9.1 12.8 8.2 20 12 17.8 15.8 20l-.9-7.2"/>',
-  flask: '<path d="M9 3h6M10 3v5.2L5.4 17.4A1.8 1.8 0 0 0 7 20.4h10a1.8 1.8 0 0 0 1.6-3L14 8.2V3"/><path d="M8.2 14.2h7.6"/>',
-  spark: '<path d="M12 3.2 13.5 8.8 19 10.4 13.5 12 12 17.6 10.5 12 5 10.4 10.5 8.8 12 3.2z"/>',
-  card: '<rect x="3.6" y="6" width="16.8" height="12" rx="2"/><path d="M3.6 10h16.8"/>',
-  star: '<path d="M12 3.6 14 8.4l5.2.5-3.9 3.3 1.2 4.9L12 14.6 7.5 17.1l1.2-4.9L4.8 8.9 10 8.4 12 3.6z"/>',
-  check: '<circle cx="12" cy="12" r="7.4"/><path d="M8.6 12.2 11 14.6 15.4 9.8"/>',
-  rows: '<path d="M9 7h11M9 12h11M9 17h11"/><circle cx="5" cy="7" r="0.8" fill="currentColor" stroke="none"/><circle cx="5" cy="12" r="0.8" fill="currentColor" stroke="none"/><circle cx="5" cy="17" r="0.8" fill="currentColor" stroke="none"/>',
-  back: '<path d="M14.5 6.5 9 12l5.5 5.5"/>',
-};
-
-const svg = (name: string) =>
-  `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${glyphs[name]}</svg>`;
-
-function topicIcon(text: string) {
+function topicIcon(text: string): IconName {
   const t = text.toLowerCase();
   if (/fórmula|formulacion|formulación/.test(t)) return 'book';
   if (/video|clase/.test(t)) return 'play';
@@ -134,18 +114,20 @@ function cleanTopic(text: string) {
 ---
 
 <div class="card-grid courses stagger">
-  {
-    courses.map((course, i) => {
-      const info = meta[course.id] ?? { kicker: 'Curso', tone: 'coral' as const };
-      const price = course.priceDisplay.trim();
-      const topics = course.includes.map(cleanTopic).filter(Boolean);
-      return (
-        <Reveal tag="article" class={`course tone-${info.tone}${info.film ? ' has-film' : ''}`} id={course.id}>
-          <div class="course-flip">
+  {courses.map((course, i) => {
+    const info = meta[course.id] ?? { kicker: 'Curso', tone: 'coral' as const };
+    const price = course.priceDisplay.trim();
+    const topics = course.includes.map(cleanTopic).filter(Boolean);
+    return (
+      <Reveal
+        tag="article"
+        class={`course tone-${info.tone}${info.film ? ' has-film' : ''}`}
+        id={course.id}
+      >
+        <div class="course-flip">
           <div class="course-face course-front">
-          <div class="course-stage" data-course-film={info.film ? 'on' : undefined}>
-            {
-              info.film ? (
+            <div class="course-stage" data-course-film={info.film ? 'on' : undefined}>
+              {info.film ? (
                 <video
                   class="course-video"
                   muted
@@ -161,11 +143,9 @@ function cleanTopic(text: string) {
                 </video>
               ) : (
                 <span class="course-still" aria-hidden="true"></span>
-              )
-            }
-            {!info.film && <span class="course-mark" aria-hidden="true"></span>}
-            {
-              info.film && (
+              )}
+              {!info.film && <span class="course-mark" aria-hidden="true"></span>}
+              {info.film && (
                 <button
                   class="course-toggle"
                   type="button"
@@ -176,28 +156,27 @@ function cleanTopic(text: string) {
                 >
                   <span class="course-toggle-icon" aria-hidden="true"></span>
                 </button>
-              )
-            }
-          </div>
-          <div class="course-body">
-            <p class="course-meta">
-              <span class="course-index">{String(i + 1).padStart(2, '0')}</span>
-              <span class="course-kicker">{info.kicker}</span>
-            </p>
-            <h3>{course.name}</h3>
-            <p class="course-lede">{course.lede}</p>
-            <p class="course-who">Para quién: {course.audience}</p>
-            <button class="course-open" type="button" data-course-open aria-expanded="false">
-              Ver temario
-              <span class="course-open-ico" aria-hidden="true" set:html={svg('rows')} />
-            </button>
-            <div class="course-foot">
-              {price ? <p class="course-price">{price}</p> : null}
-              <Button href={checkoutHref} utm={course.utm}>
-                {course.cta}
-              </Button>
+              )}
             </div>
-          </div>
+            <div class="course-body">
+              <p class="course-meta">
+                <span class="course-index">{String(i + 1).padStart(2, '0')}</span>
+                <span class="course-kicker">{info.kicker}</span>
+              </p>
+              <h3>{course.name}</h3>
+              <p class="course-lede">{course.lede}</p>
+              <p class="course-who">Para quién: {course.audience}</p>
+              <button class="course-open" type="button" data-course-open aria-expanded="false">
+                Ver temario
+                <span class="course-open-ico" aria-hidden="true" set:html={icon('rows', 16)} />
+              </button>
+              <div class="course-foot">
+                {price ? <p class="course-price">{price}</p> : null}
+                <Button href={checkoutHref} utm={course.utm}>
+                  {course.cta}
+                </Button>
+              </div>
+            </div>
           </div>
           <div class="course-face course-back">
             <div class="course-back-head">
@@ -210,23 +189,22 @@ function cleanTopic(text: string) {
             <ul class="course-syllabus">
               {topics.map((item) => (
                 <li>
-                  <span class="sy-ico" set:html={svg(topicIcon(item))} />
+                  <span class="sy-ico" set:html={icon(topicIcon(item), 16)} />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
             <div class="course-back-foot">
               <button class="course-close" type="button" data-course-close>
-                <span class="course-close-ico" aria-hidden="true" set:html={svg('back')} />
+                <span class="course-close-ico" aria-hidden="true" set:html={icon('back', 16)} />
                 Volver a la ficha
               </button>
             </div>
           </div>
-          </div>
-        </Reveal>
-      );
-    })
-  }
+        </div>
+      </Reveal>
+    );
+  })}
 </div>
 
 <script>
@@ -246,7 +224,10 @@ function cleanTopic(text: string) {
     const sync = () => {
       stage.classList.toggle('is-paused', !wanted);
       toggle.setAttribute('aria-pressed', String(!wanted));
-      toggle.setAttribute('aria-label', wanted ? `Pausar el video de ${label}` : `Reproducir el video de ${label}`);
+      toggle.setAttribute(
+        'aria-label',
+        wanted ? `Pausar el video de ${label}` : `Reproducir el video de ${label}`,
+      );
       if (wanted && visible) {
         if (!primed) {
           primed = true;
@@ -256,7 +237,12 @@ function cleanTopic(text: string) {
           if (video.readyState >= 1) openOnScene();
           else video.addEventListener('loadedmetadata', openOnScene, { once: true });
         }
-        void video.play().catch(() => undefined);
+        void video.play().catch(() => {
+          wanted = false;
+          stage.classList.add('is-paused');
+          toggle.setAttribute('aria-pressed', 'true');
+          toggle.setAttribute('aria-label', `Reproducir el video de ${label}`);
+        });
       } else {
         video.pause();
       }
