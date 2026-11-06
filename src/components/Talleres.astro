@@ -27,18 +27,18 @@ const facts = [
         eyebrow="Talleres presenciales"
         lede="Además de los cursos online, nos juntamos a formular en grupo: materias primas sobre la mesa, dudas resueltas en el momento y buena compañía."
       >
-        <h2 id="talleres-titulo">Aprender <em class="hl-coral">juntas</em>, con las manos en la mesa.</h2>
+        <h2 id="talleres-titulo">
+          Aprender <em class="hl-coral">juntas</em>, con las manos en la mesa.
+        </h2>
       </SectionHeading>
 
       <dl class="talleres-facts">
-        {
-          facts.map((fact) => (
-            <div>
-              <dt>{fact.label}</dt>
-              <dd>{fact.text}</dd>
-            </div>
-          ))
-        }
+        {facts.map((fact) => (
+          <div>
+            <dt>{fact.label}</dt>
+            <dd>{fact.text}</dd>
+          </div>
+        ))}
       </dl>
 
       <Button href={whatsappHref} variant="line">

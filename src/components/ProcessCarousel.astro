@@ -137,18 +137,30 @@ const first = slides[0];
           eyebrow="Hecho en Sororité"
           lede="Del laboratorio a tus manos: cada etapa de la formulación y los productos que nacen en nuestros cursos y talleres."
         >
-          <h2 id="creaciones-titulo">Del proceso al <em class="hl-durazno">producto</em>.</h2>
+          <h2 id="creaciones-titulo">
+            Del proceso al <em class="hl-durazno">producto</em>.
+          </h2>
         </SectionHeading>
 
         <div class="reel-caption" data-reel-caption aria-live="off" aria-atomic="true">
           <p class="reel-count">
-            <span class="reel-count-now" data-reel-current>01</span>
+            <span class="reel-count-now" data-reel-current>
+              01
+            </span>
             <span class="reel-count-total">/ {total}</span>
-            <span class="reel-chapter" data-reel-chapter>{first.chapter}</span>
+            <span class="reel-chapter" data-reel-chapter>
+              {first.chapter}
+            </span>
           </p>
-          <h3 class="reel-title" data-reel-title>{first.title}</h3>
-          <p class="reel-script" data-reel-script>{first.script}</p>
-          <p class="reel-text" data-reel-text>{first.text}</p>
+          <h3 class="reel-title" data-reel-title>
+            {first.title}
+          </h3>
+          <p class="reel-script" data-reel-script>
+            {first.script}
+          </p>
+          <p class="reel-text" data-reel-text>
+            {first.text}
+          </p>
         </div>
 
         <div class="reel-controls">
@@ -172,70 +184,66 @@ const first = slides[0];
         </div>
 
         <ol class="reel-steps" aria-label="Elegir diapositiva">
-          {
-            slides.map((slide, i) => (
-              <li>
-                <button
-                  class="reel-step"
-                  type="button"
-                  data-reel-dot={i}
-                  aria-label={`Ir a ${i + 1} de ${slides.length}: ${slide.title}`}
-                  aria-current={i === 0 ? 'true' : undefined}
-                >
-                  <span class="reel-step-fill" />
-                </button>
-              </li>
-            ))
-          }
+          {slides.map((slide, i) => (
+            <li>
+              <button
+                class="reel-step"
+                type="button"
+                data-reel-dot={i}
+                aria-label={`Ir a ${i + 1} de ${slides.length}: ${slide.title}`}
+                aria-current={i === 0 ? 'true' : undefined}
+              >
+                <span class="reel-step-fill" />
+              </button>
+            </li>
+          ))}
         </ol>
       </div>
 
       <div class="reel-stage" data-reveal>
         <ul class="reel-track" data-reel-track aria-label="Diapositivas">
-          {
-            slides.map((slide, i) => {
-              const photo = media[i];
-              return (
-                <li
-                  class:list={['reel-slide', `tone-${slide.tone}`, { 'is-active': i === 0 }]}
-                  aria-roledescription="diapositiva"
-                  aria-label={`${i + 1} de ${slides.length}: ${slide.title}`}
-                  data-chapter={slide.chapter}
-                  data-title={slide.title}
-                  data-script={slide.script}
-                  data-text={slide.text}
-                >
-                  <figure class="reel-frame">
-                    {photo ? (
-                      <img
-                        class:list={['reel-media', slide.focus && `focus-${slide.focus}`]}
-                        src={photo.src}
-                        width={photo.attributes.width}
-                        height={photo.attributes.height}
-                        alt={slide.alt ?? ''}
-                        loading={i < 2 ? 'eager' : 'lazy'}
-                        decoding="async"
-                      />
-                    ) : (
-                      <div class={`reel-media reel-placeholder art-${slide.art}`}>
-                        <span class="reel-ghost" aria-hidden="true">
-                          {String(i + 1).padStart(2, '0')}
-                        </span>
-                        <div class="reel-shot">
-                          <span class="reel-lens" aria-hidden="true" />
-                          <p class="reel-shot-text">{slide.shot}</p>
-                        </div>
+          {slides.map((slide, i) => {
+            const photo = media[i];
+            return (
+              <li
+                class:list={['reel-slide', `tone-${slide.tone}`, { 'is-active': i === 0 }]}
+                aria-roledescription="diapositiva"
+                aria-label={`${i + 1} de ${slides.length}: ${slide.title}`}
+                data-chapter={slide.chapter}
+                data-title={slide.title}
+                data-script={slide.script}
+                data-text={slide.text}
+              >
+                <figure class="reel-frame">
+                  {photo ? (
+                    <img
+                      class:list={['reel-media', slide.focus && `focus-${slide.focus}`]}
+                      src={photo.src}
+                      width={photo.attributes.width}
+                      height={photo.attributes.height}
+                      alt={slide.alt ?? ''}
+                      loading={i < 2 ? 'eager' : 'lazy'}
+                      decoding="async"
+                    />
+                  ) : (
+                    <div class={`reel-media reel-placeholder art-${slide.art}`}>
+                      <span class="reel-ghost" aria-hidden="true">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <div class="reel-shot">
+                        <span class="reel-lens" aria-hidden="true" />
+                        <p class="reel-shot-text">{slide.shot}</p>
                       </div>
-                    )}
-                    <span class="reel-tag">{slide.chapter}</span>
-                    <figcaption class="visually-hidden">
-                      {slide.title}. {slide.text}
-                    </figcaption>
-                  </figure>
-                </li>
-              );
-            })
-          }
+                    </div>
+                  )}
+                  <span class="reel-tag">{slide.chapter}</span>
+                  <figcaption class="visually-hidden">
+                    {slide.title}. {slide.text}
+                  </figcaption>
+                </figure>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

@@ -12,10 +12,18 @@
   box-shadow: inset 0 0 0 1px rgb(126 67 75 / 14%);
 }
 
-.islot-4-3 { aspect-ratio: 4 / 3; }
-.islot-4-5 { aspect-ratio: 4 / 5; }
-.islot-1-1 { aspect-ratio: 1 / 1; }
-.islot-16-9 { aspect-ratio: 16 / 9; }
+.islot-4-3 {
+  aspect-ratio: 4 / 3;
+}
+.islot-4-5 {
+  aspect-ratio: 4 / 5;
+}
+.islot-1-1 {
+  aspect-ratio: 1 / 1;
+}
+.islot-16-9 {
+  aspect-ratio: 16 / 9;
+}
 
 .islot-marca {
   width: 32%;

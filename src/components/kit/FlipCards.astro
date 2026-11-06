@@ -56,9 +56,25 @@ const fotos = await Promise.all(
           <p class="mito-cierre">{c.close}</p>
         </div>
       </div>
-      <button type="button" class="mito-toggle" aria-expanded="false" aria-controls={`${name}-${i + 1}`}>
-        <span class="mito-toggle-txt" data-abrir={openLabel} data-cerrar={closeLabel}>{openLabel}</span>
-        <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 10h10M10 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      <button
+        type="button"
+        class="mito-toggle"
+        aria-expanded="false"
+        aria-controls={`${name}-${i + 1}`}
+      >
+        <span class="mito-toggle-txt" data-abrir={openLabel} data-cerrar={closeLabel}>
+          {openLabel}
+        </span>
+        <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+          <path
+            d="M5 10h10M10 5l5 5-5 5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
       </button>
     </article>
   ))}
@@ -70,7 +86,9 @@ const fotos = await Promise.all(
       raiz.classList.add('mitos-js');
       raiz.querySelectorAll<HTMLButtonElement>('.mito-toggle').forEach((btn) => {
         const card = btn.closest('.mito') as HTMLElement;
-        const panel = document.getElementById(btn.getAttribute('aria-controls') || '') as HTMLElement;
+        const panel = document.getElementById(
+          btn.getAttribute('aria-controls') || '',
+        ) as HTMLElement;
         const cara = card.querySelector<HTMLElement>('.mito-cara')!;
         const txt = btn.querySelector('.mito-toggle-txt') as HTMLElement;
         const set = (open: boolean) => {
