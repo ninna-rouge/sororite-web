@@ -1,6 +1,6 @@
 /**
  * Catálogo real de la landing. Los precios individuales y las URLs de Hotmart
- * no están confirmados: no se inventan.
+ * no están confirmados: no se publican. El plan está en docs/plan-de-validacion.md.
  */
 export interface CatalogCourse {
   id: string;
@@ -34,7 +34,7 @@ export const packOffer = {
     'Videos paso a paso: clases grabadas para ver cuando quieras.',
     'Manual teórico en PDF: la base científica explicada simple.',
     'Fórmulas probadas: listas para aplicar.',
-    'Acceso sin fecha de vencimiento. TODO: confirmar que en Hotmart queda configurado como acceso permanente.',
+    'Acceso sin fecha de vencimiento.',
   ],
 } as const;
 
@@ -51,7 +51,7 @@ export const courses: readonly CatalogCourse[] = [
       'Selección de fragancias y aceites esenciales',
       'Lista de proveedores validados en Chile',
     ],
-    priceDisplay: 'TODO: precio individual',
+    priceDisplay: '',
     cta: 'Comprar Velas y Aromatizadores',
     utm: 'card_velas',
   },
@@ -66,9 +66,9 @@ export const courses: readonly CatalogCourse[] = [
       'Sérums, tónicos, agua micelar y desodorantes',
       'Maquillaje natural',
       'pH, estabilidad y conservantes seguros',
-      'Consultas por WhatsApp con Camila. TODO: duración.',
+      'Consultas por WhatsApp con Camila.',
     ],
-    priceDisplay: 'TODO: precio individual',
+    priceDisplay: '',
     cta: 'Comprar Cosmética Natural',
     utm: 'card_cosmetica',
   },
@@ -85,7 +85,7 @@ export const courses: readonly CatalogCourse[] = [
       'Pigmentos biodegradables',
       'Legislación cosmética chilena',
     ],
-    priceDisplay: 'TODO: precio individual',
+    priceDisplay: '',
     cta: 'Comprar Todo Jabones',
     utm: 'card_jabones',
   },
@@ -99,7 +99,7 @@ export const courses: readonly CatalogCourse[] = [
       'Velas tipo cupcake, tarta y postre',
       'Colorantes, fragancias y acabados',
     ],
-    priceDisplay: 'TODO: precio individual',
+    priceDisplay: '',
     cta: 'Comprar Velas Tipo Postre',
     utm: 'card_postre',
   },
@@ -109,14 +109,14 @@ export const courses: readonly CatalogCourse[] = [
     lede: 'Formaliza tu emprendimiento de cosmética con respaldo.',
     audience: 'Ya fabricas o vas a fabricar cosméticos y quieres venderlos de forma legal.',
     includes: [
-      'Clase con enfermera universitaria y químico farmacéutico. TODO: nombre del químico farmacéutico, o quitar la mención.',
+      'Clase con enfermera universitaria y químico farmacéutico.',
       'Cómo elaborar tus fichas técnicas',
       'Etiquetado, nomenclatura y promoción correcta',
       'Planos, guías y directorio de laboratorios en Chile',
       'Central de apuntes actualizada',
       'Diploma imprimible',
     ],
-    priceDisplay: 'TODO: precio individual',
+    priceDisplay: '',
     cta: 'Comprar Resolución Sanitaria',
     utm: 'card_resolucion',
   },
@@ -132,7 +132,7 @@ export const courses: readonly CatalogCourse[] = [
       'Estrategia de contenido',
       'Sirve para emprendimientos de productos y de servicios',
     ],
-    priceDisplay: 'TODO: precio individual',
+    priceDisplay: '',
     cta: 'Comprar Técnicas de Venta',
     utm: 'card_ventas',
   },

@@ -91,4 +91,4 @@ Tres gestos, el mismo en todas las páginas:
 
 `prefers-reduced-motion: reduce` anula animaciones y transiciones. La clase `intro-done` evita que el logo se vuelva a animar en cada navegación del cliente.
 
-Componentes compartidos: `Button`, `SectionHeading`, `Separator`, `Todo`, `Reveal` y `CatalogGrid`.
+Componentes compartidos: `Button`, `SectionHeading`, `Separator`, `Reveal` y `CatalogGrid`.

@@ -6,7 +6,8 @@ describe('catálogo de la landing', () => {
   it('publica los seis cursos sin precio ni checkout inventados', () => {
     expect(courses).toHaveLength(6);
     for (const course of courses) {
-      expect(course.priceDisplay.startsWith('TODO')).toBe(true);
+      expect(course.priceDisplay).toBe('');
+      expect(JSON.stringify(course)).not.toMatch(/TODO:/);
       expect(course.cta.length).toBeGreaterThan(0);
       expect(JSON.stringify(course)).not.toMatch(/hotmart\.com|example\.com/i);
     }
@@ -22,6 +23,6 @@ describe('catálogo de la landing', () => {
 describe('utm', () => {
   it('agrega utm_content y conserva el ancla', () => {
     expect(withUtm('/#oferta', 'hero_pack')).toBe('/?utm_content=hero_pack#oferta');
-    expect(withUtm('#todo-hotmart', 'card_velas')).toBe('?utm_content=card_velas#todo-hotmart');
+    expect(withUtm('#cursos-lista', 'card_velas')).toBe('?utm_content=card_velas#cursos-lista');
   });
 });

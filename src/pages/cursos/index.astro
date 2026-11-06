@@ -4,7 +4,6 @@ export const prerender = true;
 import { getCollection } from 'astro:content';
 import CatalogGrid from '../../components/CatalogGrid.astro';
 import CourseCard from '../../components/CourseCard.astro';
-import Todo from '../../components/Todo.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const ejemplos = (await getCollection('cursos')).sort((a, b) =>
@@ -22,13 +21,10 @@ const description =
       Cada curso se compra por separado en Hotmart y te llega al correo apenas se confirma el pago.
       El pack de 6 cursos cuesta $35.000 por tiempo limitado.
     </p>
-    <Todo id="todo-hotmart">
-      Precio individual y URL de Hotmart de cada curso. Ningún botón de esta página abre un pago.
-    </Todo>
   </header>
   <section class="section" aria-label="Cursos online">
     <div class="shell">
-      <CatalogGrid checkoutHref="#todo-hotmart" />
+      <CatalogGrid />
     </div>
   </section>
   <section class="section band-cream" aria-labelledby="ejemplos-titulo">

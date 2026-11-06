@@ -1,0 +1,38 @@
+---
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import '../../styles/kit/quote-band.css';
+
+interface Props {
+  quote: string;
+  author: string;
+  role?: string;
+  avatar?: ImageMetadata;
+}
+
+const { quote, author, role, avatar } = Astro.props;
+
+const foto = avatar ? await getImage({ src: avatar, width: 160, format: 'webp', quality: 72 }) : null;
+---
+
+<section class="section qb" aria-label={`Cita de ${author}`}>
+  <div class="shell">
+    <figure class="qb-card" data-reveal>
+      <img class="qb-flor qb-flor-a" src="/brand/botanica/cierre/tulipan.svg" alt="" width="181" height="259" aria-hidden="true" />
+      <img class="qb-flor qb-flor-b" src="/brand/botanica/cierre/rama-baya.svg" alt="" width="89" height="173" aria-hidden="true" />
+      <span class="qb-marca" aria-hidden="true">“</span>
+      <blockquote>
+        <p>{quote}</p>
+      </blockquote>
+      <figcaption>
+        {foto && (
+          <img class="qb-avatar" src={foto.src} width={foto.attributes.width} height={foto.attributes.height} alt="" loading="lazy" decoding="async" />
+        )}
+        <span>
+          <strong>{author}</strong>
+          {role && <span class="qb-role">{role}</span>}
+        </span>
+      </figcaption>
+    </figure>
+  </div>
+</section>

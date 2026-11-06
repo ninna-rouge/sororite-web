@@ -1,0 +1,96 @@
+---
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import '../../styles/kit/flip-cards.css';
+
+interface Card {
+  kicker: string;
+  title: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  backKicker: string;
+  text: string;
+  close: string;
+}
+
+interface Props {
+  /** Prefijo único para los id de los paneles. */
+  name: string;
+  items: Card[];
+  openLabel?: string;
+  closeLabel?: string;
+}
+
+const { name, items, openLabel = 'Ver más', closeLabel = 'Volver' } = Astro.props;
+
+const fotos = await Promise.all(
+  items.map((c) => getImage({ src: c.image, widths: [420, 680], format: 'webp', quality: 72 })),
+);
+---
+
+<div class="mitos flipset" data-flipset>
+  {items.map((c, i) => (
+    <article class={`mito mito-${(i % 3) + 1}`} data-reveal>
+      <div class="mito-stack">
+        <div class="mito-cara">
+          <figure class="mito-media">
+            <img
+              src={fotos[i].src}
+              srcset={fotos[i].srcSet.attribute}
+              sizes="(min-width: 960px) 30vw, 92vw"
+              width={fotos[i].attributes.width}
+              height={fotos[i].attributes.height}
+              alt={c.imageAlt}
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <div class="mito-frente">
+            <span class="mito-tag">{c.kicker}</span>
+            <h3>{c.title}</h3>
+          </div>
+        </div>
+        <div class="mito-verdad" id={`${name}-${i + 1}`}>
+          <span class="mito-tag">{c.backKicker}</span>
+          <p>{c.text}</p>
+          <p class="mito-cierre">{c.close}</p>
+        </div>
+      </div>
+      <button type="button" class="mito-toggle" aria-expanded="false" aria-controls={`${name}-${i + 1}`}>
+        <span class="mito-toggle-txt" data-abrir={openLabel} data-cerrar={closeLabel}>{openLabel}</span>
+        <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 10h10M10 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </button>
+    </article>
+  ))}
+</div>
+
+<script>
+  function initFlipsets() {
+    document.querySelectorAll<HTMLElement>('[data-flipset]:not(.mitos-js)').forEach((raiz) => {
+      raiz.classList.add('mitos-js');
+      raiz.querySelectorAll<HTMLButtonElement>('.mito-toggle').forEach((btn) => {
+        const card = btn.closest('.mito') as HTMLElement;
+        const panel = document.getElementById(btn.getAttribute('aria-controls') || '') as HTMLElement;
+        const cara = card.querySelector<HTMLElement>('.mito-cara')!;
+        const txt = btn.querySelector('.mito-toggle-txt') as HTMLElement;
+        const set = (open: boolean) => {
+          btn.setAttribute('aria-expanded', String(open));
+          card.classList.toggle('is-open', open);
+          panel.inert = !open;
+          cara.inert = open;
+          txt.textContent = (open ? txt.dataset.cerrar : txt.dataset.abrir) || '';
+        };
+        set(false);
+        btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && card.classList.contains('is-open')) {
+            set(false);
+            btn.focus();
+          }
+        });
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initFlipsets);
+</script>

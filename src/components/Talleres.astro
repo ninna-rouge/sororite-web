@@ -1,0 +1,79 @@
+---
+import { getImage } from 'astro:assets';
+import { whatsappHref } from '../data/site';
+import equipo from '../assets/fotos-productos-comunidad-reales/02-equipo-mural-circulo.jpg';
+import proceso from '../assets/fotos-productos-comunidad-reales/06-proceso-taller-mural.jpg';
+import grupo from '../assets/fotos-productos-comunidad-reales/12-seis-mujeres-circulo-negro.jpg';
+import Button from './Button.astro';
+import SectionHeading from './SectionHeading.astro';
+
+const [main, side, wide] = await Promise.all([
+  getImage({ src: equipo, width: 1200, format: 'webp', quality: 74 }),
+  getImage({ src: proceso, width: 760, format: 'webp', quality: 74 }),
+  getImage({ src: grupo, width: 760, format: 'webp', quality: 74 }),
+]);
+
+const facts = [
+  { label: 'Dónde', text: 'Providencia y Puente Alto' },
+  { label: 'Cómo', text: 'Formulas con tus manos, con la profe a tu lado' },
+  { label: 'Dónde se practica', text: 'Laboratorio con resolución sanitaria ISP' },
+];
+---
+
+<section class="section talleres" id="talleres" aria-labelledby="talleres-titulo">
+  <div class="shell talleres-grid">
+    <div class="talleres-copy">
+      <SectionHeading
+        eyebrow="Talleres presenciales"
+        lede="Además de los cursos online, nos juntamos a formular en grupo: materias primas sobre la mesa, dudas resueltas en el momento y buena compañía."
+      >
+        <h2 id="talleres-titulo">Aprender <em class="hl-coral">juntas</em>, con las manos en la mesa.</h2>
+      </SectionHeading>
+
+      <dl class="talleres-facts">
+        {
+          facts.map((fact) => (
+            <div>
+              <dt>{fact.label}</dt>
+              <dd>{fact.text}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <Button href={whatsappHref} variant="line">
+        Pregunta por las próximas fechas
+      </Button>
+    </div>
+
+    <div class="talleres-mosaic">
+      <img
+        class="talleres-main"
+        src={main.src}
+        width={main.attributes.width}
+        height={main.attributes.height}
+        alt="Equipo de Sororité con pecheras frente al mural floral, sosteniendo el letrero de la marca."
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        class="talleres-side"
+        src={side.src}
+        width={side.attributes.width}
+        height={side.attributes.height}
+        alt="Alumna concentrada preparando un producto en la mesa del taller."
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        class="talleres-wide"
+        src={wide.src}
+        width={wide.attributes.width}
+        height={wide.attributes.height}
+        alt="Seis mujeres conversan y ríen alrededor del letrero de Sororité."
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  </div>
+</section>

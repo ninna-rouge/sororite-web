@@ -1,0 +1,15 @@
+/* Reutiliza las tarjetas .mito de la home; aquí solo va la grilla */
+.flipset {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.6rem);
+  align-items: stretch;
+}
+
+@media (min-width: 860px) {
+  .flipset {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+html.js .flipset .mito[data-reveal]:nth-child(2) { transition-delay: 0.08s; }
+html.js .flipset .mito[data-reveal]:nth-child(3) { transition-delay: 0.16s; }

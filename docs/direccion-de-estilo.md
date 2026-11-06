@@ -18,7 +18,7 @@ La frase de marca es «Eres tu mejor inversión». Se escribe en Nunito, no en l
 | Tinta suave   | `--ink-soft`  | `#3E4044` | Bajadas y microcopy                  | 6.40:1 sobre blush, 9.87:1 sobre crema  |
 | Rosa          | `--rose`      | `#E06A78` | Botón principal                      | Blanco encima: 3.23:1                   |
 | Rosa profundo | `--rose-deep` | `#B5606C` | Círculo del ícono de reproducción    | Blanco encima: 4.33:1                   |
-| Rosa tinta    | `--rose-ink`  | `#7E434B` | Rótulos pequeños y notas TODO        | 7.15:1 sobre crema, 4.63:1 sobre blush  |
+| Rosa tinta    | `--rose-ink`  | `#7E434B` | Rótulos pequeños                     | 7.15:1 sobre crema, 4.63:1 sobre blush  |
 | Hoja          | `--leaf`      | `#536E58` | Firma en script                      | 5.34:1 sobre crema, 3.46:1 sobre blush  |
 
 El blanco sobre `#E06A78` solo cumple AA como texto grande: 19px y peso 800, que es el botón `.btn-primary`. No se usa ese rosa para texto de cuerpo, enlaces ni rótulos chicos. Para eso está `--rose-ink`.
@@ -55,7 +55,7 @@ Escala de la portada, tomada del mockup en 1440px: titular 40px, script 74px, ba
 - Móvil: `podios.jpg`, altura 300px, máscara que se desvanece arriba y abajo, anclada hacia la derecha (`68% 70%`).
 - Retrato de Camila: `camila.jpg`. En la pastilla es un círculo de 48px con `object-position: center 14%`. En Quiénes somos es un retrato 4:5.
 - Hoja lineal: `public/brand/rama.svg`, decorativa, girada −14°, solo en escritorio.
-- No se publican fotos de alumnas, de talleres ni de stock mientras no haya autorización. El hueco se marca con TODO.
+- No se publican fotos de alumnas, de talleres ni de stock mientras no haya autorización. El pendiente se anota en `docs/plan-de-validacion.md`.
 - Open Graph: `public/og/hero.jpg`, derivado del bodegón.
 
 ## Componentes
@@ -65,7 +65,6 @@ Misma pieza en todas las páginas. No se recrean en la hoja de cada vista.
 - `Button`: `primary` (rosa), `ink` (Ingresar), `line` (secundario con borde), `text` (subrayado). Acepta `utm` y arma `utm_content` sin perder el ancla.
 - `SectionHeading`: ceja, título en el slot y bajada.
 - `Separator`: filete horizontal.
-- `Todo`: nota con la palabra TODO. Es el único modo de marcar un dato que falta.
 - `Reveal`: envuelve una tarjeta para el revelado al scroll.
 - `CatalogGrid`: las seis tarjetas del catálogo real.
 
@@ -84,7 +83,7 @@ Un solo lenguaje, corto y fácil de apagar.
 
 - Usar los tokens. Si hace falta un color nuevo, se agrega aquí y en `/estilo` antes de usarlo en una página.
 - Dejar una sola acción rosa por bloque. Lo demás es tinta, subrayado o borde.
-- Marcar con TODO precios, URLs, fechas, nombres y fotos que no estén confirmados.
+- Si falta un precio, una URL, una fecha, un nombre o una foto, se anota en `docs/plan-de-validacion.md`. No se publica en el sitio.
 - Poner `utm_content` en cada llamado a la acción, con el id del copy.
 - Medir el contraste si el texto cambia de tamaño o de fondo. El rosa del botón no perdona un cuerpo de 16px.
 - Optimizar fotos con `astro:assets`, con ancho y alto explícitos.

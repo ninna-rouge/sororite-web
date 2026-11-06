@@ -1,0 +1,31 @@
+---
+import { icon, type IconName, type Tone } from '../../data/icons';
+import '../../styles/kit/tonos.css';
+import '../../styles/kit/stat-strip.css';
+
+interface Stat {
+  value: string;
+  label: string;
+  icon: IconName;
+  tone: Tone;
+}
+
+interface Props {
+  items: Stat[];
+  label: string;
+}
+
+const { items, label } = Astro.props;
+---
+
+<section class="ss shell" aria-label={label}>
+  <ul class="ss-list stagger">
+    {items.map((s) => (
+      <li class={`ss-item tono-${s.tone}`} data-reveal>
+        <span class="ss-ico" set:html={icon(s.icon, 20)} />
+        <span class="ss-value">{s.value}</span>
+        <span class="ss-label">{s.label}</span>
+      </li>
+    ))}
+  </ul>
+</section>

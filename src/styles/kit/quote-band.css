@@ -1,0 +1,110 @@
+.qb {
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+.qb-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: clamp(2.6rem, 6vw, 4.5rem) clamp(1.6rem, 7vw, 6rem);
+  border-radius: 2.2rem;
+  background:
+    radial-gradient(30rem 20rem at 0% 0%, rgb(255 255 255 / 55%), transparent 70%),
+    linear-gradient(150deg, #f6d2cd 0%, #fbe7dc 60%, #fff3ea 100%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 70%), var(--shadow-card);
+  text-align: center;
+}
+
+.qb-card::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: url('/brand/botanica/marca-hojas.svg') right -4rem bottom -5rem / 22rem auto no-repeat;
+  opacity: 0.12;
+}
+
+.qb-marca {
+  display: block;
+  height: 3.2rem;
+  font-family: var(--font-script);
+  font-size: 6.5rem;
+  line-height: 1;
+  color: var(--rose);
+}
+
+.qb blockquote {
+  margin: 0;
+}
+
+.qb blockquote p {
+  max-width: 46rem;
+  margin: 0 auto;
+  font-size: clamp(1.4rem, 1rem + 1.6vw, 2.2rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.qb figcaption {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1.8rem;
+  text-align: left;
+}
+
+.qb figcaption strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.qb-role {
+  display: block;
+  font-size: 0.86rem;
+  color: var(--rose-ink);
+}
+
+.qb-avatar {
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 18%;
+  border: 2px solid rgb(255 255 255 / 85%);
+  box-shadow: var(--shadow-soft);
+}
+
+.qb-flor {
+  position: absolute;
+  z-index: -1;
+  height: auto;
+  pointer-events: none;
+}
+
+.qb-flor-a {
+  left: -0.6rem;
+  bottom: -1.6rem;
+  width: clamp(4.5rem, 8vw, 6.8rem);
+  transform: rotate(14deg);
+}
+
+.qb-flor-b {
+  top: -0.8rem;
+  right: clamp(1rem, 4vw, 3rem);
+  width: clamp(2.6rem, 4vw, 3.4rem);
+  transform: rotate(-150deg);
+  opacity: 0.85;
+}
+
+@media (max-width: 599px) {
+  .qb-flor-a {
+    opacity: 0.55;
+  }
+}

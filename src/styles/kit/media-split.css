@@ -1,0 +1,127 @@
+.ms-grid {
+  display: grid;
+  gap: clamp(2.25rem, 5vw, 5rem);
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .ms-grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  }
+
+  .ms-flip {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+
+  .ms-flip .ms-media {
+    order: 2;
+  }
+}
+
+.ms-media {
+  position: relative;
+  isolation: isolate;
+  margin: 0;
+  max-width: 34rem;
+}
+
+.ms-media > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1.75rem;
+  box-shadow:
+    0 36px 64px -44px rgb(126 67 75 / 60%),
+    0 0 0 1px rgb(126 67 75 / 10%);
+}
+
+.ms-retrato > img { aspect-ratio: 4 / 5; }
+.ms-paisaje > img { aspect-ratio: 4 / 3; }
+
+/* Marco desplazado detrás de la foto */
+.ms-media::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 1.4rem -1.4rem -1.4rem 1.4rem;
+  border: 1px solid rgb(126 67 75 / 24%);
+  border-radius: 1.9rem;
+}
+
+.ms-flip .ms-media::before {
+  inset: 1.4rem 1.4rem -1.4rem -1.4rem;
+}
+
+.ms-stamp {
+  position: absolute;
+  right: -0.9rem;
+  bottom: 1.6rem;
+  max-width: 13rem;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid rgb(48 50 54 / 8%);
+  border-radius: 1.1rem;
+  background: rgb(255 252 250 / 92%);
+  box-shadow: var(--shadow-card);
+  font-family: var(--font-script);
+  font-size: 1.35rem;
+  line-height: 1.15;
+  color: var(--rose-ink);
+}
+
+.ms-flip .ms-stamp {
+  right: auto;
+  left: -0.9rem;
+}
+
+.ms .section-head {
+  margin-bottom: 1.5rem;
+}
+
+.ms-body {
+  max-width: 36rem;
+}
+
+.ms-body > p {
+  margin: 0 0 1.05rem;
+  font-size: 1.06rem;
+  line-height: 1.72;
+  color: var(--ink-soft);
+}
+
+.ms-body > p:first-child {
+  font-size: 1.14rem;
+  color: var(--ink);
+}
+
+.ms-body .cta-stack,
+.ms-body .ms-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.1rem;
+  margin-top: 1.6rem;
+}
+
+@media (max-width: 959px) {
+  .ms-media {
+    max-width: 30rem;
+  }
+
+  .ms-stamp {
+    right: 0.8rem;
+  }
+
+  .ms-flip .ms-stamp {
+    left: 0.8rem;
+  }
+}
+
+@media (max-width: 599px) {
+  .ms-media::before {
+    inset: 0.9rem -0.6rem -0.9rem 0.9rem;
+  }
+
+  .ms-flip .ms-media::before {
+    inset: 0.9rem 0.9rem -0.9rem -0.6rem;
+  }
+}

@@ -1,63 +1,65 @@
 ---
-import { footerNav, site, whatsappHref } from '../data/site';
-import Todo from './Todo.astro';
+import { packOffer } from '../data/catalog';
+import { footerNav, headerNav, ingresar, site, whatsappHref } from '../data/site';
+
+const sororite = [
+  ...footerNav.filter((i) => i.href === '/quienes-somos' || i.href === '/galeria'),
+  ...headerNav.filter((i) => i.href === '/contacto#talleres' || i.href === '/contacto'),
+  ingresar,
+];
+const icon = {
+  mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+  chat: '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/>',
+  pin: '<path d="M20 10c0 5-8 12-8 12s-8-7-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>',
+  ig: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
+  fb: '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>',
+  lock: '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+};
+const svg = (d: string) =>
+  `<svg class="f-ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
 ---
 
 <footer class="site-footer">
-  <div class="shell footer-grid">
-    <div>
-      <img class="footer-logo" src={site.logo} width="586" height="416" alt="" />
-      <p>Sororité · Academia de Cosmética Natural y Emprendimiento · Santiago de Chile</p>
-      <Todo>
-        Rango de años. No usar 2015–2026: según el CV, Sororité.cl es de 2016 y 2015 corresponde a
-        Lahuen Productos Terapéuticos.
-      </Todo>
+  <img class="footer-deco" src="/brand/botanica/decoracion-footer.svg" alt="" aria-hidden="true" width="550" height="588" loading="lazy" decoding="async" />
+  <div class="footer-main">
+    <div class="f-brand">
+      <a href="/" class="f-logo"><img src="/brand/logo-nav.png" width="542" height="374" alt="Sororité, inicio" /></a>
+      <p>Academia de Cosmética Natural y Emprendimiento · Santiago de Chile</p>
+      <div class="f-social">
+        <a href={site.instagram} rel="noopener noreferrer" aria-label="Instagram" set:html={svg(icon.ig)} />
+        <a href={site.facebook} rel="noopener noreferrer" aria-label="Facebook" set:html={svg(icon.fb)} />
+      </div>
     </div>
-    <nav aria-label="Pie de página">
+    <nav class="f-col" aria-label="Cursos">
+      <h2>Cursos</h2>
       <ul>
-        {footerNav.map((item) => (
-          <li>
-            <a href={item.href}>{item.label}</a>
-          </li>
-        ))}
+        {packOffer.includes.map((name) => <li><a href="/#cursos-lista">{name}</a></li>)}
       </ul>
     </nav>
-    <div>
+    <nav class="f-col" aria-label="Sororité">
+      <h2>Sororité</h2>
       <ul>
-        <li>
-          <a href={`mailto:${site.email}`}>{site.email}</a>
-        </li>
-        <li>
-          <a href={whatsappHref}>{site.phoneDisplay}</a>
-        </li>
-        <li>
-          <a href={site.instagram} rel="noopener noreferrer">
-            Instagram
-          </a>
-        </li>
-        <li>
-          <a href={site.facebook} rel="noopener noreferrer">
-            Facebook
-          </a>
-        </li>
-        <li>
-          <a href="/politica-de-privacidad">Política de privacidad</a>
-        </li>
-        <li>
-          <a href="/terminos">Términos y condiciones</a>
-        </li>
-        <li>
-          <button type="button" class="cookie-preferences" data-cookie-preferences>
-            Preferencias de cookies
-          </button>
-        </li>
+        {sororite.map((i) => <li><a href={i.href}>{i.label}</a></li>)}
       </ul>
+    </nav>
+    <div class="f-col">
+      <h2>Contacto</h2>
+      <ul class="f-contact">
+        <li><a href={`mailto:${site.email}`}><Fragment set:html={svg(icon.mail)} />{site.email}</a></li>
+        <li><a href={whatsappHref}><Fragment set:html={svg(icon.chat)} />{site.phoneDisplay}</a></li>
+        <li><span><Fragment set:html={svg(icon.pin)} />{site.location}</span></li>
+      </ul>
+      <p class="f-trust"><Fragment set:html={svg(icon.lock)} />Pago seguro con Hotmart · Garantía de 7 días</p>
     </div>
   </div>
-  <div class="shell legal-note">
+  <div class="footer-bar">
     <p>
-      © {new Date().getFullYear()} {site.legalName}. RUT {site.companyTaxId}. Giro:{' '}
-      {site.businessActivity}. Representante: {site.representative}.
+      © {new Date().getFullYear()} {site.legalName} · RUT {site.companyTaxId} · Giro: {site.businessActivity} · Representante: {site.representative}
     </p>
+    <ul>
+      <li><a href="/politica-de-privacidad">Política de privacidad</a></li>
+      <li><a href="/terminos">Términos y condiciones</a></li>
+      <li><button type="button" class="cookie-preferences" data-cookie-preferences>Preferencias de cookies</button></li>
+    </ul>
   </div>
 </footer>

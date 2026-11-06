@@ -1,0 +1,32 @@
+---
+import { icon, type IconName, type Tone } from '../../data/icons';
+import '../../styles/kit/tonos.css';
+import '../../styles/kit/feature-grid.css';
+
+interface Feature {
+  icon: IconName;
+  tone: Tone;
+  kicker?: string;
+  title: string;
+  text: string;
+}
+
+interface Props {
+  items: Feature[];
+  /** Número de columnas en escritorio. */
+  cols?: 2 | 3 | 4;
+}
+
+const { items, cols = 3 } = Astro.props;
+---
+
+<ul class={`fg fg-${cols} stagger`}>
+  {items.map((f) => (
+    <li class={`fg-card kit-perla tono-${f.tone}`} data-reveal>
+      <span class="kit-ico fg-ico" set:html={icon(f.icon, 20)} />
+      {f.kicker && <p class="kit-kicker">{f.kicker}</p>}
+      <h3>{f.title}</h3>
+      <p class="fg-text">{f.text}</p>
+    </li>
+  ))}
+</ul>

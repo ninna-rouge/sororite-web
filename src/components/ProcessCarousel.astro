@@ -1,0 +1,247 @@
+---
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import SectionHeading from './SectionHeading.astro';
+import pesar from '../assets/creaciones/01-pesar-materias-primas.jpg';
+import banoMaria from '../assets/creaciones/02-bano-maria.jpg';
+import champu from '../assets/creaciones/03-champu-solido.jpg';
+import verter from '../assets/creaciones/04-verter-molde.jpg';
+import velas from '../assets/fotos-productos-comunidad-reales/05-producto-velas-cupcake.jpg';
+import corte from '../assets/fotos-productos-comunidad-reales/10-proceso-corte-jabon-taller.jpg';
+import bolsas from '../assets/fotos-productos-comunidad-reales/07-productos-bolsas-mesa-verde.jpg';
+import linea from '../assets/fotos-productos-comunidad-reales/_src-new-01-still-life-2k.jpg';
+
+type Slide = {
+  chapter: 'Proceso' | 'Producto';
+  title: string;
+  script: string;
+  text: string;
+  shot: string;
+  tone: 'blush' | 'sage' | 'cream' | 'rose';
+  art: 'amapola' | 'palma' | 'cosmos' | 'ginkgo' | 'tulipan' | 'rama';
+  image?: ImageMetadata;
+  alt?: string;
+  focus?: 'left' | 'right';
+};
+
+const slides: Slide[] = [
+  {
+    chapter: 'Proceso',
+    title: 'Pesar al gramo',
+    script: 'ciencia',
+    text: 'Cada fórmula parte en la balanza: mantecas, aceites y activos medidos con precisión.',
+    shot: 'Manos pesando manteca de karité en balanza digital, vista cenital.',
+    tone: 'cream',
+    art: 'palma',
+    image: pesar,
+    alt: 'Manos con guantes pesan flores secas de caléndula en una balanza digital.',
+  },
+  {
+    chapter: 'Proceso',
+    title: 'Fundir a baño maría',
+    script: 'con calma',
+    text: 'Temperatura controlada para cuidar las propiedades de cada materia prima.',
+    shot: 'Vaso de precipitado con manteca fundiéndose, vapor suave, luz lateral.',
+    tone: 'blush',
+    art: 'amapola',
+    image: banoMaria,
+    alt: 'Vaso de precipitado con aceite dorado calentándose a baño maría.',
+  },
+  {
+    chapter: 'Producto',
+    title: 'Champú sólido',
+    script: 'natural',
+    text: 'Barras sin plástico, con tensioactivos suaves y aceites esenciales.',
+    shot: 'Champú sólido en forma de corazón sobre podio crema, con lavanda.',
+    tone: 'sage',
+    art: 'rama',
+    image: champu,
+    alt: 'Barras de champú sólido rosadas con forma de flor junto a jabones verdes.',
+  },
+  {
+    chapter: 'Proceso',
+    title: 'Verter y moldear',
+    script: 'paso a paso',
+    text: 'La mezcla toma forma en el molde: aquí se define la textura final.',
+    shot: 'Mezcla vertiéndose en molde de silicona, primer plano del chorro.',
+    tone: 'rose',
+    art: 'cosmos',
+    image: verter,
+    alt: 'Mezcla dorada vertiéndose desde una jarra metálica en un molde de silicona.',
+    focus: 'left',
+  },
+  {
+    chapter: 'Producto',
+    title: 'Velas tipo postre',
+    script: 'dulce',
+    text: 'Capas de cera, crema batida y toppings que se ven y huelen como un postre.',
+    shot: 'Vela cupcake terminada sobre podio, flores rosadas de fondo.',
+    tone: 'blush',
+    art: 'tulipan',
+    image: velas,
+    alt: 'Velas con forma de cupcake, decoradas con crema, frutillas y flores de cera.',
+    focus: 'left',
+  },
+  {
+    chapter: 'Proceso',
+    title: 'Cortar en el taller',
+    script: 'juntas',
+    text: 'En los talleres presenciales cortamos las barras juntas y aprendemos a curarlas.',
+    shot: 'Alumnas cortando barras de jabón en la mesa del taller.',
+    tone: 'cream',
+    art: 'ginkgo',
+    image: corte,
+    alt: 'Dos mujeres con guantes rosados cortan una barra de jabón en la mesa del taller.',
+  },
+  {
+    chapter: 'Producto',
+    title: 'Listo para regalar',
+    script: 'con tu marca',
+    text: 'Empaque, etiqueta y presentación: el último paso antes de la primera venta.',
+    shot: 'Productos terminados junto a bolsas de regalo con logo.',
+    tone: 'rose',
+    art: 'amapola',
+    image: bolsas,
+    alt: 'Bolsas blancas con logo Sororité junto a jabones, una bomba de baño y un perfume.',
+  },
+  {
+    chapter: 'Producto',
+    title: 'Cosmética corporal',
+    script: 'cuidado',
+    text: 'Cremas, bálsamos, sérums y jabones formulados para el uso diario.',
+    shot: 'Frascos de crema, bálsamos y jabones frente al logo Sororité.',
+    tone: 'sage',
+    art: 'palma',
+    image: linea,
+    alt: 'Cremas, bálsamos labiales, sérums y jabones de carbón frente al letrero de Sororité.',
+  },
+];
+
+const media = await Promise.all(
+  slides.map((slide) =>
+    slide.image
+      ? getImage({ src: slide.image, width: 900, format: 'webp', quality: 76 })
+      : Promise.resolve(undefined),
+  ),
+);
+
+const total = String(slides.length).padStart(2, '0');
+const first = slides[0];
+---
+
+<section class="section reel-section" id="creaciones" aria-labelledby="creaciones-titulo">
+  <div class="shell">
+    <div class="reel" data-reel aria-roledescription="carrusel" aria-label="Proceso y productos">
+      <div class="reel-copy">
+        <SectionHeading
+          eyebrow="Hecho en Sororité"
+          lede="Del laboratorio a tus manos: cada etapa de la formulación y los productos que nacen en nuestros cursos y talleres."
+        >
+          <h2 id="creaciones-titulo">Del proceso al <em class="hl-durazno">producto</em>.</h2>
+        </SectionHeading>
+
+        <div class="reel-caption" data-reel-caption aria-live="off" aria-atomic="true">
+          <p class="reel-count">
+            <span class="reel-count-now" data-reel-current>01</span>
+            <span class="reel-count-total">/ {total}</span>
+            <span class="reel-chapter" data-reel-chapter>{first.chapter}</span>
+          </p>
+          <h3 class="reel-title" data-reel-title>{first.title}</h3>
+          <p class="reel-script" data-reel-script>{first.script}</p>
+          <p class="reel-text" data-reel-text>{first.text}</p>
+        </div>
+
+        <div class="reel-controls">
+          <div class="reel-arrows">
+            <button class="reel-btn" type="button" data-reel-prev aria-label="Anterior">
+              <span class="reel-arrow reel-arrow-prev" aria-hidden="true"></span>
+            </button>
+            <button class="reel-btn" type="button" data-reel-next aria-label="Siguiente">
+              <span class="reel-arrow" aria-hidden="true"></span>
+            </button>
+          </div>
+          <button
+            class="reel-toggle"
+            type="button"
+            data-reel-toggle
+            aria-pressed="false"
+            aria-label="Pausar el carrusel"
+          >
+            <span class="reel-toggle-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <ol class="reel-steps" aria-label="Elegir diapositiva">
+          {
+            slides.map((slide, i) => (
+              <li>
+                <button
+                  class="reel-step"
+                  type="button"
+                  data-reel-dot={i}
+                  aria-label={`Ir a ${i + 1} de ${slides.length}: ${slide.title}`}
+                  aria-current={i === 0 ? 'true' : undefined}
+                >
+                  <span class="reel-step-fill" />
+                </button>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <div class="reel-stage" data-reveal>
+        <ul class="reel-track" data-reel-track aria-label="Diapositivas">
+          {
+            slides.map((slide, i) => {
+              const photo = media[i];
+              return (
+                <li
+                  class:list={['reel-slide', `tone-${slide.tone}`, { 'is-active': i === 0 }]}
+                  aria-roledescription="diapositiva"
+                  aria-label={`${i + 1} de ${slides.length}: ${slide.title}`}
+                  data-chapter={slide.chapter}
+                  data-title={slide.title}
+                  data-script={slide.script}
+                  data-text={slide.text}
+                >
+                  <figure class="reel-frame">
+                    {photo ? (
+                      <img
+                        class:list={['reel-media', slide.focus && `focus-${slide.focus}`]}
+                        src={photo.src}
+                        width={photo.attributes.width}
+                        height={photo.attributes.height}
+                        alt={slide.alt ?? ''}
+                        loading={i < 2 ? 'eager' : 'lazy'}
+                        decoding="async"
+                      />
+                    ) : (
+                      <div class={`reel-media reel-placeholder art-${slide.art}`}>
+                        <span class="reel-ghost" aria-hidden="true">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <div class="reel-shot">
+                          <span class="reel-lens" aria-hidden="true" />
+                          <p class="reel-shot-text">{slide.shot}</p>
+                        </div>
+                      </div>
+                    )}
+                    <span class="reel-tag">{slide.chapter}</span>
+                    <figcaption class="visually-hidden">
+                      {slide.title}. {slide.text}
+                    </figcaption>
+                  </figure>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/reel.ts';
+</script>
