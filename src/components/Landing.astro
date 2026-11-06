@@ -1,13 +1,18 @@
 ---
-import { packOffer } from '../data/catalog';
+import { packOffer, courses } from '../data/catalog';
 import { whatsappHref } from '../data/site';
 import { getImage } from 'astro:assets';
 import camila from '../assets/hero/camila.jpg';
+import duoTaller from '../assets/fotos-productos-comunidad-reales/13-duo-pecheras-circulo-mural.jpg';
 import Button from './Button.astro';
 import CatalogGrid from './CatalogGrid.astro';
+import CtaCierre from './CtaCierre.astro';
+import ProcessCarousel from './ProcessCarousel.astro';
 import Reveal from './Reveal.astro';
 import SectionHeading from './SectionHeading.astro';
-import Todo from './Todo.astro';
+import StartBanner from './StartBanner.astro';
+import Talleres from './Talleres.astro';
+import TrustBoard from './TrustBoard.astro';
 
 const portrait = await getImage({
   src: camila,
@@ -16,11 +21,18 @@ const portrait = await getImage({
   quality: 70,
 });
 
+const voicesPhoto = await getImage({
+  src: duoTaller,
+  width: 720,
+  format: 'webp',
+  quality: 72,
+});
+
 const paths = [
   {
     title: 'Quiero empezar a vender pronto',
     course: 'Velas y Aromatizadores, con el complemento Mini curso Velas Tipo Postre.',
-    text: 'Productos aromáticos para el hogar (velas, home spray, difusores, wax melt) con técnica y fragancias seguras. Un camino práctico para tus primeras ventas, en ferias, redes o como regalo. TODO: validar la redacción sobre si requiere o no resolución sanitaria.',
+    text: 'Productos aromáticos para el hogar (velas, home spray, difusores, wax melt) con técnica y fragancias seguras. Un camino práctico para tus primeras ventas, en ferias, redes o como regalo.',
     links: [{ href: '/#velas', label: 'Ver Velas y Aromatizadores', utm: 'camino_velas' }],
   },
   {
@@ -59,24 +71,15 @@ const objections = [
   },
 ];
 
-const trust = [
-  {
-    title: '3.500 estudiantes durante 2026',
-    text: 'Mujeres que aprendieron con Sororité en cursos online y talleres presenciales en Providencia y Puente Alto.',
-  },
-  {
-    title: 'Laboratorio con resolución sanitaria',
-    text: 'Contamos con un laboratorio de bajo riesgo cosmético con resolución sanitaria del ISP (N° 2931/22), donde también practican nuestras estudiantes.',
-  },
-  {
-    title: 'Una enfermera universitaria te enseña',
-    text: 'Camila Sánchez enseña cosmética natural desde 2018, explicando el porqué de cada paso: pH, conservación y estabilidad, en lenguaje simple.',
-  },
-  {
-    title: 'Ingredientes libres de tóxicos',
-    text: 'Te enseñamos a elegir materias primas libres de tóxicos y disruptores hormonales, con información técnica clara.',
-  },
+const packImgs = ['velas', 'cosmetica', 'jabones', 'postre', 'resolucion', 'ventas'];
+const packIcons = [
+  'M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 14.5zM10.5 8.2v4.6l4-2.3zM8 20h8',
+  'M7 3.5h7l4 4V19a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 19V5a1.5 1.5 0 0 1 1-1.5zM14 3.5V8h4M9 12h6M9 15.5h6',
+  'M9.5 3.5h5M10.5 3.5v5.2L5.6 17.3A2.2 2.2 0 0 0 7.5 20.5h9a2.2 2.2 0 0 0 1.9-3.2l-4.9-8.6V3.5M7.6 14h8.8',
+  'M7 9a3 3 0 1 0 0 6c2.5 0 7.5-6 10-6a3 3 0 1 1 0 6c-2.5 0-7.5-6-10-6z',
 ];
+
+const mitoImgs = ['mito-laboratorio', 'mito-formula', 'mito-venta'];
 
 const chips = [
   'Enfermera universitaria',
@@ -90,29 +93,21 @@ const chips = [
 
 <section class="section band-cream" id="respaldo" aria-labelledby="respaldo-titulo">
   <div class="shell">
-    <SectionHeading eyebrow="Respaldo">
+    <SectionHeading
+      eyebrow="Respaldo"
+      lede="Ciencia explicada simple, un laboratorio autorizado por el ISP y una comunidad que ya aprendió con nosotras."
+    >
       <h2 id="respaldo-titulo">
-        Aprendes con ciencia, oficio y una formadora con experiencia real
+        Aprendes con ciencia, oficio y una formadora con <em class="hl-coral">experiencia real</em>
       </h2>
     </SectionHeading>
-    <div class="card-grid cols-2 stagger">
-      {trust.map((item) => (
-        <Reveal class="card">
-          <h3>{item.title}</h3>
-          <p>{item.text}</p>
-        </Reveal>
-      ))}
-    </div>
-    <div class="section-head stack-loose">
-      <h3>Creado por nuestras alumnas</h3>
-      <p>Productos reales hechos por alumnas de Sororité.</p>
-      <Todo>
-        6–9 fotos de productos hechos por alumnas, con autorización de uso y nombre o @ si lo
-        aceptan. No se publican imágenes de relleno.
-      </Todo>
-    </div>
+    <TrustBoard />
   </div>
 </section>
+
+<StartBanner />
+
+<ProcessCarousel />
 
 <section class="section" id="frenos" aria-labelledby="frenos-titulo">
   <div class="shell">
@@ -120,17 +115,90 @@ const chips = [
       eyebrow="Lo que te está frenando"
       lede="El primer paso para formular con confianza es cuestionar lo que damos por hecho sobre los cosméticos y sobre nuestra propia capacidad."
     >
-      <h2 id="frenos-titulo">Estas ideas son las que nos impiden empezar.</h2>
+      <h2 id="frenos-titulo">
+        Estas ideas son las que nos impiden <em class="hl-hoja">empezar</em>.
+      </h2>
     </SectionHeading>
-    <div class="card-grid stagger">
-      {objections.map((item) => (
-        <Reveal class="card">
-          <h3>«{item.quote}».</h3>
-          <p>{item.text}</p>
-          <p>{item.close}</p>
+    <div class="mitos" data-mitos>
+      {objections.map((item, i) => (
+        <Reveal tag="article" class={`mito mito-${i + 1}`}>
+          <div class="mito-stack">
+            <div class="mito-cara">
+              <figure class="mito-media">
+                <picture>
+                  <source srcset={`/brand/mitos/${mitoImgs[i]}.avif`} type="image/avif" />
+                  <img
+                    src={`/brand/mitos/${mitoImgs[i]}.webp`}
+                    alt=""
+                    width="900"
+                    height="675"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+              </figure>
+              <div class="mito-frente">
+                <span class="mito-tag">Mito</span>
+                <h3>«{item.quote}».</h3>
+              </div>
+            </div>
+            <div class="mito-verdad" id={`mito-verdad-${i + 1}`}>
+              <span class="mito-tag">Verdad</span>
+              <p>{item.text}</p>
+              <p class="mito-cierre">{item.close}</p>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="mito-toggle"
+            aria-expanded="false"
+            aria-controls={`mito-verdad-${i + 1}`}
+          >
+            <span class="mito-toggle-txt" data-abrir="Ver la verdad" data-cerrar="Volver al mito">
+              Ver la verdad
+            </span>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <path
+                d="M5 10h10M10 5l5 5-5 5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
         </Reveal>
       ))}
     </div>
+    <script>
+      const raiz = document.querySelector<HTMLElement>('[data-mitos]');
+      if (raiz) {
+        raiz.classList.add('mitos-js');
+        raiz.querySelectorAll<HTMLButtonElement>('.mito-toggle').forEach((btn) => {
+          const card = btn.closest('.mito') as HTMLElement;
+          const panel = document.getElementById(
+            btn.getAttribute('aria-controls') || '',
+          ) as HTMLElement;
+          const txt = btn.querySelector('.mito-toggle-txt') as HTMLElement;
+          const set = (open: boolean) => {
+            btn.setAttribute('aria-expanded', String(open));
+            card.classList.toggle('is-open', open);
+            panel.inert = !open;
+            card.querySelector<HTMLElement>('.mito-cara')!.inert = open;
+            txt.textContent = (open ? txt.dataset.cerrar : txt.dataset.abrir) || '';
+          };
+          set(false);
+          btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+          card.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && card.classList.contains('is-open')) {
+              set(false);
+              btn.focus();
+            }
+          });
+        });
+      }
+    </script>
   </div>
 </section>
 
@@ -140,7 +208,9 @@ const chips = [
       eyebrow="Elige tu camino"
       lede="Depende de lo que quieras lograr hoy. Elige tu camino y suma los demás cursos cuando quieras."
     >
-      <h2 id="elegir-titulo">¿Por dónde empiezo?</h2>
+      <h2 id="elegir-titulo">
+        ¿Por dónde <em class="hl-durazno">empiezo</em>?
+      </h2>
     </SectionHeading>
     <div class="card-grid cols-3 stagger">
       {paths.map((path) => (
@@ -169,18 +239,72 @@ const chips = [
   </div>
 </section>
 
-<section class="section" id="oferta" aria-labelledby="oferta-titulo" data-reveal>
+<section class="section feature" id="oferta" aria-labelledby="oferta-titulo" data-reveal>
   <div class="shell">
     <SectionHeading eyebrow={packOffer.eyebrow} lede={packOffer.lede}>
       <h2 id="oferta-titulo">{packOffer.title}</h2>
     </SectionHeading>
-    <div class="split">
-      <div>
-        <ul class="plain-list">
-          {packOffer.includes.map((item) => (
-            <li>{item}</li>
+    <div class="pk" data-pack>
+      <div class="pk-cursos">
+        <ul class="pk-lista pack-includes">
+          {packOffer.includes.map((item, i) => (
+            <li>
+              <button
+                type="button"
+                class={`pk-item${i === 0 ? ' is-on' : ''}`}
+                aria-pressed={i === 0 ? 'true' : 'false'}
+                aria-controls="pk-vista"
+                data-i={i}
+              >
+                <span class="pack-num">{String(i + 1).padStart(2, '0')}</span>
+                <span class="pk-nombre">{item}</span>
+                <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                  <path
+                    d="M5 10h10M10 5l5 5-5 5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </li>
           ))}
         </ul>
+        <figure class="pk-vista" id="pk-vista">
+          <div class="pk-fotos">
+            {packImgs.map((img, i) => (
+              <picture class={`pk-foto${i === 0 ? ' is-on' : ''}`} data-i={i}>
+                <source srcset={`/brand/pack/pack-${img}.avif`} type="image/avif" />
+                <img
+                  src={`/brand/pack/pack-${img}.webp`}
+                  alt=""
+                  width="1000"
+                  height="750"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              </picture>
+            ))}
+          </div>
+          <figcaption class="pk-pie" aria-live="polite">
+            <span class="pack-num pk-pie-num">01</span>
+            <span class="pk-pie-txt">
+              <strong class="pk-pie-nombre">{packOffer.includes[0]}</strong>
+              <span class="pk-pie-lede">{courses[0].lede}</span>
+            </span>
+          </figcaption>
+          <script
+            type="application/json"
+            class="pk-data"
+            set:html={JSON.stringify(
+              packOffer.includes.map((n, i) => ({ n, l: courses[i]?.lede ?? '' })),
+            )}
+          />
+        </figure>
+      </div>
+      <div class="pk-valor pack-offer">
         <p class="price">
           <s>
             <span class="visually-hidden">Precio por separado: </span>
@@ -191,62 +315,130 @@ const chips = [
             {packOffer.price}
           </span>
         </p>
-        <p>{packOffer.priceNote}</p>
-        <Todo>
-          Fecha de término de la oferta, si se quiere comunicar. Confirmar si se habilitan cuotas en
-          Hotmart y cómo se comunican.
-        </Todo>
-        <Todo id="todo-hotmart">
-          URLs de Hotmart del pack y de cada curso. Los botones de compra todavía no abren un pago.
-        </Todo>
-        <Button href="/#todo-hotmart" utm="oferta_pack">
+        <p class="pk-nota">{packOffer.priceNote}</p>
+        <Button href={whatsappHref} utm="oferta_pack">
           {packOffer.cta}
         </Button>
-        <p class="micro">{packOffer.micro}</p>
+        <p class="micro pk-trust">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path
+              d="M7 10.5V8a5 5 0 0 1 10 0v2.5M6 10.5h12a1 1 0 0 1 1 1V19a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19v-7.5a1 1 0 0 1 1-1zM12 14.5v2.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span>{packOffer.micro}</span>
+        </p>
       </div>
-      <div class="card-grid">
-        <article class="card">
-          <h3>Bono 1: Lista de proveedores investigados y validados.</h3>
+      <div class="pack-bonos">
+        <article class="pack-bono tone-coral">
+          <p class="course-meta">
+            <span class="course-index">01</span>
+            <span class="course-kicker">Bono</span>
+          </p>
+          <h3>Lista de proveedores investigados y validados.</h3>
           <p>
             Te entregamos una lista de proveedores de materias primas libres de tóxicos y
             disruptores hormonales, con precios mayoristas y minoristas y despacho a todo Chile. Así
             formulas con tranquilidad desde tu primer pedido.
           </p>
         </article>
-        <article class="card">
-          <h3>Bono 2: Consultas por WhatsApp con Camila.</h3>
+        <article class="pack-bono tone-hoja">
+          <p class="course-meta">
+            <span class="course-index">02</span>
+            <span class="course-kicker">Bono</span>
+          </p>
+          <h3>Consultas por WhatsApp con Camila.</h3>
           <p>
             Resuelve tus dudas de formulación, ingredientes y emprendimiento directamente con la
             fundadora.
           </p>
-          <Todo>
-            Definir alcance y duración. La web actual dice «por 1 año» solo en Cosmética Natural.
-          </Todo>
         </article>
       </div>
     </div>
-    <h3>Qué recibes en cada curso</h3>
-    <ul class="plain-list">
-      {packOffer.receives.map((item) => (
-        <li>{item}</li>
+    <h3 class="pack-gets-title">Qué recibes en cada curso</h3>
+    <ul class="pack-gets">
+      {packOffer.receives.map((item, i) => (
+        <li class={`pk-get pk-get-${i + 1}`}>
+          <span class="pk-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path
+                d={packIcons[i] ?? packIcons[0]}
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <span>{item}</span>
+        </li>
       ))}
     </ul>
   </div>
 </section>
 
+<script>
+  const pk = document.querySelector<HTMLElement>('[data-pack]');
+  if (pk) {
+    const items = [...pk.querySelectorAll<HTMLButtonElement>('.pk-item')];
+    const fotos = [...pk.querySelectorAll<HTMLElement>('.pk-foto')];
+    const data = JSON.parse(pk.querySelector('.pk-data')?.textContent || '[]') as {
+      n: string;
+      l: string;
+    }[];
+    const num = pk.querySelector('.pk-pie-num') as HTMLElement;
+    const nombre = pk.querySelector('.pk-pie-nombre') as HTMLElement;
+    const lede = pk.querySelector('.pk-pie-lede') as HTMLElement;
+    const pie = pk.querySelector('.pk-pie') as HTMLElement;
+    let actual = 0;
+    const activar = (i: number) => {
+      if (i === actual) return;
+      actual = i;
+      items.forEach((b, k) => {
+        b.classList.toggle('is-on', k === i);
+        b.setAttribute('aria-pressed', String(k === i));
+      });
+      fotos.forEach((f, k) => f.classList.toggle('is-on', k === i));
+      pie.classList.remove('is-cambio');
+      void pie.offsetWidth;
+      pie.classList.add('is-cambio');
+      num.textContent = String(i + 1).padStart(2, '0');
+      nombre.textContent = data[i]?.n ?? '';
+      lede.textContent = data[i]?.l ?? '';
+    };
+    items.forEach((b, i) => {
+      b.addEventListener('click', () => activar(i));
+      b.addEventListener('focus', () => activar(i));
+      if (matchMedia('(hover: hover)').matches)
+        b.addEventListener('pointerenter', () => activar(i));
+      b.addEventListener('keydown', (e) => {
+        const d =
+          e.key === 'ArrowDown' || e.key === 'ArrowRight'
+            ? 1
+            : e.key === 'ArrowUp' || e.key === 'ArrowLeft'
+              ? -1
+              : 0;
+        if (!d) return;
+        e.preventDefault();
+        items[(i + d + items.length) % items.length].focus();
+      });
+    });
+  }
+</script>
+
 <section class="section band-cream" id="cursos-lista" aria-labelledby="cursos-titulo">
   <div class="shell">
-    <SectionHeading lede="Cada curso se compra por separado en Hotmart y te llega al correo apenas se confirma el pago.">
-      <h2 id="cursos-titulo">Elige el curso que más te mueva hoy.</h2>
+    <SectionHeading lede="Cada curso se consulta por separado. El acceso llega al correo cuando el pago queda confirmado.">
+      <h2 id="cursos-titulo">
+        Elige el curso que <em class="hl-coral">más te mueva</em> hoy.
+      </h2>
     </SectionHeading>
     <CatalogGrid />
-    <div id="muestra" class="section-head stack-mid">
-      <h3>Mira cómo es una clase por dentro.</h3>
-      <Todo>Video o fragmento de clase de 2–3 min.</Todo>
-      <Button href="/#muestra" utm="muestra_clase" variant="text">
-        Ver clase de muestra
-      </Button>
-    </div>
     <p>
       ¿Quieres más de uno? El pack de 6 cursos cuesta $35.000 por tiempo limitado.
       <Button href="/#oferta" utm="cards_pack" variant="text">
@@ -256,46 +448,56 @@ const chips = [
   </div>
 </section>
 
-<section class="section" id="testimonios" aria-labelledby="testimonios-titulo">
+<Talleres />
+
+<section class="section band-cream" id="testimonios" aria-labelledby="testimonios-titulo">
   <div class="shell">
     <SectionHeading
       eyebrow="Lo que crean nuestras alumnas"
       lede="Experiencias de quienes ya aprendieron con nosotras."
     >
-      <h2 id="testimonios-titulo">Palabras reales de alumnas de Sororité.</h2>
+      <h2 id="testimonios-titulo">
+        Palabras <em class="hl-hoja">reales</em> de alumnas de Sororité.
+      </h2>
     </SectionHeading>
-    <Todo>
-      3–6 testimonios de alumnas de los cursos online, con producto creado o paso logrado (por
-      ejemplo, primera venta o resolución sanitaria obtenida), foto del producto y autorización. No
-      usar cifras de ventas sin respaldo.
-    </Todo>
-    <div class="card-grid cols-3 stagger">
-      <Reveal tag="article" class="card">
-        <blockquote class="quote">
-          <p>
-            «Hoy viví una experiencia increíble. Creamos productos maravillosos con nuestras propias
-            manos. Hoy no gané un premio, gané el día completo.»
-          </p>
-          <footer>@poninapolito · Instagram · Taller presencial</footer>
-        </blockquote>
-      </Reveal>
-      <Reveal tag="article" class="card">
-        <blockquote class="quote">
-          <p>
-            «Feliz de haber participado, aprendí muchas cosas que me hacían falta. La profe un amor,
-            se pasa bien, compartes y conoces. 100% recomendado.»
-          </p>
-          <footer>@hummingurbangirl · Instagram · Taller presencial</footer>
-        </blockquote>
-      </Reveal>
-      <Reveal tag="article" class="card">
-        <blockquote class="quote">
-          <p>«Amo los productos, especialmente el desodorante y el shampoo.»</p>
-          <footer>
-            María · alumna Sororité · WhatsApp. TODO: confirmar si es de curso online o de taller.
-          </footer>
-        </blockquote>
-      </Reveal>
+    <div class="voices">
+      <figure class="voices-photo">
+        <img
+          src={voicesPhoto.src}
+          width={voicesPhoto.attributes.width}
+          height={voicesPhoto.attributes.height}
+          alt="Dos alumnas sonríen con el letrero de Sororité frente al mural floral del taller."
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>Taller presencial Sororité</figcaption>
+      </figure>
+      <div class="voices-list stagger">
+        <Reveal tag="article" class="card">
+          <blockquote class="quote">
+            <p>
+              «Hoy viví una experiencia increíble. Creamos productos maravillosos con nuestras
+              propias manos. Hoy no gané un premio, gané el día completo.»
+            </p>
+            <footer>@poninapolito · Instagram · Taller presencial</footer>
+          </blockquote>
+        </Reveal>
+        <Reveal tag="article" class="card">
+          <blockquote class="quote">
+            <p>
+              «Feliz de haber participado, aprendí muchas cosas que me hacían falta. La profe un
+              amor, se pasa bien, compartes y conoces. 100% recomendado.»
+            </p>
+            <footer>@hummingurbangirl · Instagram · Taller presencial</footer>
+          </blockquote>
+        </Reveal>
+        <Reveal tag="article" class="card">
+          <blockquote class="quote">
+            <p>«Amo los productos, especialmente el desodorante y el shampoo.»</p>
+            <footer>María · alumna Sororité · WhatsApp</footer>
+          </blockquote>
+        </Reveal>
+      </div>
     </div>
   </div>
 </section>
@@ -310,9 +512,11 @@ const chips = [
       alt="Camila Sánchez, fundadora de Sororité"
       loading="lazy"
     />
-    <div>
+    <div class="bio">
       <SectionHeading eyebrow="Quién te enseña">
-        <h2 id="camila-titulo">Camila Sánchez, fundadora de Sororité.</h2>
+        <h2 id="camila-titulo">
+          Camila Sánchez, <em class="hl-durazno">fundadora</em> de Sororité.
+        </h2>
       </SectionHeading>
       <p class="lede">Enfermera universitaria · Formuladora · Enseña desde 2018</p>
       <p>
@@ -345,9 +549,11 @@ const chips = [
 
 <section class="section" id="garantia" aria-labelledby="garantia-titulo" data-reveal>
   <div class="shell">
-    <div class="split">
-      <div>
-        <h2 id="garantia-titulo">Pruébalo con tranquilidad: tienes 7 días de garantía.</h2>
+    <div class="split garantia-split">
+      <div class="garantia-note">
+        <h2 id="garantia-titulo">
+          Pruébalo con tranquilidad: tienes <em class="hl-coral hl-brush">7 días de garantía</em>.
+        </h2>
         <p>
           Compras a través de Hotmart. Si en los primeros 7 días sientes que el curso no es para ti,
           puedes pedir el reembolso directamente en Hotmart, según sus condiciones.
@@ -358,17 +564,14 @@ const chips = [
         <details>
           <summary>¿Cómo compro y cómo accedo al curso?</summary>
           <p>
-            Haces clic en el botón del curso o del pack y pagas en Hotmart. Cuando se confirma el
-            pago, Hotmart te envía un correo con tu acceso. Revisa también la carpeta de spam o
-            promociones.
+            El botón del curso o del pack abre WhatsApp. Te enviamos el enlace de Hotmart para
+            pagar. Cuando se confirma el pago, Hotmart te envía un correo con tu acceso. Revisa
+            también la carpeta de spam o promociones.
           </p>
         </details>
         <details>
           <summary>¿Qué medios de pago puedo usar?</summary>
-          <p>
-            Los que Hotmart tenga disponibles para Chile al momento de pagar. TODO: listar medios y
-            cuotas habilitados.
-          </p>
+          <p>Los que Hotmart tenga disponibles para Chile al momento de pagar.</p>
         </details>
         <details>
           <summary>¿Qué pasa si no me llega el correo de acceso?</summary>
@@ -385,7 +588,7 @@ const chips = [
           <summary>¿Los cursos tienen fecha de vencimiento?</summary>
           <p>
             No. El acceso es permanente: puedes ver el material cuando quieras, las veces que
-            necesites y desde cualquier dispositivo. TODO: confirmar configuración en Hotmart.
+            necesites y desde cualquier dispositivo.
           </p>
         </details>
         <details>
@@ -410,18 +613,10 @@ const chips = [
           </p>
         </details>
         <details>
-          <summary>¿Recibo boleta o certificado?</summary>
-          <p>
-            TODO: cómo se emite el comprobante con Hotmart y qué cursos entregan diploma. La web
-            actual menciona diploma solo en Resolución Sanitaria.
-          </p>
-        </details>
-        <details>
           <summary>¿Hay talleres presenciales?</summary>
           <p>
             Sí, en Providencia y Puente Alto, Santiago.
-            <a href="/contacto#talleres">Escríbenos para los talleres</a>. TODO: enlace a calendario
-            de fechas.
+            <a href="/contacto#talleres">Escríbenos para los talleres</a>.
           </p>
         </details>
         <details>
@@ -436,51 +631,4 @@ const chips = [
   </div>
 </section>
 
-<section class="section band-cream" id="cierre" aria-labelledby="cierre-titulo" data-reveal>
-  <div class="shell split">
-    <div>
-      <h2 id="cierre-titulo">Eres tu mejor inversión.</h2>
-      <p class="lede">
-        Empieza hoy, a tu ritmo y desde casa, con fórmulas probadas y ciencia explicada simple.
-      </p>
-      <div class="cta-stack">
-        <Button href="/#oferta" utm="final_pack">
-          Quiero los 6 cursos por $35.000
-        </Button>
-        <Button href="/#cursos-lista" utm="final_cursos" variant="text">
-          Ver cursos por separado
-        </Button>
-      </div>
-    </div>
-    <div id="lead">
-      <h2>¿Aún no te decides? Empieza gratis.</h2>
-      <p>
-        Déjanos tu correo y te enviamos TODO: nombre y contenido del recurso gratuito (la minuta del
-        28-09 propone un libro digital) para que des tu primer paso en cosmética natural.
-      </p>
-      <div class="lead-grid">
-        <div>
-          <label for="lead-nombre">Nombre</label>
-          <input id="lead-nombre" type="text" autocomplete="name" />
-        </div>
-        <div>
-          <label for="lead-correo">Correo</label>
-          <input id="lead-correo" type="email" autocomplete="email" inputmode="email" />
-        </div>
-      </div>
-      <div class="cta-stack stack-tight">
-        <Button href="/#lead" utm="lead_magnet">
-          Quiero recibirlo
-        </Button>
-      </div>
-      <p class="micro">
-        Usaremos tu correo solo para enviarte contenido de Sororité. Puedes darte de baja cuando
-        quieras. <a href="/politica-de-privacidad">Política de privacidad</a>.
-      </p>
-      <Todo>
-        Herramienta de email. El formulario no envía datos: no hay servicio conectado. El recurso
-        gratuito todavía no tiene nombre ni archivo.
-      </Todo>
-    </div>
-  </div>
-</section>
+<CtaCierre />

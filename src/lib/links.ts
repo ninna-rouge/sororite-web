@@ -1,4 +1,4 @@
-/** Añade `utm_content` sin perder el ancla. Las URLs de Hotmart aún no existen. */
+/** Añade `utm_content` sin perder la query ni el ancla. */
 export function withUtm(path: string, content: string): string {
   const hashAt = path.indexOf('#');
   const hash = hashAt >= 0 ? path.slice(hashAt) : '';

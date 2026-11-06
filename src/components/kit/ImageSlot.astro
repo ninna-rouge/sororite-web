@@ -1,0 +1,30 @@
+---
+import { icon } from '../../data/icons';
+import '../../styles/kit/image-slot.css';
+
+interface Props {
+  /** Qué foto va aquí (se muestra solo en desarrollo). */
+  label: string;
+  ratio?: '4-3' | '4-5' | '1-1' | '16-9';
+}
+
+const { label, ratio = '4-3' } = Astro.props;
+const dev = import.meta.env.DEV;
+---
+
+<div class={`islot islot-${ratio}`} aria-hidden="true">
+  <img
+    class="islot-marca"
+    src="/brand/botanica/marca-hojas.svg"
+    alt=""
+    width="120"
+    height="120"
+    aria-hidden="true"
+  />
+  {dev && (
+    <span class="islot-label">
+      <span set:html={icon('image', 16)} />
+      TODO: {label}
+    </span>
+  )}
+</div>

@@ -3,262 +3,402 @@ export const prerender = true;
 
 import { getImage } from 'astro:assets';
 import camila from '../assets/hero/camila.jpg';
+import cuatroMujeres from '../assets/fotos-productos-comunidad-reales/11-cuatro-mujeres-riendo-circulo.jpg';
+import seisMujeres from '../assets/fotos-productos-comunidad-reales/12-seis-mujeres-circulo-negro.jpg';
+import corteJabon from '../assets/fotos-productos-comunidad-reales/10-proceso-corte-jabon-taller.jpg';
+import productosPiedra from '../assets/fotos-productos-comunidad-reales/Skincare_products_on_stone_surface_2K_20260930171646.jpg';
+import duoBolsas from '../assets/fotos-productos-comunidad-reales/04-duo-bolsas-mural.jpg';
+import equipoMural from '../assets/fotos-productos-comunidad-reales/02-equipo-mural-circulo.jpg';
 import Button from '../components/Button.astro';
+import CtaCierre from '../components/CtaCierre.astro';
 import SectionHeading from '../components/SectionHeading.astro';
+import FeatureGrid from '../components/kit/FeatureGrid.astro';
+import FlipCards from '../components/kit/FlipCards.astro';
+import ImageSlot from '../components/kit/ImageSlot.astro';
+import MediaSplit from '../components/kit/MediaSplit.astro';
+import PageHero from '../components/kit/PageHero.astro';
+import QuoteBand from '../components/kit/QuoteBand.astro';
+import StatStrip from '../components/kit/StatStrip.astro';
+import Timeline from '../components/kit/Timeline.astro';
+import { icon } from '../data/icons';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/paginas/quienes.css';
 
-const portrait = await getImage({ src: camila, width: 720, format: 'webp', quality: 70 });
 const description =
   'Somos una escuela de cosmética natural que une ciencia, naturaleza y emprendimiento, creada por mujeres para mujeres.';
+
+const sororidad = await getImage({
+  src: equipoMural,
+  widths: [480, 760],
+  format: 'webp',
+  quality: 72,
+});
+
+const stats = [
+  { value: '3.500', label: 'estudiantes en 2026', icon: 'people', tone: 'coral' },
+  { value: 'Desde 2018', label: 'formando en cosmética natural', icon: 'growth', tone: 'hoja' },
+  {
+    value: 'ISP N° 2931/22',
+    label: 'laboratorio con resolución sanitaria',
+    icon: 'flask',
+    tone: 'calipso',
+  },
+  { value: 'Capital Abeja', label: 'Sercotec 2023', icon: 'badge', tone: 'durazno' },
+] as const;
+
+const hitos = [
+  { year: '2015', title: 'Lahuen', text: 'Nace Lahuen Productos Terapéuticos.', tone: 'hoja' },
+  {
+    year: '2016',
+    title: 'Sororité.cl',
+    text: 'Venta de materias primas y primeros pasos de la academia.',
+    tone: 'coral',
+  },
+  {
+    year: '2018',
+    title: 'Capacitaciones',
+    text: 'Cursos presenciales y online de cosmética natural y terapéutica.',
+    tone: 'durazno',
+  },
+  {
+    year: '2021',
+    title: 'Formalización',
+    text: 'Fichas técnicas, maquila y resolución sanitaria.',
+    tone: 'calipso',
+  },
+  {
+    year: '2023',
+    title: 'Velas y aromaterapia',
+    text: 'Emprendimientos con velas y aromatizadores.',
+    tone: 'hoja',
+  },
+  {
+    year: '2026',
+    title: '3.500 estudiantes',
+    text: 'Online y en talleres de Providencia y Puente Alto.',
+    tone: 'coral',
+  },
+] as const;
+
+const trayectoria = [
+  {
+    icon: 'badge',
+    tone: 'coral',
+    kicker: 'Base',
+    title: 'Enfermera universitaria',
+    text: 'Titulada con distinción de la Universidad Pedro de Valdivia.',
+  },
+  {
+    icon: 'flask',
+    tone: 'calipso',
+    kicker: '+10 años',
+    title: 'Formulación cosmética',
+    text: 'Experiencia en cosmética natural, emulsiones y productos terapéuticos.',
+  },
+  {
+    icon: 'people',
+    tone: 'durazno',
+    kicker: '+8 años',
+    title: 'Docencia',
+    text: 'En el Instituto AIEP, el Instituto IP Chile y sus propios programas.',
+  },
+  {
+    icon: 'leaf',
+    tone: 'hoja',
+    kicker: 'Formación continua',
+    title: 'Siempre aprendiendo',
+    text: 'Maquillaje natural (Academia Boreal, 2018) y cosmética capilar avanzada (Cooltiva.cl, 2025).',
+  },
+] as const;
+
+const proposito = [
+  {
+    icon: 'compass',
+    tone: 'coral',
+    kicker: 'Misión',
+    title: 'Oficios que dan autonomía',
+    text: 'Empoderar a mujeres con oficios creativos (cosmética natural, velas y aromatizadores) para que creen, generen ingresos y construyan con más autonomía.',
+  },
+  {
+    icon: 'horizon',
+    tone: 'hoja',
+    kicker: 'Visión',
+    title: 'Referente en Latinoamérica',
+    text: 'Ser referente en formación creativa y cosmética natural en Latinoamérica, por combinar técnica, cercanía y herramientas reales de emprendimiento.',
+  },
+  {
+    icon: 'heart',
+    tone: 'durazno',
+    kicker: 'Nuestra promesa',
+    title: 'Manos, porqué y camino',
+    text: 'Aprendes algo que puedes hacer con tus manos, entiendes por qué funciona y sales con herramientas concretas para seguir creando.',
+  },
+] as const;
+
+const metodo = [
+  {
+    kicker: 'Ciencia',
+    title: 'Entiendes el porqué de cada paso.',
+    image: corteJabon,
+    imageAlt: 'Dos alumnas cortan barras de jabón artesanal en el taller.',
+    backKicker: 'Cómo lo hacemos',
+    text: 'Formulación, conservación y pH explicados en lenguaje humano. Enseñamos con evidencia científica y te explicamos el porqué de cada paso.',
+    close: 'Para que fabriques con seguridad.',
+  },
+  {
+    kicker: 'Naturaleza',
+    title: 'Ingredientes que puedes defender.',
+    image: productosPiedra,
+    imageAlt: 'Productos de cosmética natural Sororité sobre una mesa de piedra.',
+    backKicker: 'Cómo lo hacemos',
+    text: 'Estudiamos las materias primas y a los proveedores para elaborar productos libres de ingredientes cuestionados para la salud, sobre todo la hormonal.',
+    close: 'Cosmética sólida, menos residuos y envases reutilizados.',
+  },
+  {
+    kicker: 'Emprendimiento',
+    title: 'Sales con un camino para vender.',
+    image: duoBolsas,
+    imageAlt: 'Dos mujeres sonríen con el logo de Sororité y bolsas de la marca.',
+    backKicker: 'Cómo lo hacemos',
+    text: 'Además de fabricar, aprendes a vender, a formalizar y a sacar la resolución sanitaria en Chile.',
+    close: 'Terminas con productos propios y un camino claro.',
+  },
+];
+
+const valores = [
+  {
+    icon: 'shield',
+    tone: 'hoja',
+    title: 'Libre de tóxicos',
+    text: 'Ingredientes libres de tóxicos, disruptores hormonales y derivados del petróleo, con información técnica clara para decidir bien.',
+  },
+  {
+    icon: 'badge',
+    tone: 'calipso',
+    title: 'IFRA / ECOCERT',
+    text: 'Lo que decimos sobre normas IFRA y criterios ECOCERT sigue la documentación y el alcance de cada materia prima o producto.',
+  },
+  {
+    icon: 'pin',
+    tone: 'durazno',
+    title: 'Proveedores locales',
+    text: 'Valoramos las extracciones artesanales y los proveedores locales, con foco en calidad, trazabilidad y procedencia.',
+  },
+  {
+    icon: 'heart',
+    tone: 'coral',
+    title: 'Sororidad',
+    text: 'No competimos entre nosotras: fortalecemos el ecosistema. Nos apoyamos y crecemos en comunidad, en el taller y fuera de él.',
+  },
+] as const;
+
+const medios = [
+  'Radio Universidad de Chile',
+  'Las Últimas Noticias',
+  'TVN',
+  'Sercotec · Capital Abeja 2023',
+];
 ---
 
 <BaseLayout title="Quiénes somos" description={description}>
-  <header class="page-hero shell">
-    <p class="eyebrow">Quiénes somos</p>
-    <h1>Una historia de autonomía, ciencia y empoderamiento femenino.</h1>
-    <p class="lede">
-      Somos una escuela de cosmética natural que une ciencia, naturaleza y emprendimiento, creada
-      por mujeres para mujeres. Aprendes algo que puedes hacer con tus manos, entiendes por qué
-      funciona y sales con herramientas concretas para seguir creando.
+  <PageHero
+    eyebrow="Quiénes somos"
+    crumbs={[{ label: 'Inicio', href: '/' }, { label: 'Quiénes somos' }]}
+    image={cuatroMujeres}
+    imageAlt="Cuatro mujeres ríen juntas en el taller de Sororité, una sostiene el logo de la marca."
+  >
+    <h1 id="ph-titulo">
+      Una historia de <em class="hl-coral hl-brush">autonomía</em>, ciencia y empoderamiento
+      femenino.
+    </h1>
+    <Fragment slot="lede">
+      <p>
+        Somos una escuela de cosmética natural que une ciencia, naturaleza y emprendimiento, creada
+        por mujeres para mujeres.
+      </p>
+    </Fragment>
+    <Fragment slot="actions">
+      <Button href="/cursos">Ver cursos</Button>
+      <Button href="#historia" variant="text">
+        Conoce nuestra historia
+      </Button>
+    </Fragment>
+  </PageHero>
+
+  <StatStrip label="Sororité en cifras" items={[...stats]} />
+
+  <MediaSplit
+    id="historia"
+    eyebrow="Nuestra historia"
+    image={camila}
+    imageAlt="Camila Sánchez Fernández, fundadora de Sororité."
+    stamp="Ven, te enseño."
+  >
+    <h2 slot="title" id="historia-titulo">
+      Emprender no es un sueño para <em class="hl-hoja">unas pocas</em>.
+    </h2>
+    <p>
+      Camila Sánchez es enfermera universitaria, emprendedora y madre de una niña. A partir de su
+      experiencia creó Sororité, para que las mujeres recuperen su autonomía económica y transformen
+      lo que saben en un emprendimiento real.
     </p>
-  </header>
-
-  <section class="section" aria-labelledby="historia-titulo" data-reveal>
-    <div class="shell split">
-      <img
-        class="portrait"
-        src={portrait.src}
-        width={portrait.attributes.width}
-        height={portrait.attributes.height}
-        alt="Camila Sánchez Fernández, fundadora de Sororité"
-      />
-      <div class="prose">
-        <h2 id="historia-titulo">Nuestra historia</h2>
-        <p>
-          Camila Sánchez es enfermera universitaria, emprendedora y madre de una niña. A partir de
-          su experiencia personal y profesional creó Sororité, con el propósito de entregar a las
-          mujeres herramientas para recuperar su autonomía económica, desarrollar nuevas habilidades
-          y transformar sus conocimientos en oportunidades reales de emprendimiento.
-        </p>
-        <p>
-          Sororité nació de la venta de materias primas y del desarrollo de una academia de
-          formación en cosmética natural y elaboración de productos. Integra el conocimiento
-          científico, el uso responsable de ingredientes naturales y la formación técnica
-          profesional, con una mirada ecológica y un compromiso con el fortalecimiento de las
-          economías locales.
-        </p>
-        <p>
-          Detrás de este proyecto hay una motivación profundamente personal. Camila conoce los
-          desafíos de ser madre y emprendedora, y quiere que otras mujeres, especialmente las madres
-          solteras, accedan a herramientas que les permitan generar ingresos adicionales para sus
-          hogares y construir una mayor independencia económica.
-        </p>
-        <p>
-          El camino comenzó con Lahuen Productos Terapéuticos en 2015 y siguió con Sororité.cl en
-          2016. Desde 2018, Camila dicta capacitaciones presenciales y online en cosmética natural y
-          terapéutica; en 2021 sumó la formalización de emprendimientos (fichas técnicas, maquila y
-          resolución sanitaria) y en 2023, los emprendimientos con velas, aromatizadores y
-          aromaterapia.
-        </p>
-        <p>
-          Su propósito es demostrar que emprender no es un sueño reservado para unas pocas. Con
-          formación, acompañamiento y los conocimientos adecuados, es posible comenzar desde casa,
-          desarrollar habilidades profesionales y convertir una idea en un proyecto propio.
-        </p>
-        <p>
-          Hoy Sororité es un espacio de aprendizaje y emprendimiento que acerca estos conocimientos
-          a más mujeres, combinando ciencia, creatividad, sostenibilidad y desarrollo económico.
-        </p>
-      </div>
+    <p>
+      Conoce los desafíos de ser madre y emprendedora. Por eso quiere que otras mujeres, sobre todo
+      las madres solteras, tengan herramientas para generar ingresos y construir más independencia.
+    </p>
+    <div class="ms-actions">
+      <Button href="#trayectoria" variant="line">
+        Ver su trayectoria
+      </Button>
     </div>
-  </section>
+  </MediaSplit>
 
-  <section class="section band-cream" aria-labelledby="proposito-titulo">
+  <section class="section band-cream" id="trayectoria" aria-labelledby="trayectoria-titulo">
     <div class="shell">
-      <h2 id="proposito-titulo">Propósito</h2>
-      <div class="card-grid cols-3 stagger">
-        <article class="card" data-reveal>
-          <h3>Misión</h3>
-          <p>
-            Empoderar a mujeres con oficios creativos (cosmética natural, velas y aromatizadores)
-            para que creen, generen ingresos y construyan con más autonomía.
-          </p>
-        </article>
-        <article class="card" data-reveal>
-          <h3>Visión</h3>
-          <p>
-            Ser referente en formación creativa y cosmética natural en Latinoamérica, por combinar
-            técnica, cercanía y herramientas reales de emprendimiento.
-          </p>
-        </article>
-        <article class="card" data-reveal>
-          <h3>Nuestra promesa</h3>
-          <p>
-            Aprendes algo que puedes hacer con tus manos, entiendes por qué funciona y sales con
-            herramientas concretas para seguir creando.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="filosofia-titulo" data-reveal>
-    <div class="shell prose">
-      <h2 id="filosofia-titulo">Nuestra filosofía: «Eres tu mejor inversión»</h2>
-      <p>
-        Esta frase es el corazón del trabajo de Camila y de Sororité. Camila busca devolverles la
-        esperanza a las mujeres que sienten que ciertos sueños, oportunidades o proyectos están
-        fuera de su alcance. Está convencida de que muchas veces el primer paso es volver a mirarse
-        a una misma, reconocer las propias capacidades y atreverse a trazar un camino propio.
-      </p>
-      <p>
-        Las mujeres solemos dedicar gran parte de nuestra energía al cuidado de nuestras familias y
-        de las personas que amamos. En ese proceso, podemos postergar nuestros proyectos y perder de
-        vista nuestras aspiraciones personales.
-      </p>
-      <p>
-        Para Camila, invertir en una misma no es un acto de egoísmo, sino una forma de recuperar la
-        confianza, desarrollar nuevas capacidades y construir mejores oportunidades para el futuro.
-        Porque cuando una mujer vuelve a creer en sí misma, también puede transformar su entorno.
-      </p>
-    </div>
-  </section>
-
-  <section class="section band-cream" aria-labelledby="fundadora-titulo" data-reveal>
-    <div class="shell prose">
-      <SectionHeading eyebrow="La fundadora">
-        <h2 id="fundadora-titulo">Camila Sánchez Fernández</h2>
+      <SectionHeading
+        eyebrow="La fundadora"
+        lede="Enfermera universitaria, docente en cosmética natural y emprendimiento, fundadora de Sororité.cl."
+      >
+        <h2 id="trayectoria-titulo">
+          Camila Sánchez <em class="hl-durazno">Fernández</em>.
+        </h2>
       </SectionHeading>
-      <p class="lede">
-        Enfermera universitaria · Docente en cosmética natural y emprendimiento · Fundadora de
-        Sororité.cl
-      </p>
-      <p>
-        Camila es enfermera universitaria titulada con distinción de la Universidad Pedro de
-        Valdivia, emprendedora y madre de una niña. Tiene más de 10 años de experiencia en
-        formulación cosmética natural y más de 8 años como docente y capacitadora, en instituciones
-        formales (Instituto AIEP, Instituto IP Chile) y en sus propios programas.
-      </p>
-      <p>
-        Se ha seguido formando en cosmética natural y emulsiones, maquillaje con materias primas
-        naturales (Academia Boreal, 2018) y cosmética capilar avanzada (Cooltiva.cl, 2025). Cuenta
-        con un laboratorio propio de bajo riesgo cosmético con resolución sanitaria del ISP (N°
-        2931/22), donde también practican sus estudiantes.
-      </p>
-      <p>
-        Su trabajo ha aparecido en Radio Universidad de Chile, Las Últimas Noticias y TVN, y en 2023
-        ganó el Capital Abeja de Sercotec.
-      </p>
-      <h3>Formación y alcance</h3>
-      <p>
-        Durante 2026, Sororité alcanzó los 3.500 estudiantes. La academia ofrece formación online y
-        talleres presenciales en Providencia y Puente Alto, Santiago de Chile.
-      </p>
-      <blockquote class="quote">
-        <p>
-          «Invertir en ti no es egoísmo: es el primer paso para transformar tu vida y la de tu
-          familia.»
-        </p>
-        <footer>Camila Sánchez</footer>
-      </blockquote>
+      <FeatureGrid items={[...trayectoria]} cols={4} />
+      <div class="qs-camino">
+        <h3 class="qs-camino-titulo">El camino de Sororité</h3>
+        <Timeline items={[...hitos]} />
+      </div>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="metodo-titulo">
+  <section class="section" id="proposito" aria-labelledby="proposito-titulo">
     <div class="shell">
-      <SectionHeading lede="Ven, te enseño: así enseñamos, con oficio y cercanía.">
-        <h2 id="metodo-titulo">Metodología</h2>
+      <SectionHeading eyebrow="Propósito">
+        <h2 id="proposito-titulo">
+          Por qué existe <em class="hl-coral">Sororité</em>.
+        </h2>
       </SectionHeading>
-      <div class="card-grid cols-3 stagger">
-        <article class="card" data-reveal>
-          <h3>Ciencia</h3>
-          <p>
-            Formulación, conservación y pH explicados en lenguaje humano. Enseñamos con evidencia
-            científica y te explicamos el porqué de cada paso, para que fabriques con seguridad.
-          </p>
-        </article>
-        <article class="card" data-reveal>
-          <h3>Naturaleza</h3>
-          <p>
-            Estudiamos las materias primas y a los proveedores para que puedas elaborar productos
-            libres de ingredientes problemáticos o cuestionados para la salud, sobre todo la
-            hormonal. Promovemos la cosmética sólida, la reducción de residuos y la reutilización de
-            envases.
-          </p>
-        </article>
-        <article class="card" data-reveal>
-          <h3>Emprendimiento</h3>
-          <p>
-            Además de fabricar, aprendes a vender, a formalizar y a sacar la resolución sanitaria en
-            Chile. Terminas con productos propios y un camino claro para emprender.
-          </p>
-        </article>
-      </div>
-      <div class="prose stack-top">
-        <h3>Compromiso con la formación responsable</h3>
-        <p>
-          Promovemos la elaboración de productos cosméticos y aromáticos desde una perspectiva
-          técnica, científica y responsable: selección consciente de materias primas, uso adecuado
-          de los ingredientes y atención a la calidad y la seguridad de cada formulación.
-        </p>
-        <p>
-          Aprendes en el formato que te acomode: cursos online, talleres presenciales en Providencia
-          y Puente Alto, acompañamiento a tu propio proyecto y experiencias en comunidad.
-        </p>
+      <FeatureGrid items={[...proposito]} cols={3} />
+    </div>
+  </section>
+
+  <MediaSplit
+    id="filosofia"
+    eyebrow="Nuestra filosofía"
+    image={seisMujeres}
+    imageAlt="Seis mujeres del taller posan juntas con el logo de Sororité."
+    shape="paisaje"
+    flip
+    band="band-cream"
+  >
+    <h2 slot="title" id="filosofia-titulo">
+      Volver a mirarte a <em class="hl-durazno">ti misma</em>.
+    </h2>
+    <p>
+      «Eres tu mejor inversión» es el corazón de Sororité. Muchas veces el primer paso es reconocer
+      las propias capacidades y atreverse a trazar un camino propio.
+    </p>
+    <p>
+      Las mujeres solemos dedicar gran parte de nuestra energía a cuidar a otros, y en ese proceso
+      postergamos nuestros proyectos.
+    </p>
+    <p>
+      Invertir en una misma no es egoísmo: es recuperar la confianza y construir mejores
+      oportunidades. Cuando una mujer vuelve a creer en sí misma, también transforma su entorno.
+    </p>
+  </MediaSplit>
+
+  <QuoteBand
+    quote="Invertir en ti no es egoísmo: es el primer paso para transformar tu vida y la de tu familia."
+    author="Camila Sánchez"
+    cargo="Fundadora"
+    avatar={camila}
+  />
+
+  <section class="section band-cream" id="metodo" aria-labelledby="metodo-titulo">
+    <div class="shell">
+      <SectionHeading
+        eyebrow="Metodología"
+        lede="Con oficio y cercanía. Gira cada tarjeta para ver cómo lo hacemos."
+      >
+        <h2 id="metodo-titulo">
+          Así <em class="hl-hoja">enseñamos</em>.
+        </h2>
+      </SectionHeading>
+      <FlipCards name="metodo" items={metodo} openLabel="Ver cómo" closeLabel="Volver" />
+    </div>
+  </section>
+
+  <MediaSplit id="laboratorio" eyebrow="Formación responsable" shape="paisaje" flip>
+    <ImageSlot slot="media" label="Laboratorio con resolución sanitaria (4:3)" ratio="4-3" />
+    <h2 slot="title" id="laboratorio-titulo">
+      Un laboratorio <em class="hl-calipso">propio</em>.
+    </h2>
+    <p>
+      Camila cuenta con un laboratorio de bajo riesgo cosmético con resolución sanitaria del ISP (N°
+      2931/22), donde también practican sus estudiantes.
+    </p>
+    <p>
+      Elegimos las materias primas con conciencia, usamos bien cada ingrediente y cuidamos la
+      calidad y la seguridad de cada formulación.
+    </p>
+    <ul class="qs-formatos" aria-label="Formatos">
+      <li>
+        <span set:html={icon('leaf', 16)} />
+        Cursos online
+      </li>
+      <li>
+        <span set:html={icon('pin', 16)} />
+        Talleres en Providencia y Puente Alto
+      </li>
+      <li>
+        <span set:html={icon('growth', 16)} />
+        Acompañamiento a tu proyecto
+      </li>
+      <li>
+        <span set:html={icon('people', 16)} />
+        Experiencias en comunidad
+      </li>
+    </ul>
+  </MediaSplit>
+
+  <section class="section band-cream" id="valores" aria-labelledby="valores-titulo">
+    <div class="shell">
+      <SectionHeading eyebrow="Valores">
+        <h2 id="valores-titulo">
+          Lo que <em class="hl-calipso">no transamos</em>.
+        </h2>
+      </SectionHeading>
+      <div class="qs-valores">
+        <figure class="qs-valores-foto">
+          <img
+            src={sororidad.src}
+            srcset={sororidad.srcSet.attribute}
+            sizes="(min-width: 960px) 34vw, 92vw"
+            width={sororidad.attributes.width}
+            height={sororidad.attributes.height}
+            alt="Equipo de Sororité frente al mural floral del taller."
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>En comunidad, en el taller y fuera de él.</figcaption>
+        </figure>
+        <FeatureGrid items={[...valores]} cols={2} />
       </div>
     </div>
   </section>
 
-  <section class="section band-cream" aria-labelledby="valores-titulo">
-    <div class="shell">
-      <h2 id="valores-titulo">Valores</h2>
-      <div class="card-grid cols-2 stagger">
-        <article class="card" data-reveal>
-          <h3>Libre de tóxicos</h3>
-          <p>
-            Enseñamos a elegir ingredientes libres de tóxicos, disruptores hormonales y derivados
-            del petróleo, con información técnica clara para decidir bien.
-          </p>
-        </article>
-        <article class="card" data-reveal>
-          <h3>IFRA / ECOCERT</h3>
-          <p>
-            La información sobre normas IFRA y criterios o certificaciones ECOCERT se comunica de
-            acuerdo con la documentación y el alcance correspondiente a cada materia prima o
-            producto.
-          </p>
-        </article>
-        <article class="card" data-reveal>
-          <h3>Proveedores locales</h3>
-          <p>
-            Valoramos las extracciones artesanales y los proveedores locales, con foco en calidad,
-            trazabilidad y procedencia.
-          </p>
-        </article>
-        <article class="card" data-reveal>
-          <h3>Sororidad</h3>
-          <p>
-            No competimos entre nosotras: fortalecemos el ecosistema. Nos apoyamos, colaboramos y
-            crecemos en comunidad, en el taller y fuera de él.
-          </p>
-        </article>
-      </div>
-    </div>
+  <section class="qs-medios shell" aria-labelledby="medios-titulo">
+    <p class="qs-medios-titulo" id="medios-titulo">
+      <span set:html={icon('mic', 18)} />
+      Han hablado de nuestro trabajo
+    </p>
+    <ul class="qs-medios-lista">
+      {medios.map((m) => (
+        <li>{m}</li>
+      ))}
+    </ul>
   </section>
 
-  <section class="section" aria-labelledby="cierre-quienes" data-reveal>
-    <div class="shell">
-      <h2 id="cierre-quienes">Eres tu mejor inversión.</h2>
-      <p class="lede">
-        Elige tu curso y empieza a crear: cosmética natural, velas, jabones, ventas y resolución
-        sanitaria.
-      </p>
-      <div class="cta-stack">
-        <Button href="/cursos">Ver cursos</Button>
-        <Button href="/contacto" variant="text">
-          Quiero acompañamiento para mi proyecto
-        </Button>
-      </div>
-    </div>
-  </section>
+  <CtaCierre />
 </BaseLayout>

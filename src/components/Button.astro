@@ -7,9 +7,10 @@ interface Props {
   variant?: 'primary' | 'ink' | 'text' | 'line';
   type?: 'button' | 'submit';
   class?: string;
+  rel?: string;
 }
 
-const { href, utm, variant = 'primary', type = 'button', class: className } = Astro.props;
+const { href, utm, variant = 'primary', type = 'button', class: className, rel } = Astro.props;
 const destination = href && utm ? withUtm(href, utm) : href;
 const classes = ['btn', `btn-${variant}`, className];
 const external = Boolean(destination?.startsWith('http'));
@@ -19,7 +20,7 @@ const external = Boolean(destination?.startsWith('http'));
   <a
     class:list={classes}
     href={destination}
-    rel={external ? 'noopener noreferrer' : undefined}
+    rel={external ? (rel ?? 'noopener noreferrer') : rel}
     target={external ? '_blank' : undefined}
   >
     <slot />

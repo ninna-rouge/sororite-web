@@ -1,0 +1,29 @@
+---
+import { type Tone } from '../../data/icons';
+import '../../styles/kit/tonos.css';
+import '../../styles/kit/timeline.css';
+
+interface Hito {
+  year: string;
+  title: string;
+  text: string;
+  tone: Tone;
+}
+
+interface Props {
+  items: Hito[];
+}
+
+const { items } = Astro.props;
+---
+
+<ol class="tl stagger">
+  {items.map((h) => (
+    <li class={`tl-item tono-${h.tone}`} data-reveal>
+      <span class="tl-punto" aria-hidden="true" />
+      <p class="tl-year">{h.year}</p>
+      <h3 class="tl-title">{h.title}</h3>
+      <p class="tl-text">{h.text}</p>
+    </li>
+  ))}
+</ol>

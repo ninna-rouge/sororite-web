@@ -1,0 +1,128 @@
+---
+import { icon } from '../data/icons';
+
+const notes = [
+  {
+    icon: 'flask',
+    tone: 'coral',
+    kicker: 'ISP N° 2931/22',
+    title: 'Laboratorio con resolución sanitaria',
+    text: 'Laboratorio de bajo riesgo cosmético autorizado por el ISP, donde también practican nuestras estudiantes.',
+  },
+  {
+    icon: 'steth',
+    tone: 'hoja',
+    kicker: 'Desde 2018',
+    title: 'Una enfermera universitaria te enseña',
+    text: 'Camila Sánchez explica el porqué de cada paso: pH, conservación y estabilidad, en lenguaje simple.',
+  },
+  {
+    icon: 'leaf',
+    tone: 'durazno',
+    kicker: 'Materias primas',
+    title: 'Ingredientes libres de tóxicos',
+    text: 'Aprendes a elegir materias primas libres de tóxicos y disruptores hormonales, con información técnica clara.',
+  },
+] as const;
+---
+
+<div class="tb">
+  <div class="tb-side">
+    <ul class="tb-notes stagger">
+      {notes.map((note) => (
+        <li class={`tb-note tone-${note.tone}`} data-reveal>
+          <span class="tb-ico" set:html={icon(note.icon, 18)} />
+          <div>
+            <p class="tb-kicker">{note.kicker}</p>
+            <h3>{note.title}</h3>
+            <p class="tb-text">{note.text}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="tb-media">
+    <article class="tb-film" data-reveal data-tb-film>
+      <video
+        class="tb-video"
+        muted
+        loop
+        playsinline
+        preload="none"
+        poster="/respaldo/taller-poster.jpg"
+        width="1280"
+        height="534"
+        aria-hidden="true"
+      >
+        <source src="/respaldo/taller.mp4" type="video/mp4" />
+      </video>
+      <div class="tb-stat">
+        <p class="tb-kicker">Online y presencial</p>
+        <h3>
+          <span class="tb-figure">3.500</span>
+          <span class="tb-line">estudiantes durante 2026</span>
+        </h3>
+      </div>
+      <button
+        class="tb-toggle"
+        type="button"
+        aria-pressed="false"
+        aria-label="Pausar el video"
+        data-tb-toggle
+      >
+        <span class="tb-toggle-icon" aria-hidden="true"></span>
+      </button>
+    </article>
+  </div>
+</div>
+
+<script>
+  function initFilm(card: HTMLElement) {
+    const video = card.querySelector('video');
+    const toggle = card.querySelector<HTMLButtonElement>('[data-tb-toggle]');
+    if (!video || !toggle || card.dataset.tbBound) return;
+    card.dataset.tbBound = 'true';
+    video.muted = true;
+
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let wanted = !reduce;
+    let visible = false;
+
+    const sync = () => {
+      card.classList.toggle('is-paused', !wanted);
+      toggle.setAttribute('aria-pressed', String(!wanted));
+      toggle.setAttribute('aria-label', wanted ? 'Pausar el video' : 'Reproducir el video');
+      if (wanted && visible) {
+        void video.play().catch(() => {
+          wanted = false;
+          card.classList.add('is-paused');
+          toggle.setAttribute('aria-pressed', 'true');
+          toggle.setAttribute('aria-label', 'Reproducir el video');
+        });
+      } else video.pause();
+    };
+
+    toggle.addEventListener('click', () => {
+      wanted = !wanted;
+      sync();
+    });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(
+        (entries) => {
+          visible = entries.some((entry) => entry.isIntersecting);
+          sync();
+        },
+        { threshold: 0.25 },
+      ).observe(card);
+    } else if (!reduce) {
+      visible = true;
+    }
+    sync();
+  }
+
+  const bootFilm = () => document.querySelectorAll<HTMLElement>('[data-tb-film]').forEach(initFilm);
+  bootFilm();
+  document.addEventListener('astro:page-load', bootFilm);
+</script>

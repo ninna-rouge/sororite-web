@@ -4,24 +4,30 @@ Referencia: hero v8, aprobado por el equipo de diseño (octubre 2026). El archiv
 
 ## Concepto
 
-Pastelería botánica. Un campo de color blush, un bodegón de productos entre flores y una voz cercana que habla de ciencia sin ponerse dura. El sitio se siente amplio: mucho aire, pocos bordes, una sola acción rosa por zona. La fotografía hace el trabajo decorativo. No se le suman texturas, ilustraciones nuevas ni una segunda paleta.
+Pastelería botánica. Un campo de color blush, un bodegón de productos entre flores y una voz cercana que habla de ciencia sin ponerse dura. El sitio se siente amplio: mucho aire, pocos bordes, una sola acción rosa por zona. La fotografía hace el trabajo decorativo. El fondo de página sigue siendo blush y crema. Coral, hoja, durazno y calipso solo colorean una palabra del titular o un ícono, no una segunda paleta de página.
 
 La frase de marca es «Eres tu mejor inversión». Se escribe en Nunito, no en la script: Always Classy no tiene tildes.
 
 ## Paleta
 
-| Nombre        | Token         | Hex       | Sobre qué va                         | Contraste                               |
-| ------------- | ------------- | --------- | ------------------------------------ | --------------------------------------- |
-| Blush         | `--blush`     | `#F4BEBC` | Fondo de la página                   | —                                       |
-| Crema         | `--cream`     | `#FFF8F2` | Tarjetas, pastilla, aviso de cookies | —                                       |
-| Tinta         | `--ink`       | `#303236` | Texto, pie, botón Ingresar           | 7.91:1 sobre blush, 12.21:1 sobre crema |
-| Tinta suave   | `--ink-soft`  | `#3E4044` | Bajadas y microcopy                  | 6.40:1 sobre blush, 9.87:1 sobre crema  |
-| Rosa          | `--rose`      | `#E06A78` | Botón principal                      | Blanco encima: 3.23:1                   |
-| Rosa profundo | `--rose-deep` | `#B5606C` | Círculo del ícono de reproducción    | Blanco encima: 4.33:1                   |
-| Rosa tinta    | `--rose-ink`  | `#7E434B` | Rótulos pequeños y notas TODO        | 7.15:1 sobre crema, 4.63:1 sobre blush  |
-| Hoja          | `--leaf`      | `#536E58` | Firma en script                      | 5.34:1 sobre crema, 3.46:1 sobre blush  |
+| Nombre        | Token            | Hex       | Sobre qué va                         | Contraste                               |
+| ------------- | ---------------- | --------- | ------------------------------------ | --------------------------------------- |
+| Blush         | `--blush`        | `#F4BEBC` | Fondo de la página                   | —                                       |
+| Crema         | `--cream`        | `#FFF8F2` | Tarjetas, pastilla, aviso de cookies | —                                       |
+| Tinta         | `--ink`          | `#303236` | Texto, pie, botón Ingresar           | 7.91:1 sobre blush, 12.21:1 sobre crema |
+| Tinta suave   | `--ink-soft`     | `#3E4044` | Bajadas y microcopy                  | 6.40:1 sobre blush, 9.87:1 sobre crema  |
+| Rosa          | `--rose`         | `#E06A78` | Botón principal                      | Blanco encima: 3.23:1                   |
+| Rosa profundo | `--rose-deep`    | `#B5606C` | Círculo del ícono de reproducción    | Blanco encima: 4.33:1                   |
+| Rosa tinta    | `--rose-ink`     | `#7E434B` | Rótulos pequeños                     | 7.15:1 sobre crema, 4.63:1 sobre blush  |
+| Hoja          | `--leaf`         | `#536E58` | Firma en script                      | 5.34:1 sobre crema, 3.46:1 sobre blush  |
+| Coral         | `--tone-coral`   | `#B84C59` | Palabra destacada e ícono            | 3.07:1 sobre blush, 4.73:1 sobre crema  |
+| Hoja viva     | `--tone-hoja`    | `#487B45` | Palabra destacada e ícono            | 3.08:1 sobre blush, 4.76:1 sobre crema  |
+| Durazno       | `--tone-durazno` | `#A85935` | Palabra destacada e ícono            | 3.12:1 sobre blush, 4.82:1 sobre crema  |
+| Calipso       | `--tone-calipso` | `#237B7E` | Palabra destacada e ícono            | 3.08:1 sobre blush, 4.75:1 sobre crema  |
 
-El blanco sobre `#E06A78` solo cumple AA como texto grande: 19px y peso 800, que es el botón `.btn-primary`. No se usa ese rosa para texto de cuerpo, enlaces ni rótulos chicos. Para eso está `--rose-ink`.
+El blanco sobre `#E06A78` solo cumple AA como texto grande: 19px y peso 800, que es el botón `.btn-primary`, también dentro de una ficha o del banner. No se achica ese botón para que quepa: el rosa no cumple con un cuerpo de 16px. No se usa ese rosa para texto de cuerpo, enlaces ni rótulos chicos. Para eso está `--rose-ink`.
+
+El hover de «Ingresar» usa `#9A4552` con texto blanco, porque `#B5606C` se queda en 4.33:1 y el rótulo es pequeño.
 
 `--leaf` no se usa como texto sobre blush salvo en un titular grande. La firma «Ven, te enseño.» va dentro de la pastilla crema.
 
@@ -55,7 +61,7 @@ Escala de la portada, tomada del mockup en 1440px: titular 40px, script 74px, ba
 - Móvil: `podios.jpg`, altura 300px, máscara que se desvanece arriba y abajo, anclada hacia la derecha (`68% 70%`).
 - Retrato de Camila: `camila.jpg`. En la pastilla es un círculo de 48px con `object-position: center 14%`. En Quiénes somos es un retrato 4:5.
 - Hoja lineal: `public/brand/rama.svg`, decorativa, girada −14°, solo en escritorio.
-- No se publican fotos de alumnas, de talleres ni de stock mientras no haya autorización. El hueco se marca con TODO.
+- No se publican fotos de alumnas, de talleres ni de stock mientras no haya autorización. El pendiente se anota en `docs/plan-de-validacion.md`.
 - Open Graph: `public/og/hero.jpg`, derivado del bodegón.
 
 ## Componentes
@@ -65,16 +71,18 @@ Misma pieza en todas las páginas. No se recrean en la hoja de cada vista.
 - `Button`: `primary` (rosa), `ink` (Ingresar), `line` (secundario con borde), `text` (subrayado). Acepta `utm` y arma `utm_content` sin perder el ancla.
 - `SectionHeading`: ceja, título en el slot y bajada.
 - `Separator`: filete horizontal.
-- `Todo`: nota con la palabra TODO. Es el único modo de marcar un dato que falta.
 - `Reveal`: envuelve una tarjeta para el revelado al scroll.
 - `CatalogGrid`: las seis tarjetas del catálogo real.
+- Kit de páginas (`PageHero`, `FeatureGrid`, `MediaSplit`, `Timeline`, `QuoteBand`, `StatStrip`, `FlipCards`, `ImageSlot`) y `CtaCierre` para el cierre del pack.
+- Íconos: un solo set en `src/data/icons.ts`, 24×24, trazo 1.5.
+- La galería está en la navegación de escritorio y en la móvil.
 
 ## Movimiento
 
 Un solo lenguaje, corto y fácil de apagar.
 
-- **Intro.** El logo aparece en 0.8 segundos (opacidad y 6px). No hay velo a pantalla completa. La foto del hero no se anima, para no retrasar el LCP. En la navegación siguiente del cliente no se repite (`intro-done`).
-- **Scroll.** `[data-reveal]` entra 16px más abajo, en 0.7s, sin bajar la opacidad: un fundido dejaría el texto bajo el contraste mínimo a mitad de camino. `IntersectionObserver` añade `.is-in`. En una grilla, el segundo, tercero y cuarto elemento esperan 80ms más cada uno. Sin JavaScript el bloque se ve igual (`@media (scripting: none)`).
+- **Intro.** El logo de la cabecera se desplaza 6px en 0.8 segundos, sin fundido y sin velo. No tapa la página ni espera a las fuentes. La foto del hero no se anima: el primer pantallazo es el póster, y el video entra después de la carga, encima del mismo encuadre. Con movimiento reducido el video no se pide. En la navegación siguiente del cliente el logo no se repite (`intro-done`).
+- **Scroll.** `[data-reveal]` entra 16px más abajo, en 0.7s, sin bajar la opacidad. El texto se lee desde el primer momento. `IntersectionObserver` añade `.is-in`. Sin JavaScript el bloque se ve igual (`@media (scripting: none)`).
 - **Páginas.** `<ClientRouter />` funde la vista: 180ms la que sale, 280ms la que entra, en la hoja global. No se nombra la transición de un elemento, porque Astro inyectaría un `<style>` y la CSP no permite estilo en línea. El aviso de cookies persiste entre páginas.
 - **Hover.** El botón rosa sube 2px. Las tarjetas de una grilla, 3px. Nada más.
 
@@ -84,7 +92,7 @@ Un solo lenguaje, corto y fácil de apagar.
 
 - Usar los tokens. Si hace falta un color nuevo, se agrega aquí y en `/estilo` antes de usarlo en una página.
 - Dejar una sola acción rosa por bloque. Lo demás es tinta, subrayado o borde.
-- Marcar con TODO precios, URLs, fechas, nombres y fotos que no estén confirmados.
+- Si falta un precio, una URL, una fecha, un nombre o una foto, se anota en `docs/plan-de-validacion.md`. No se publica en el sitio.
 - Poner `utm_content` en cada llamado a la acción, con el id del copy.
 - Medir el contraste si el texto cambia de tamaño o de fondo. El rosa del botón no perdona un cuerpo de 16px.
 - Optimizar fotos con `astro:assets`, con ancho y alto explícitos.

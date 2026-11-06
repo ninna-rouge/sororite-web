@@ -1,6 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-import logo from '../assets/brand/logo-oficial.png';
 import { headerNav, ingresar, isCurrent, mobileNav } from '../data/site';
 
 const pathname = Astro.url.pathname;
@@ -9,14 +7,7 @@ const pathname = Astro.url.pathname;
 <header class="site-header">
   <div class="header-bar">
     <a class="brand" href="/">
-      <Image
-        src={logo}
-        alt="Sororité, inicio"
-        width={128}
-        height={91}
-        densities={[1, 2]}
-        loading="eager"
-      />
+      <img src="/brand/logo-nav.png" alt="Sororité, inicio" width="542" height="374" />
     </a>
     <nav class="site-nav" aria-label="Principal">
       <ul class="nav-desktop">
@@ -36,7 +27,13 @@ const pathname = Astro.url.pathname;
         {ingresar.label}
       </a>
       <details class="nav-mobile">
-        <summary role="button">Menú</summary>
+        <summary role="button">
+          <span class="burger" aria-hidden="true">
+            <i></i>
+            <i></i>
+          </span>
+          Menú
+        </summary>
         <ul>
           {mobileNav.map((item) => (
             <li>

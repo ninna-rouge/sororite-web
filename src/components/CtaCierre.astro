@@ -1,0 +1,194 @@
+---
+import { getImage } from 'astro:assets';
+import trioTaller from '../assets/fotos-productos-comunidad-reales/14-trio-pecheras-circulo-mural.jpg';
+import decoCierre from '/src/assets/deco/decoracion-cierre.svg?raw';
+import Button from './Button.astro';
+
+const trioPhoto = await getImage({
+  src: trioTaller,
+  width: 960,
+  format: 'webp',
+  quality: 72,
+});
+---
+
+<section class="section band-cream cierre" id="cierre" aria-labelledby="cierre-titulo" data-reveal>
+  <div class="cierre-arte" aria-hidden="true" data-deco-cierre>
+    <Fragment set:html={decoCierre} />
+  </div>
+  <div class="shell cierre-marco">
+    <div class="cierre-flora" aria-hidden="true">
+      <img
+        class="cf cf-ramo"
+        src="/brand/botanica/cierre/ramo-cosmos.svg"
+        alt=""
+        width="415"
+        height="543"
+      />
+      <img
+        class="cf cf-ginkgo"
+        src="/brand/botanica/cierre/flor-ginkgo.svg"
+        alt=""
+        width="127"
+        height="198"
+      />
+      <img
+        class="cf cf-cosmos"
+        src="/brand/botanica/cierre/flor-cosmos.svg"
+        alt=""
+        width="234"
+        height="418"
+      />
+      <img
+        class="cf cf-lineal"
+        src="/brand/botanica/cierre/rama-lineal.svg"
+        alt=""
+        width="180"
+        height="345"
+      />
+      <img
+        class="cf cf-abanico"
+        src="/brand/botanica/cierre/rama-abanico.svg"
+        alt=""
+        width="142"
+        height="208"
+      />
+      <img
+        class="cf cf-tulipan"
+        src="/brand/botanica/cierre/tulipan.svg"
+        alt=""
+        width="181"
+        height="259"
+      />
+      <img
+        class="cf cf-cosmos-b"
+        src="/brand/botanica/cierre/flor-cosmos.svg"
+        alt=""
+        width="234"
+        height="418"
+      />
+      <img
+        class="cf cf-baya"
+        src="/brand/botanica/cierre/rama-baya.svg"
+        alt=""
+        width="89"
+        height="173"
+      />
+      <img
+        class="cf cf-hoja-a"
+        src="/brand/botanica/cierre/hoja-nervada-1.svg"
+        alt=""
+        width="66"
+        height="40"
+      />
+      <img
+        class="cf cf-hoja-b"
+        src="/brand/botanica/cierre/hoja-nervada-2.svg"
+        alt=""
+        width="51"
+        height="78"
+      />
+      <img
+        class="cf cf-hoja-c"
+        src="/brand/botanica/cierre/hoja-nervada-4.svg"
+        alt=""
+        width="33"
+        height="60"
+      />
+    </div>
+    <div class="cierre-cuerpo">
+      <div class="cierre-panel">
+        <figure class="cierre-portrait">
+          <img
+            src={trioPhoto.src}
+            width={trioPhoto.attributes.width}
+            height={trioPhoto.attributes.height}
+            alt="Tres mujeres del taller sostienen el logo de Sororité frente al mural."
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+        <div class="cierre-lado">
+          <article class="cierre-offer">
+            <div class="cierre-offer-grid">
+              <div class="cierre-copy">
+                <p class="course-meta">
+                  <span class="course-index">01</span>
+                </p>
+                <h2 id="cierre-titulo">
+                  Eres tu <em class="hl-calipso hl-brush">mejor inversión</em>.
+                </h2>
+                <p class="lede">
+                  Empieza hoy, a tu ritmo y desde casa, con fórmulas probadas y ciencia explicada
+                  simple.
+                </p>
+              </div>
+              <div class="cierre-specs">
+                <p class="course-kicker">Pack completo</p>
+                <ul class="cierre-facts">
+                  <li>
+                    <span>06</span> cursos completos
+                  </li>
+                  <li>
+                    <span>$35.000</span> pago único
+                  </li>
+                  <li>
+                    <span>7 días</span> de garantía
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="cta-stack">
+              <Button href="/#oferta" utm="final_pack">
+                Quiero los 6 cursos por $35.000
+              </Button>
+              <Button href="/#cursos-lista" utm="final_cursos" variant="text">
+                Ver cursos por separado
+              </Button>
+            </div>
+          </article>
+          <article class="cierre-lead" id="lead">
+            <div class="cierre-lead-copy">
+              <p class="course-meta">
+                <span class="course-index">02</span>
+                <span class="course-kicker">Antes de decidir</span>
+              </p>
+              <h2>
+                Si quieres, <em class="hl-hoja">conversemos</em>.
+              </h2>
+              <p>
+                Esta página no pide ni guarda tu nombre o tu correo. Si todavía no te decides por el
+                pack, escribe por los canales de contacto.
+              </p>
+            </div>
+            <div class="cta-stack">
+              <Button href="/contacto" utm="cierre_contacto" variant="line">
+                Ir a contacto
+              </Button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initDecoCierre() {
+    const arte = document.querySelector<HTMLElement>('[data-deco-cierre]');
+    if (!arte || !('IntersectionObserver' in window)) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    arte.classList.add('dc-espera');
+    new IntersectionObserver(
+      (entradas) => {
+        for (const e of entradas) {
+          if (e.isIntersecting) arte.classList.add('dc-vivo');
+          arte.classList.toggle('dc-pausa', !e.isIntersecting);
+        }
+      },
+      { threshold: 0.15 },
+    ).observe(arte);
+  }
+
+  document.addEventListener('astro:page-load', initDecoCierre);
+</script>

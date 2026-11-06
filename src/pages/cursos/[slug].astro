@@ -5,6 +5,7 @@ import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import { modalityLabel } from '../../lib/courses';
 import { site, whatsappHref } from '../../data/site';
+import Button from '../../components/Button.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 interface Props {
@@ -78,17 +79,13 @@ if (!data.example) {
           <Content />
         </div>
         <div class="cta-stack">
-          <a
-            class="btn btn-primary"
-            href={data.hotmartCheckoutUrl}
-            rel="nofollow noopener noreferrer"
-          >
+          <Button href={data.hotmartCheckoutUrl} rel="nofollow noopener noreferrer">
             Ir al pago en Hotmart
             <span class="visually-hidden"> (sitio externo)</span>
-          </a>
-          <a class="btn btn-line" href={whatsappHref}>
+          </Button>
+          <Button href={whatsappHref} variant="line">
             Preguntar por WhatsApp
-          </a>
+          </Button>
         </div>
       </div>
       <img src={data.image} width="640" height="480" alt="" />

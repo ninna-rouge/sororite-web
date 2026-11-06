@@ -4,16 +4,21 @@ export const prerender = true;
 import Button from '../components/Button.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import Separator from '../components/Separator.astro';
-import Todo from '../components/Todo.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const swatches = [
-  { name: 'Blush', token: '--blush', hex: '#F4BEBC', use: 'Fondo de página', chip: 'swatch-blush' },
+  {
+    name: 'Blush',
+    token: '--blush',
+    hex: '#F4BEBC',
+    use: 'Láminas y pastillas',
+    chip: 'swatch-blush',
+  },
   {
     name: 'Crema',
     token: '--cream',
     hex: '#FFF8F2',
-    use: 'Tarjetas y pastillas',
+    use: 'Hoja del sitio',
     chip: 'swatch-cream',
   },
   {
@@ -132,7 +137,6 @@ const swatches = [
         <h3>Tarjeta</h3>
         <p>Fondo crema, radio amplio y sombra corta. El revelado al scroll usa esta misma pieza.</p>
       </div>
-      <Todo>Así se marca un dato que todavía no existe. No se inventa.</Todo>
     </div>
   </section>
 </BaseLayout>

@@ -83,5 +83,5 @@ El detalle de cómo se enchufan esas versiones está en `docs/arquitectura.md`.
 ## Fuera de alcance ahora
 
 - Conectar o desplegar una cuenta real de hosting, analytics, Hotmart o Supabase
-- Dar por cerrado el copy, la galería fotográfica o los textos legales
+- Dar por cerrado el copy, la galería fotográfica o los textos legales. Lo que falta validar está en `docs/plan-de-validacion.md`
 - Migrar el aula de Edwiser / WordPress

@@ -1,5 +1,5 @@
 /**
  * La galería pública no usa estas entradas.
- * No hay fotos de alumnas con autorización: la página muestra un TODO y no marcadores.
+ * Las fotos sin autorización no se publican. El pendiente está en docs/plan-de-validacion.md.
  */
 export const galleryItems = [] as const;

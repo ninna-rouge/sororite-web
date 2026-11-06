@@ -1,9 +1,9 @@
 ---
 export const prerender = true;
 
+import Button from '../components/Button.astro';
 import { contact } from '../data/copy';
 import { site, whatsappHref } from '../data/site';
-import Todo from '../components/Todo.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const description = `Escríbele a Sororité por WhatsApp al ${site.phoneDisplay} o al correo ${site.email}.`;
@@ -17,31 +17,29 @@ const description = `Escríbele a Sororité por WhatsApp al ${site.phoneDisplay}
   </header>
   <section class="section" aria-label="Canales de contacto">
     <div class="shell split">
-      <ul class="contact-list">
-        <li>
-          <a href={whatsappHref}>
-            {contact.whatsappLabel}: {site.phoneDisplay}
-          </a>
-        </li>
-        <li>
-          <a href={`mailto:${site.email}`}>
-            {contact.emailLabel}: {site.email}
-          </a>
-        </li>
-        <li>{site.legalName}</li>
-        <li>RUT {site.companyTaxId}</li>
-        <li>Giro: {site.businessActivity}</li>
-        <li>Representante: {site.representative}</li>
-        <li>{site.location}</li>
-      </ul>
+      <article class="card">
+        <h2>Canales</h2>
+        <p>Te respondemos por el mismo medio. Este sitio no guarda el mensaje.</p>
+        <div class="cta-stack">
+          <Button href={whatsappHref}>{contact.whatsappLabel}</Button>
+          <Button href={`mailto:${site.email}`} variant="line">
+            {contact.emailLabel}
+          </Button>
+        </div>
+      </article>
       <article class="card" id="talleres">
         <h2>Talleres presenciales</h2>
         <p>
           Hay talleres en Providencia y Puente Alto, Santiago. El mensaje se abre en WhatsApp o en
           tu correo: este sitio no lo guarda.
         </p>
-        <Todo>Enlace al calendario de fechas de los talleres.</Todo>
+        <Button href={whatsappHref} variant="text" utm="contacto_talleres">
+          Preguntar por las próximas fechas
+        </Button>
       </article>
     </div>
+    <p class="micro shell">
+      {site.legalName} · RUT {site.companyTaxId} · Giro: {site.businessActivity} · {site.location}
+    </p>
   </section>
 </BaseLayout>
