@@ -7,6 +7,7 @@ import Reveal from './Reveal.astro';
 
 interface Props {
   checkoutHref?: string;
+  heading?: 'h2' | 'h3';
 }
 
 interface Film {
@@ -22,7 +23,8 @@ interface CourseMeta {
   film?: Film;
 }
 
-const { checkoutHref = whatsappHref } = Astro.props;
+const { checkoutHref = whatsappHref, heading = 'h3' } = Astro.props;
+const Title = heading;
 
 /* Para sumar el video de otro curso, agrega `film` en su entrada. */
 const meta: Record<string, CourseMeta> = {
@@ -163,7 +165,7 @@ function cleanTopic(text: string) {
                 <span class="course-index">{String(i + 1).padStart(2, '0')}</span>
                 <span class="course-kicker">{info.kicker}</span>
               </p>
-              <h3>{course.name}</h3>
+              <Title>{course.name}</Title>
               <p class="course-lede">{course.lede}</p>
               <p class="course-who">Para quién: {course.audience}</p>
               <button class="course-open" type="button" data-course-open aria-expanded="false">
@@ -184,7 +186,7 @@ function cleanTopic(text: string) {
                 <span class="course-kicker">Temario</span>
                 <span class="course-count">{String(topics.length).padStart(2, '0')} temas</span>
               </p>
-              <h3>{course.name}</h3>
+              <Title>{course.name}</Title>
             </div>
             <ul class="course-syllabus">
               {topics.map((item) => (
