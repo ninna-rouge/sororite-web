@@ -81,7 +81,7 @@ Misma pieza en todas las páginas. No se recrean en la hoja de cada vista.
 
 Un solo lenguaje, corto y fácil de apagar.
 
-- **Intro.** El logo de la cabecera se desplaza 6px en 0.8 segundos, sin fundido y sin velo. No tapa la página ni espera a las fuentes. La foto del hero no se anima. En la navegación siguiente del cliente no se repite (`intro-done`).
+- **Intro.** El logo de la cabecera se desplaza 6px en 0.8 segundos, sin fundido y sin velo. No tapa la página ni espera a las fuentes. La foto del hero no se anima: el primer pantallazo es el póster, y el video entra después de la carga, encima del mismo encuadre. Con movimiento reducido el video no se pide. En la navegación siguiente del cliente el logo no se repite (`intro-done`).
 - **Scroll.** `[data-reveal]` entra 16px más abajo, en 0.7s, sin bajar la opacidad. El texto se lee desde el primer momento. `IntersectionObserver` añade `.is-in`. Sin JavaScript el bloque se ve igual (`@media (scripting: none)`).
 - **Páginas.** `<ClientRouter />` funde la vista: 180ms la que sale, 280ms la que entra, en la hoja global. No se nombra la transición de un elemento, porque Astro inyectaría un `<style>` y la CSP no permite estilo en línea. El aviso de cookies persiste entre páginas.
 - **Hover.** El botón rosa sube 2px. Las tarjetas de una grilla, 3px. Nada más.
