@@ -201,7 +201,7 @@ const first = slides[0];
       </div>
 
       <div class="reel-stage" data-reveal>
-        <ul class="reel-track" data-reel-track tabindex="0" aria-label="Diapositivas">
+        <ul class="reel-track" data-reel-track aria-label="Diapositivas">
           {slides.map((slide, i) => {
             const photo = media[i];
             return (
@@ -214,6 +214,9 @@ const first = slides[0];
                 data-script={slide.script}
                 data-text={slide.text}
               >
+                <button type="button" class="reel-hit">
+                  <span class="visually-hidden">Mostrar {slide.title}</span>
+                </button>
                 <figure class="reel-frame">
                   {photo ? (
                     <img
