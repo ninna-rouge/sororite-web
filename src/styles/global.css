@@ -440,30 +440,6 @@ p {
   font-weight: 800;
 }
 
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 3.25rem;
-  padding: 1.05rem 2rem;
-  border: 0;
-  border-radius: var(--radius-pill);
-  background: var(--rose);
-  color: #fff;
-  font: 800 1.1875rem/1.2 var(--font-body);
-  text-decoration: none;
-  box-shadow: var(--shadow-rose);
-  cursor: pointer;
-}
-
-.button.secondary {
-  border: 1.5px solid var(--ink);
-  background: transparent;
-  color: var(--ink);
-  font-size: 1rem;
-  box-shadow: none;
-}
-
 .button-row,
 .cta-stack {
   display: flex;
@@ -503,13 +479,30 @@ p {
   mask-image: linear-gradient(180deg, #000 0%, #000 46%, transparent 100%);
 }
 
+.hero-still picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-poster,
 .hero-film {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 32%;
-  background: url('/hero/atelier-poster.jpg') center 32% / cover no-repeat;
+}
+
+.hero-film {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-film.is-playing {
+  opacity: 1;
 }
 
 .hero-panel {
@@ -985,6 +978,7 @@ p {
     font-size: 1.7rem;
   }
 
+  .hero-poster,
   .hero-film {
     object-position: center 40%;
   }
@@ -1112,267 +1106,6 @@ p {
 
 .card h3 {
   margin-bottom: 0.55rem;
-}
-
-/* Respaldo: una ficha con la cifra y un expediente con las otras tres pruebas. */
-#respaldo .proof {
-  display: grid;
-  gap: 1.35rem;
-  align-items: stretch;
-}
-
-#respaldo .proof-lead,
-#respaldo .proof-rail {
-  border-radius: var(--radius-card);
-}
-
-#respaldo .proof-lead {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  min-height: 34rem;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 0;
-  background: var(--cream);
-  box-shadow:
-    var(--shadow-card),
-    inset 0 1px 0 rgb(255 255 255 / 80%);
-}
-
-#respaldo .proof-photo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 42%;
-  pointer-events: none;
-  user-select: none;
-}
-
-#respaldo .proof-sheet {
-  position: relative;
-  z-index: 1;
-  align-self: start;
-  width: min(19rem, 64%);
-  margin: 0;
-  padding: 1.45rem 1.7rem 1.45rem 1.5rem;
-  background:
-    linear-gradient(to right, rgb(24 14 20 / 90%) 0%, rgb(24 14 20 / 78%) 72%, transparent 100%),
-    linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgb(24 14 20 / 72%) 1.15rem,
-      rgb(24 14 20 / 88%) 100%
-    );
-}
-
-#respaldo .proof-lead .proof-meta {
-  justify-content: flex-start;
-  gap: 0.85rem;
-}
-
-#respaldo .proof-meta {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin: 0 0 0.95rem;
-}
-
-#respaldo .proof-index {
-  color: var(--rose-ink);
-  font-family: var(--font-brand);
-  font-size: 1.05rem;
-  font-weight: 400;
-  line-height: 1;
-}
-
-#respaldo .proof-kicker {
-  color: var(--rose-ink);
-  font-size: 0.6875rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  line-height: 1.35;
-  text-align: right;
-  text-transform: uppercase;
-}
-
-#respaldo .proof-lead h3 {
-  margin: 0;
-}
-
-#respaldo .proof-figure {
-  display: block;
-  color: var(--ink);
-  font-family: var(--font-brand);
-  font-size: clamp(4.5rem, 7.4vw, 6.75rem);
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  line-height: 0.82;
-}
-
-#respaldo .proof-line {
-  display: block;
-  margin-top: 0.7rem;
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: clamp(1.65rem, 2.4vw, 2.2rem);
-  font-weight: 300;
-  letter-spacing: -0.03em;
-  line-height: 1.12;
-}
-
-#respaldo .proof-copy {
-  margin-top: 1.6rem;
-  padding-top: 1.1rem;
-  border-top: 1px solid var(--line-soft);
-}
-
-#respaldo .proof-copy p,
-#respaldo .proof-note p {
-  margin: 0;
-  color: var(--ink-soft);
-}
-
-#respaldo .proof-copy p {
-  max-width: 34ch;
-  font-size: 1rem;
-  line-height: 1.55;
-}
-
-#respaldo .proof-lead .proof-index,
-#respaldo .proof-lead .proof-kicker,
-#respaldo .proof-lead .proof-figure,
-#respaldo .proof-lead .proof-line {
-  color: var(--cream);
-}
-
-#respaldo .proof-lead .proof-figure {
-  font-size: clamp(3.15rem, 4.8vw, 4.35rem);
-}
-
-#respaldo .proof-lead .proof-line {
-  margin-top: 0.28rem;
-  font-size: clamp(1.25rem, 1.7vw, 1.55rem);
-}
-
-#respaldo .proof-lead .proof-meta {
-  margin-bottom: 0.55rem;
-}
-
-#respaldo .proof-lead .proof-copy {
-  margin-top: 0.6rem;
-  padding-top: 0.55rem;
-  border-top-color: rgb(255 248 242 / 40%);
-}
-
-#respaldo .proof-lead .proof-copy p {
-  color: rgb(255 248 242 / 92%);
-  font-size: 0.9rem;
-  line-height: 1.45;
-}
-
-#respaldo .proof-rail {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--veil-line);
-  background: rgb(255 248 242 / 46%);
-}
-
-#respaldo .proof-note {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0;
-  padding: 1.45rem 1.65rem 1.5rem;
-  background: transparent;
-}
-
-#respaldo .proof-note:first-child {
-  border-radius: calc(var(--radius-card) - 1px) calc(var(--radius-card) - 1px) 0 0;
-}
-
-#respaldo .proof-note:last-child {
-  border-radius: 0 0 calc(var(--radius-card) - 1px) calc(var(--radius-card) - 1px);
-}
-
-#respaldo .proof-note + .proof-note {
-  border-top: 1px solid var(--line-soft);
-}
-
-#respaldo .proof-note .proof-meta {
-  margin-bottom: 0.55rem;
-}
-
-#respaldo .proof-note h3 {
-  margin: 0 0 0.4rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
-  text-wrap: balance;
-}
-
-#respaldo .proof-note p {
-  max-width: 46ch;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-@media (min-width: 900px) {
-  #respaldo .proof {
-    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
-    gap: 1.5rem;
-    align-items: stretch;
-  }
-}
-
-@media (max-width: 899px) {
-  #respaldo .proof-note {
-    flex: none;
-    justify-content: flex-start;
-  }
-
-  #respaldo .proof-photo {
-    object-position: center 36%;
-  }
-
-  #respaldo .proof-sheet {
-    width: min(19.5rem, 92%);
-  }
-
-  #respaldo .proof-lead .proof-figure {
-    font-size: clamp(3.35rem, 16vw, 4.4rem);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  #respaldo .proof-lead,
-  #respaldo .proof-note {
-    transition:
-      transform 0.2s ease,
-      background-color 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  html.js #respaldo .proof-lead.is-in:hover {
-    transform: translateY(-3px);
-    box-shadow:
-      0 26px 46px -24px rgb(126 67 75 / 48%),
-      inset 0 1px 0 rgb(255 255 255 / 80%);
-    transition-delay: 0s !important;
-  }
-
-  html.js #respaldo .proof-note.is-in:hover {
-    background: var(--cream);
-    transition-delay: 0s !important;
-  }
 }
 
 .card .audience {
@@ -1901,15 +1634,13 @@ p {
     animation-delay: 0.72s;
   }
 
-  .btn-primary,
-  .button:not(.secondary) {
+  .btn-primary {
     transition:
       transform 0.18s ease,
       box-shadow 0.18s ease;
   }
 
-  .btn-primary:hover,
-  .button:not(.secondary):hover {
+  .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 18px 28px -12px rgb(224 106 120 / 75%);
   }
@@ -2607,22 +2338,7 @@ main {
     transform: none;
   }
 }
-@keyframes m-reveal {
-  from {
-    transform: none;
-  }
-  to {
-    transform: none;
-  }
-}
-@keyframes m-scale {
-  from {
-    transform: none;
-  }
-  to {
-    transform: none;
-  }
-}
+
 @keyframes m-rise {
   from {
     transform: translateY(var(--rise));
@@ -2703,72 +2419,6 @@ main {
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;
-  }
-  .carga {
-    display: none;
-  }
-}
-
-/* ── Carga: el logo oficial al centro, hasta que tipografía, marca y hero están listos. ── */
-.carga {
-  position: fixed;
-  inset: 0;
-  z-index: 70;
-  display: grid;
-  place-items: center;
-  background:
-    radial-gradient(32rem 28rem at 50% 46%, rgb(246 210 205 / 55%), transparent 70%), var(--cream);
-  transition:
-    opacity 0.5s var(--ease-out),
-    visibility 0.5s;
-}
-.carga-marca {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: min(78vw, 22rem);
-}
-.carga-aro {
-  position: absolute;
-  inset: -1.35rem -0.9rem;
-  border-radius: 50%;
-  border: 1px solid rgb(224 106 120 / 30%);
-  border-inline-end-color: transparent;
-  border-block-end-color: transparent;
-}
-.carga-logo {
-  width: 100%;
-  height: auto;
-}
-html:not(.js) .carga,
-html.intro-done .carga:not(.carga-sale) {
-  display: none;
-}
-.carga-sale {
-  opacity: 0;
-  visibility: hidden;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .carga-logo {
-    animation: carga-logo 0.9s var(--ease-out) both;
-  }
-  .carga-aro {
-    animation: carga-giro 1.6s linear infinite;
-  }
-}
-@keyframes carga-logo {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-@keyframes carga-giro {
-  to {
-    transform: rotate(1turn);
   }
 }
 
@@ -3589,6 +3239,7 @@ html.js .trust-lead.is-in .trust-shape {
 }
 
 .reel-slide {
+  position: relative;
   flex: 0 0 var(--slide);
   scroll-snap-align: start;
   transform-origin: left bottom;
@@ -3597,6 +3248,16 @@ html.js .trust-lead.is-in .trust-shape {
     transform 0.9s var(--ease-out),
     opacity 0.9s var(--ease-out),
     filter 0.9s var(--ease-out);
+}
+
+.reel-hit {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: inherit;
 }
 
 .reel-slide.is-active {
@@ -4586,77 +4247,6 @@ main .section .section-head .eyebrow::after {
   }
 }
 
-/* ── Carga v2: marco floral + logo ── */
-.carga {
-  background:
-    radial-gradient(34rem 30rem at 50% 48%, rgb(250 222 228 / 55%), transparent 70%),
-    linear-gradient(135deg, #fffdfb, #fbf0f1 45%, #f4f1f9 70%, #fffaf4);
-  transition:
-    opacity 0.4s var(--ease-out),
-    visibility 0.4s;
-}
-.carga-marca {
-  width: min(78vw, 24rem);
-  aspect-ratio: 1;
-}
-.carga-marco {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-.carga-logo {
-  position: relative;
-  width: 48%;
-}
-.carga-marco .leaf,
-.carga-marco .flower,
-.carga-marco .berry {
-  transform-box: fill-box;
-  transform-origin: center;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .carga-marco .leaf {
-    animation: marco-in 0.6s var(--ease-out) 0s both;
-  }
-  .carga-marco .flower {
-    animation: marco-in 0.65s var(--ease-out) 0.2s both;
-  }
-  .carga-marco .berry {
-    animation: marco-pop 0.5s var(--ease-out) 0.4s both;
-  }
-  .carga-logo {
-    animation: carga-logo 0.6s var(--ease-out) 0.45s both;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .carga-logo,
-  .carga-marco * {
-    animation: none !important;
-  }
-}
-@keyframes marco-in {
-  from {
-    opacity: 0;
-    transform: scale(0.82) rotate(-6deg);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-@keyframes marco-pop {
-  from {
-    opacity: 0;
-    transform: scale(0.4);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 /* Banner v3: tonos de la marca y entrada animada */
 .hero-banner {
   border-color: rgb(126 67 75 / 14%);
@@ -4888,35 +4478,6 @@ main .section .section-head .eyebrow::after {
     box-shadow: 0 14px 26px -16px rgb(196 80 95 / 70%);
   }
 }
-/* Carga v2.1: vaivén sutil tras la entrada */
-@media (prefers-reduced-motion: no-preference) {
-  .carga-marco .flower {
-    animation:
-      marco-in 0.65s var(--ease-out) 0.2s both,
-      marco-sway 2.8s ease-in-out 0.7s infinite alternate;
-  }
-  .carga-marco .flower:nth-child(3n) {
-    animation-delay: 0.2s, 0.6s;
-    animation-duration: 0.65s, 2.4s;
-  }
-  .carga-marco .flower:nth-child(3n + 1) {
-    animation-delay: 0.2s, 0.75s;
-    animation-duration: 0.65s, 3.2s;
-    animation-direction: normal, alternate-reverse;
-  }
-  .carga-marco .flower:nth-child(4n + 2) {
-    animation-duration: 0.65s, 2.6s;
-  }
-  .carga-marco .leaf {
-    animation:
-      marco-in 0.6s var(--ease-out) 0s both,
-      marco-sway-leaf 3s ease-in-out 0.6s infinite alternate;
-  }
-  .carga-marco .leaf:nth-child(2n) {
-    animation-direction: normal, alternate-reverse;
-    animation-duration: 0.6s, 2.7s;
-  }
-}
 @keyframes marco-sway {
   0% {
     transform: rotate(-1.8deg) scale(1);
@@ -4933,45 +4494,6 @@ main .section .section-head .eyebrow::after {
     transform: rotate(0.8deg);
   }
 }
-/* Carga v3: más larga y vaivén perceptible */
-.carga {
-  transition:
-    opacity 0.5s var(--ease-out),
-    visibility 0.5s;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .carga-marco .flower {
-    animation:
-      marco-in 0.65s var(--ease-out) 0.2s both,
-      marco-sway 2.5s ease-in-out 0.6s infinite alternate;
-  }
-  .carga-marco .flower:nth-child(3n) {
-    animation-delay: 0.2s, 0.65s;
-    animation-duration: 0.65s, 2.2s;
-  }
-  .carga-marco .flower:nth-child(3n + 1) {
-    animation-delay: 0.2s, 0.75s;
-    animation-duration: 0.65s, 2.8s;
-    animation-direction: normal, alternate-reverse;
-  }
-  .carga-marco .flower:nth-child(4n + 2) {
-    animation-duration: 0.65s, 2.4s;
-  }
-  .carga-marco .leaf {
-    animation:
-      marco-in 0.6s var(--ease-out) 0s both,
-      marco-sway-leaf 2.6s ease-in-out 0.6s infinite alternate;
-  }
-  .carga-marco .leaf:nth-child(2n) {
-    animation-direction: normal, alternate-reverse;
-    animation-duration: 0.6s, 2.3s;
-  }
-  .carga-logo {
-    animation:
-      carga-logo 0.6s var(--ease-out) 0.45s both,
-      logo-breathe 2.4s ease-in-out 1.05s infinite alternate;
-  }
-}
 @keyframes marco-sway {
   0% {
     transform: rotate(-3deg) scale(1);
@@ -4986,14 +4508,6 @@ main .section .section-head .eyebrow::after {
   }
   100% {
     transform: rotate(1.4deg);
-  }
-}
-@keyframes logo-breathe {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.015);
   }
 }
 
@@ -5315,110 +4829,13 @@ main .section .section-head .eyebrow::after {
   --ease-sine: cubic-bezier(0.45, 0, 0.55, 1);
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
-.carga .carga-marco g.leaf,
-.carga .carga-marco g.flower,
-.carga .carga-marco g.berry {
-  transform-box: fill-box;
-  transform-origin: var(--o, 50% 50%);
-}
-.carga .carga-marco g.frame-line {
-  animation: none !important;
-  transform: none !important;
-}
-.carga {
-  transition:
-    opacity 0.6s var(--ease-out),
-    filter 0.6s var(--ease-out),
-    visibility 0.6s;
-}
-.carga-sale {
-  filter: blur(4px);
-}
-@media (prefers-reduced-motion: no-preference) {
-  .carga .carga-marco g.leaf {
-    animation:
-      v4-bloom 0.7s var(--ease-expo) calc(var(--d) * 0.35) both,
-      v4-leaf 4.2s var(--ease-sine) calc(0.7s + var(--d)) infinite alternate;
-  }
-  .carga .carga-marco g.flower-big {
-    animation:
-      v4-bloom 0.7s var(--ease-expo) calc(0.2s + var(--d) * 0.35) both,
-      v4-big 4.8s var(--ease-sine) calc(0.9s + var(--d)) infinite alternate;
-  }
-  .carga .carga-marco g.flower-small {
-    animation:
-      v4-bloom 0.7s var(--ease-expo) calc(0.25s + var(--d) * 0.35) both,
-      v4-small 3.6s var(--ease-sine) calc(0.95s + var(--d)) infinite alternate;
-  }
-  .carga .carga-marco g.berry {
-    animation:
-      v4-fade 0.7s var(--ease-expo) calc(0.4s + var(--d) * 0.35) both,
-      v4-berry 4s var(--ease-sine) calc(1.1s + var(--d)) infinite alternate;
-  }
-  .carga .carga-logo {
-    animation: carga-logo 0.7s var(--ease-expo) 0.5s both;
-  }
-  .carga-sale .carga-marco g {
-    animation-play-state: paused !important;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .carga .carga-marco g,
-  .carga .carga-logo {
-    animation: none !important;
-  }
-  .carga-sale {
-    filter: none;
-  }
-}
-@keyframes v4-bloom {
-  from {
-    opacity: 0;
-    transform: scale(0.92);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
+
 @keyframes v4-fade {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
-  }
-}
-@keyframes v4-leaf {
-  0% {
-    transform: rotate(-1.2deg) skewX(-0.4deg) scale(1);
-  }
-  100% {
-    transform: rotate(1.2deg) skewX(0.4deg) scale(1.012);
-  }
-}
-@keyframes v4-big {
-  0% {
-    transform: rotate(-1.6deg);
-  }
-  100% {
-    transform: rotate(1.6deg);
-  }
-}
-@keyframes v4-small {
-  0% {
-    transform: rotate(-2.2deg);
-  }
-  100% {
-    transform: rotate(2.2deg);
-  }
-}
-@keyframes v4-berry {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-0.8px);
   }
 }
 
